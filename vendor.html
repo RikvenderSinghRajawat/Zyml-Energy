@@ -427,7 +427,6 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="careers.html">Careers</a></li>
-                        <li><a href="Media.html">Media</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="vendor.html" class="active">Vendor</a></li>
                     </ul>
@@ -498,7 +497,7 @@
                     ✓ Thank you for your registration! We will review your application and contact you within 3-5 business days.
                 </div>
 
-                <form id="vendorForm" onsubmit="handleVendorSubmit(event)">
+                <form id="vendorForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="companyName">Company Name *</label>
@@ -611,39 +610,7 @@
             nav.classList.toggle('active');
         }
 
-        // Vendor Form Submit
-        function handleVendorSubmit(event) {
-            event.preventDefault();
-            
-            const formData = {
-                companyName: document.getElementById('companyName').value,
-                contactName: document.getElementById('contactName').value,
-                email: document.getElementById('vendorEmail').value,
-                phone: document.getElementById('vendorPhone').value,
-                category: document.getElementById('category').value,
-                businessType: document.getElementById('businessType').value,
-                gstNumber: document.getElementById('gstNumber').value,
-                address: document.getElementById('address').value,
-                message: document.getElementById('vendorMessage').value
-            };
-
-            // Show success message
-            const successMsg = document.getElementById('successMessage');
-            successMsg.style.display = 'block';
-            
-            // Scroll to success message
-            successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Reset form
-            event.target.reset();
-
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                successMsg.style.display = 'none';
-            }, 5000);
-
-            console.log('Vendor Registration Data:', formData);
-        }
+        
 
         // Close mobile menu when clicking on a link
         document.querySelectorAll('nav a').forEach(link => {
@@ -652,5 +619,6 @@
             });
         });
     </script>
+    <script src="js/form-handler.js"></script>
 </body>
 </html>

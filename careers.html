@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/responsive.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Careers - Zylm Energy</title>
     <style>
@@ -528,7 +529,6 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="careers.html" class="active">Careers</a></li>
-                        <li><a href="Media.html">Media</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="vendor.html">Vendor</a></li>
                     </ul>
@@ -731,7 +731,7 @@
                         <label for="careerTerms">I accept the Terms & Conditions and Privacy Policy</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="newsletter">
+                        <input type="checkbox" id="newsletter" name="newsletter">
                         <label for="newsletter">Subscribe to our newsletter for updates</label>
                     </div>
 
@@ -795,10 +795,9 @@
             });
         });
 
-        // Department Selection
+        // Department Selection (handled also in js/form-handler.js for consistency)
         const deptOptions = document.querySelectorAll('.dept-option');
         const deptInput = document.getElementById('department');
-        
         if (deptOptions && deptInput) {
             deptOptions.forEach(option => {
                 option.addEventListener('click', () => {
@@ -808,47 +807,7 @@
                 });
             });
         }
-
-        // Form Submission
-        document.getElementById('careerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic form validation
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.borderColor = 'red';
-                } else {
-                    field.style.borderColor = '#ddd';
-                }
-            });
-            
-            if (!isValid) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                alert('Thank you for your application! We will review your information and contact you soon.');
-                this.reset();
-                deptOptions.forEach(opt => opt.classList.remove('selected'));
-                deptInput.value = '';
-                
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
-        });
     </script>
+    <script src="js/form-handler.js"></script>
 </body>
 </html>

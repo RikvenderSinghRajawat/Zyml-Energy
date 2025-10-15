@@ -120,6 +120,55 @@ db.serialize(() => {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
 
+    // Ensure users table has required columns for newer versions
+    db.all(`PRAGMA table_info(users)`, (err, rows) => {
+        if (err) {
+            console.error('⚠️ Failed to inspect users table schema:', err.message);
+        } else {
+            const columns = rows.map(r => r.name);
+            const addColumnTasks = [];
+
+            if (!columns.includes('status')) {
+                addColumnTasks.push({
+                    sql: `ALTER TABLE users ADD COLUMN status TEXT DEFAULT 'active'`,
+                    after: () => db.run(`UPDATE users SET status = 'active' WHERE status IS NULL`)
+                });
+            }
+            if (!columns.includes('last_login')) {
+                addColumnTasks.push({
+                    sql: `ALTER TABLE users ADD COLUMN last_login DATETIME`
+                });
+            }
+            if (!columns.includes('created_at')) {
+                addColumnTasks.push({
+                    sql: `ALTER TABLE users ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP`
+                });
+            }
+
+            const runNext = () => {
+                const task = addColumnTasks.shift();
+                if (!task) return;
+                db.run(task.sql, function(addErr) {
+                    if (addErr) {
+                        // Ignore errors if column already exists due to race; log for visibility
+                        console.warn('⚠️ Column addition notice:', addErr.message);
+                    } else {
+                        console.log('✅ Applied schema change:', task.sql);
+                        if (typeof task.after === 'function') {
+                            try { task.after(); } catch (e) { console.warn('⚠️ Post-migration step error:', e.message); }
+                        }
+                    }
+                    runNext();
+                });
+            };
+
+            if (addColumnTasks.length > 0) {
+                console.log('🔧 Applying users table migrations for compatibility');
+                runNext();
+            }
+        }
+    });
+
     // Create default admin user
     const adminEmail = 'admin@zylm.in';
     const adminPassword = 'Admin123!';

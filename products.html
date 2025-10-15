@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/responsive.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Zylm Energy</title>
     <style>
@@ -445,15 +446,15 @@
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">Zylm Energy (AirBin)</a>
-                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
                 <nav id="mainNav">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="house.html">Need of The House</a></li>
+                        <li><a href="Hour.html">Need of The Hour</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="products.html" class="active">Products</a></li>
                         <li><a href="careers.html">Careers</a></li>
-                        <li><a href="Media.html">Media</a></li>
+                        
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="vendor.html">Vendor</a></li>
                     </ul>
@@ -788,10 +789,22 @@
             document.getElementById('currentModel').textContent = 'Model ' + modelName;
         }
 
-        function toggleMenu() {
-            const nav = document.querySelector('nav');
-            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        // Mobile Menu Toggle (consistent across pages)
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+            const btn = document.querySelector('.mobile-menu-btn');
+            if (btn) btn.classList.toggle('active');
         }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mainNav').classList.remove('active');
+                const btn = document.querySelector('.mobile-menu-btn');
+                if (btn) btn.classList.remove('active');
+            });
+        });
 
         // Initialize with outdoor product
         window.onload = function() {

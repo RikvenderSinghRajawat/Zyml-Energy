@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Zylm Energy</title>
+    <link rel="stylesheet" href="css/responsive.css">
     <style>
         * {
             margin: 0;
@@ -559,7 +560,7 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="careers.html">Careers</a></li>
-                        <li><a href="Media.html">Media</a></li>
+                        
                         <li><a href="contact.html" class="active">Contact</a></li>
                         <li><a href="vendor.html">Vendor</a></li>
                     </ul>
@@ -672,7 +673,7 @@
                             <label for="contactTerms">I agree to the Terms & Conditions and Privacy Policy</label>
                         </div>
                         <div class="checkbox-group">
-                            <input type="checkbox" id="contactNewsletter">
+                            <input type="checkbox" id="contactNewsletter" name="newsletter">
                             <label for="contactNewsletter">Subscribe to our newsletter</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
@@ -757,45 +758,7 @@
                 document.getElementById('mainNav').classList.remove('active');
             });
         });
-
-        // Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic form validation
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.borderColor = 'red';
-                } else {
-                    field.style.borderColor = '#ddd';
-                }
-            });
-            
-            if (!isValid) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                alert('Thank you for your message! We will get back to you soon.');
-                this.reset();
-                
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
-        });
     </script>
+    <script src="js/form-handler.js"></script>
 </body>
 </html>
