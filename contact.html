@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Zylm Energy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header - Same as index.html */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5a6c7d;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #2c3e50;
+        }
+
+        .admin-login-btn {
+            background: #f5f5f5;
+            color: #5a6c7d;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            font-size: 18px;
+        }
+
+        .admin-login-btn:hover {
+            background: #e9e9e9;
+            color: #2c3e50;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        /* Page Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 15px;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #5a6c7d;
+        }
+
+        /* Contact Info Section */
+        .contact-info {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .contact-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #90caf9;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            font-size: 14px;
+            color: #5a6c7d;
+            line-height: 1.7;
+        }
+
+        /* Contact Details Section */
+        .contact-details {
+            padding: 80px 0;
+            background: #e8f4f8;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-methods {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .contact-methods h2 {
+            color: #1a237e;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-method-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .contact-method-info h4 {
+            color: #1a237e;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .contact-method-info p {
+            color: #5a6c7d;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .contact-form-container h3 {
+            color: #1a237e;
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            background: #fafafa;
+        }
+
+        .form-control:focus {
+            border-color: #1976d2;
+            outline: none;
+            background: white;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #1976d2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .map-section h2 {
+            color: #1a237e;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .map-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .map-info {
+            margin-bottom: 30px;
+        }
+
+        .map-info h4 {
+            color: #1a237e;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .map-info p {
+            color: #5a6c7d;
+            margin-bottom: 8px;
+        }
+
+        .map-frame {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 8px;
+            color: #5a6c7d;
+        }
+
+        /* Footer - Same as index.html */
+        footer {
+            background: #37474f;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3, .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-section p, .footer-section a {
+            font-size: 14px;
+            color: #b0bec5;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #b0bec5;
+            font-size: 14px;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .fab-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .fab-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .fab-button.primary {
+            background: #42a5f5;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 60px);
+                background: white;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 999;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-methods,
+            .contact-form-container {
+                padding: 25px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .map-section h2 {
+                font-size: 28px;
+            }
+
+            .map-container {
+                padding: 20px;
+            }
+
+            .map-placeholder {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .page-hero {
+                padding: 60px 0;
+            }
+
+            .contact-info,
+            .contact-details,
+            .map-section {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Same as index.html -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Zylm Energy (AirBin)</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Hour.html">Need of The Hour</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="Media.html">Media</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                        <li><a href="vendor.html">Vendor</a></li>
+                    </ul>
+                </nav>
+                <a href="admin.html" class="admin-login-btn" title="Admin Login">👤</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team for inquiries and support</p>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Registered Office</h3>
+                    <p>B1/2, Alankar Plaza, Vidhyadhar Nagar<br>Jaipur - 302039, Rajasthan, India</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">🏭</div>
+                    <h3>Production Unit 1</h3>
+                    <p>G1-32, RIICO Industrial Area, Sitapura<br>Jaipur - 302022, Rajasthan, India</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">🏭</div>
+                    <h3>Production Unit 2</h3>
+                    <p>F-767, RIICO Industrial Area, Sitapura<br>Jaipur - 302022, Rajasthan, India</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Details Section -->
+    <section class="contact-details">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-methods">
+                    <h2>Get in Touch</h2>
+                    <div class="contact-item">
+                        <div class="contact-method-icon">📞</div>
+                        <div class="contact-method-info">
+                            <h4>Phone Numbers</h4>
+                            <p>Sales: +91 8854 933 001</p>
+                            <p>Stores: +91 9660 533 001</p>
+                            <p>Accounts: +91 9660 533 001</p>
+                            <p>Office: +91 141 4116525</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-method-icon">✉️</div>
+                        <div class="contact-method-info">
+                            <h4>Email Addresses</h4>
+                            <p>General: info@zylm.in</p>
+                            <p>Sales: sales@zylm.in</p>
+                            <p>HR: hr@zylm.in</p>
+                            <p>Stores: stores@zylm.in</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-method-icon">🕒</div>
+                        <div class="contact-method-info">
+                            <h4>Business Hours</h4>
+                            <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <p>Saturday: 9:00 AM - 2:00 PM</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Full Name *</label>
+                                <input type="text" id="contactName" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactCompany">Company Name</label>
+                                <input type="text" id="contactCompany" name="company" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactEmail">Email Address *</label>
+                                <input type="email" id="contactEmail" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone">Phone Number *</label>
+                                <input type="tel" id="contactPhone" name="phone" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject">Subject *</label>
+                            <input type="text" id="contactSubject" name="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Message *</label>
+                            <textarea id="contactMessage" name="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="contactTerms" required>
+                            <label for="contactTerms">I agree to the Terms & Conditions and Privacy Policy</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="contactNewsletter">
+                            <label for="contactNewsletter">Subscribe to our newsletter</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2>Our Location</h2>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <div class="map-info">
+                        <h4>Zylm Energy Private Limited</h4>
+                        <p>📍 B1/2, Alankar Plaza, Vidhyadhar Nagar, Jaipur - 302039</p>
+                        <p>📞 +91 141 4116525</p>
+                        <p>✉️ info@zylm.in</p>
+                    </div>
+                    <!-- In a real implementation, you would embed Google Maps here -->
+                    <div class="map-frame">
+                        <p>Google Maps would be embedded here</p>
+                        <p>Coordinates: 26.9124° N, 75.7873° E</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Same as index.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zylm Energy</h3>
+                    <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="legal.html">Legal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>📍 B1/2, Alankar Plaza,Vidhyadhar Nagar,Jaipur - 302039</p>
+                    <p>📞 +91 141 4116525</p>
+                    <p>✉️ info@zylm.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zylm Energy Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <!-- <div class="fab">
+        <a href="mailto:info@zylm.in" class="fab-button" title="Email">📧</a>
+        <a href="contact.html" class="fab-button" title="Support">👋</a>
+        <a href="contact.html" class="fab-button" title="Chat">💬</a>
+        <a href="contact.html" class="fab-button primary" title="Help">❓</a>
+    </div> -->
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mainNav').classList.remove('active');
+            });
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

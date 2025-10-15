@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="css/responsive.css">
+    <title>Zylm Energy | GPS Tracking Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header - Consistent with other pages */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5a6c7d;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #2c3e50;
+        }
+
+        .admin-login-btn {
+            background: #f5f5f5;
+            color: #5a6c7d;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            font-size: 18px;
+        }
+
+        .admin-login-btn:hover {
+            background: #e9e9e9;
+            color: #2c3e50;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        /* Page Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 15px;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #5a6c7d;
+        }
+
+        /* Certificates Section */
+        .certificates {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .cert-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .cert-image {
+            height: 180px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #d1e9f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .cert-content {
+            padding: 25px;
+        }
+
+        .cert-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .cert-content p {
+            font-size: 14px;
+            color: #5a6c7d;
+            line-height: 1.7;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 80px 0;
+            background: #e8f4f8;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #d1e9f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .blog-meta {
+            display: flex;
+            margin-bottom: 15px;
+            color: #5a6c7d;
+            font-size: 14px;
+        }
+
+        .blog-meta span {
+            margin-right: 15px;
+        }
+
+        .blog-content p {
+            font-size: 14px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Footer - Same as other pages */
+        footer {
+            background: #37474f;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3, .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-section p, .footer-section a {
+            font-size: 14px;
+            color: #b0bec5;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #b0bec5;
+            font-size: 14px;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .fab-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .fab-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .fab-button.primary {
+            background: #42a5f5;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 60px);
+                background: white;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 999;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .page-hero {
+                padding: 60px 0;
+            }
+
+            .certificates, .blog {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Same as other pages -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Zylm Energy (AirBin)</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hour.html" class="active">Need of The Hour</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="media.html">Media</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="vendor.html">Vendor</a></li>
+                    </ul>
+                </nav>
+                <a href="admin.html" class="admin-login-btn" title="Admin Login">👤</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Zylm Energy</h1>
+            <p>Advanced GPS tracking solutions for personal, commercial, and industrial applications</p>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section class="certificates">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Certificates & Accreditations</h2>
+                <p>We maintain the highest standards of quality and compliance in all our products and services.</p>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-image">
+                        📄
+                    </div>
+                    <div class="cert-content">
+                        <h3>ISO 9001:2015 Certified</h3>
+                        <p>Quality Management System Certification for our manufacturing processes and product development.</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-image">
+                        📡
+                    </div>
+                    <div class="cert-content">
+                        <h3>FCC Part 15 Compliance</h3>
+                        <p>Our GPS tracking devices meet FCC standards for electromagnetic compatibility and radio frequency emissions.</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-image">
+                        🇪🇺
+                    </div>
+                    <div class="cert-content">
+                        <h3>CE Marking</h3>
+                        <p>Our products comply with EU safety, health, and environmental requirements for market distribution.</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-image">
+                        🌱
+                    </div>
+                    <div class="cert-content">
+                        <h3>RoHS Compliant</h3>
+                        <p>All our electronic components meet Restriction of Hazardous Substances directives for environmental safety.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Articles & Insights</h2>
+                <p>Stay updated with the latest trends in GPS technology and tracking solutions.</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        🛰️
+                    </div>
+                    <div class="blog-content">
+                        <h3>Advancements in Low-Power GPS Tracking</h3>
+                        <div class="blog-meta">
+                            <span>May 15, 2023</span>
+                            <span>Technology</span>
+                        </div>
+                        <p>Exploring how modern GPS trackers achieve extended battery life while maintaining accuracy and reliability in location tracking.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        🚚
+                    </div>
+                    <div class="blog-content">
+                        <h3>Optimizing Fleet Management with Real-Time Tracking</h3>
+                        <div class="blog-meta">
+                            <span>April 28, 2023</span>
+                            <span>Business</span>
+                        </div>
+                        <p>How businesses are leveraging GPS tracking technology to improve fleet efficiency, reduce costs, and enhance customer service.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        📱
+                    </div>
+                    <div class="blog-content">
+                        <h3>The Role of GPS in the Expanding IoT Ecosystem</h3>
+                        <div class="blog-meta">
+                            <span>March 10, 2023</span>
+                            <span>Innovation</span>
+                        </div>
+                        <p>Understanding how GPS technology integrates with IoT devices to create smarter, more connected solutions across various industries.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        🔋
+                    </div>
+                    <div class="blog-content">
+                        <h3>Battery Life Optimization in Wearable Trackers</h3>
+                        <div class="blog-meta">
+                            <span>February 22, 2023</span>
+                            <span>Engineering</span>
+                        </div>
+                        <p>Technical insights into how we've achieved industry-leading battery performance in our latest wearable GPS tracking devices.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        🔒
+                    </div>
+                    <div class="blog-content">
+                        <h3>Ensuring Data Security in Location Tracking Systems</h3>
+                        <div class="blog-meta">
+                            <span>January 18, 2023</span>
+                            <span>Security</span>
+                        </div>
+                        <p>Best practices and technologies for protecting sensitive location data in GPS tracking applications and services.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        🚀
+                    </div>
+                    <div class="blog-content">
+                        <h3>The Future of GPS: What's Next in Location Technology?</h3>
+                        <div class="blog-meta">
+                            <span>December 5, 2022</span>
+                            <span>Innovation</span>
+                        </div>
+                        <p>Exploring emerging technologies that will shape the next generation of GPS tracking and location-based services.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Same as other pages -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zylm Energy</h3>
+                    <p>Leading provider of GPS tracking solutions for personal, commercial, and industrial applications.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hour.html">Hour</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="legal.html">Legal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>📍 123 Tech Park, Innovation Road, Bangalore - 560001</p>
+                    <p>📞 +91 80 4123 4567</p>
+                    <p>✉️ info@stepwhere.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zylm Energy Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab">
+        <a href="mailto:info@stepwhere.in" class="fab-button" title="Email">📧</a>
+        <a href="contact.html" class="fab-button" title="Support">👋</a>
+        <a href="contact.html" class="fab-button" title="Chat">💬</a>
+        <a href="contact.html" class="fab-button primary" title="Help">❓</a>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mainNav').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

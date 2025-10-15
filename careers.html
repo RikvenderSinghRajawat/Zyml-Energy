@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Zylm Energy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header - Same as index.html */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5a6c7d;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #2c3e50;
+        }
+
+        .admin-login-btn {
+            background: #f5f5f5;
+            color: #5a6c7d;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            font-size: 18px;
+        }
+
+        .admin-login-btn:hover {
+            background: #e9e9e9;
+            color: #2c3e50;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        /* Page Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 15px;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #5a6c7d;
+        }
+
+        /* Careers Intro Section */
+        .careers-intro {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .careers-content h2 {
+            color: #1a237e;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .careers-content > p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: #5a6c7d;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .benefit-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #90caf9;
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .benefit-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            color: #5a6c7d;
+            line-height: 1.7;
+        }
+
+        /* Careers Form Section */
+        .careers-form-section {
+            padding: 80px 0;
+            background: #e8f4f8;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #5a6c7d;
+            font-size: 16px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .form-container h3 {
+            color: #1a237e;
+            font-size: 22px;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .form-container h3:first-child {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            background: #fafafa;
+        }
+
+        .form-control:focus {
+            border-color: #1976d2;
+            outline: none;
+            background: white;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        .department-selection {
+            margin: 20px 0;
+        }
+
+        .department-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .dept-option {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .dept-option:hover {
+            border-color: #1976d2;
+            background: #e3f2fd;
+        }
+
+        .dept-option.selected {
+            background: #1976d2;
+            color: white;
+            border-color: #1976d2;
+        }
+
+        .dept-option strong {
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #1976d2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3);
+        }
+
+        /* Footer - Same as index.html */
+        footer {
+            background: #37474f;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3, .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-section p, .footer-section a {
+            font-size: 14px;
+            color: #b0bec5;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #b0bec5;
+            font-size: 14px;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .fab-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .fab-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .fab-button.primary {
+            background: #42a5f5;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 60px);
+                background: white;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 999;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            .careers-content h2 {
+                font-size: 28px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-container {
+                padding: 25px;
+            }
+
+            .department-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .page-hero {
+                padding: 60px 0;
+            }
+
+            .careers-intro,
+            .careers-form-section {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Same as index.html -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Zylm Energy (AirBin)</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Hour.html">Need of The Hour</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html" class="active">Careers</a></li>
+                        <li><a href="Media.html">Media</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="vendor.html">Vendor</a></li>
+                    </ul>
+                </nav>
+                <a href="admin.html" class="admin-login-btn" title="Admin Login">👤</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Join Our Team</h1>
+            <p>Build your career while helping create a cleaner, healthier world</p>
+        </div>
+    </section>
+
+    <!-- Careers Intro -->
+    <section class="careers-intro">
+        <div class="container">
+            <div class="careers-content">
+                <h2>Why Work at Zylm Energy?</h2>
+                <p>At Zylm Energy, we're not just building products - we're building solutions for a sustainable future. Join us in our mission to combat air pollution and create cleaner environments for generations to come.</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💼</div>
+                        <h3>Professional Growth</h3>
+                        <p>Continuous learning opportunities and career advancement</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🌍</div>
+                        <h3>Meaningful Work</h3>
+                        <p>Contribute to environmental conservation and public health</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⚡</div>
+                        <h3>Innovation</h3>
+                        <p>Work with cutting-edge technology in air purification</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🤝</div>
+                        <h3>Team Culture</h3>
+                        <p>Collaborative environment with experienced professionals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Form Section -->
+    <section class="careers-form-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Apply Now</h2>
+                <p>Submit your application to join our team</p>
+            </div>
+            <div class="form-container">
+                <form id="careerForm">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number *</label>
+                            <input type="tel" id="mobile" name="mobile" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="careerEmail">Email Address *</label>
+                            <input type="email" id="careerEmail" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">Pin Code</label>
+                            <input type="text" id="pincode" name="pincode" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Permanent Address</label>
+                        <textarea id="address" name="address" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <h3>Education & Experience</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="education">Highest Education *</label>
+                            <input type="text" id="education" name="education" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentCompany">Current Company</label>
+                            <input type="text" id="currentCompany" name="currentCompany" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyProduct">Company Product</label>
+                            <input type="text" id="companyProduct" name="companyProduct" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentTenure">Service Length in Current Company</label>
+                            <input type="text" id="currentTenure" name="currentTenure" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="highestTenure">Highest Tenure in Any Company</label>
+                            <input type="text" id="highestTenure" name="highestTenure" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="totalExperience">Total Work Experience *</label>
+                            <input type="text" id="totalExperience" name="totalExperience" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reasonChange">Reason for Change</label>
+                            <input type="text" id="reasonChange" name="reasonChange" class="form-control">
+                        </div>
+                    </div>
+
+                    <h3>Compensation & Position</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentCTC">Current CTC (₹)</label>
+                            <input type="text" id="currentCTC" name="currentCTC" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="expectedCTC">Expected CTC (₹) *</label>
+                            <input type="text" id="expectedCTC" name="expectedCTC" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expertise">Area of Expertise</label>
+                        <input type="text" id="expertise" name="expertise" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="expectedPosition">Expected Position</label>
+                        <input type="text" id="expectedPosition" name="expectedPosition" class="form-control">
+                    </div>
+
+                    <div class="department-selection">
+                        <label>Department *</label>
+                        <div class="department-options">
+                            <div class="dept-option" data-value="hr-executive">
+                                <strong>Human Resource - Executive</strong>
+                            </div>
+                            <div class="dept-option" data-value="production-technician">
+                                <strong>Production - Technician</strong>
+                            </div>
+                            <div class="dept-option" data-value="finance-accountant">
+                                <strong>Finance - Accountant</strong>
+                            </div>
+                            <div class="dept-option" data-value="procurement-supervisor">
+                                <strong>Procurement - Supervisor</strong>
+                            </div>
+                            <div class="dept-option" data-value="operation-manager">
+                                <strong>Operation - Manager</strong>
+                            </div>
+                            <div class="dept-option" data-value="sales-executive">
+                                <strong>Sales - Executive</strong>
+                            </div>
+                            <div class="dept-option" data-value="marketing-executive">
+                                <strong>Marketing - Executive</strong>
+                            </div>
+                            <div class="dept-option" data-value="rnd-mechanical">
+                                <strong>R&D - Mechanical</strong>
+                            </div>
+                        </div>
+                        <input type="hidden" id="department" name="department" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cv">CV Link or Additional Information</label>
+                        <input type="text" id="cv" name="cv" class="form-control" placeholder="You can share your LinkedIn profile or portfolio link">
+                    </div>
+                    <div class="form-group">
+                        <label for="remarks">Additional Remarks</label>
+                        <textarea id="remarks" name="remarks" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="careerTerms" required>
+                        <label for="careerTerms">I accept the Terms & Conditions and Privacy Policy</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter">
+                        <label for="newsletter">Subscribe to our newsletter for updates</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Same as index.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zylm Energy</h3>
+                    <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="legal.html">Legal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>📍 B1/2, Alankar Plaza,Vidhyadhar Nagar,Jaipur - 302039</p>
+                    <p>📞 +91 141 4116525</p>
+                    <p>✉️ info@zylm.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zylm Energy Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <!-- <div class="fab">
+        <a href="mailto:info@zylm.in" class="fab-button" title="Email">📧</a>
+        <a href="contact.html" class="fab-button" title="Support">👋</a>
+        <a href="contact.html" class="fab-button" title="Chat">💬</a>
+        <a href="contact.html" class="fab-button primary" title="Help">❓</a>
+    </div> -->
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mainNav').classList.remove('active');
+            });
+        });
+
+        // Department Selection
+        const deptOptions = document.querySelectorAll('.dept-option');
+        const deptInput = document.getElementById('department');
+        
+        if (deptOptions && deptInput) {
+            deptOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    deptOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    deptInput.value = option.getAttribute('data-value');
+                });
+            });
+        }
+
+        // Form Submission
+        document.getElementById('careerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                alert('Thank you for your application! We will review your information and contact you soon.');
+                this.reset();
+                deptOptions.forEach(opt => opt.classList.remove('selected'));
+                deptInput.value = '';
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

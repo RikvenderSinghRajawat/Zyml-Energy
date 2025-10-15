@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="css/responsive.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Registration - Zylm Energy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header - Consistent with index page */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5a6c7d;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #2c3e50;
+        }
+
+        .admin-login-btn {
+            background: #f5f5f5;
+            color: #5a6c7d;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            font-size: 18px;
+        }
+
+        .admin-login-btn:hover {
+            background: #e9e9e9;
+            color: #2c3e50;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 15px;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            color: #5a6c7d;
+        }
+
+        /* Vendor Benefits Section */
+        .vendor-benefits-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 16px;
+            color: #5a6c7d;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .benefit-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #90caf9;
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .benefit-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            color: #5a6c7d;
+            line-height: 1.7;
+        }
+
+        /* Registration Form Section */
+        .registration-section {
+            padding: 80px 0;
+            background: #e8f4f8;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-container h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: #5a6c7d;
+            margin-bottom: 35px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: #5a6c7d;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #1976d2;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3);
+        }
+
+        .success-message {
+            display: none;
+            background: #e8f5e9;
+            border: 1px solid #81c784;
+            color: #2e7d32;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* Footer - Same as index page */
+        footer {
+            background: #37474f;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3, .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-section p, .footer-section a {
+            font-size: 14px;
+            color: #b0bec5;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #b0bec5;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 60px);
+                background: white;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 999;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 10px;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Consistent with index page -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Zylm Energy (AirBin)</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Hour.html">Need of The Hour</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="Media.html">Media</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="vendor.html" class="active">Vendor</a></li>
+                    </ul>
+                </nav>
+                <a href="admin.html" class="admin-login-btn" title="Admin Login">👤</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Vendor Registration</h1>
+            <p>Partner with us to build a cleaner future</p>
+        </div>
+    </section>
+
+    <!-- Vendor Benefits Section -->
+    <section class="vendor-benefits-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Partner With Zylm Energy</h2>
+                <p>Join our network of trusted vendors and grow with us</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Business Growth</h3>
+                    <p>Access to consistent business opportunities and expand your market reach with a growing leader in air purification technology.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Long-term Partnership</h3>
+                    <p>Build lasting relationships with transparent communication, fair pricing, and mutual growth objectives.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💡</div>
+                    <h3>Innovation & Technology</h3>
+                    <p>Work with cutting-edge air purification technology and contribute to environmental sustainability initiatives.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>Timely Payments</h3>
+                    <p>Reliable payment schedules and clear terms ensure smooth business operations and financial stability.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Quality Standards</h3>
+                    <p>Join a network committed to excellence with rigorous quality control and industry-leading standards.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌍</div>
+                    <h3>Market Expansion</h3>
+                    <p>Grow your business across commercial, industrial, and residential sectors with diverse project opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section class="registration-section">
+        <div class="container">
+            <div class="form-container">
+                <h3>Vendor Registration Form</h3>
+                <p class="form-subtitle">Fill out the form below to start your partnership journey with us</p>
+                
+                <div id="successMessage" class="success-message">
+                    ✓ Thank you for your registration! We will review your application and contact you within 3-5 business days.
+                </div>
+
+                <form id="vendorForm" onsubmit="handleVendorSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="companyName">Company Name *</label>
+                            <input type="text" id="companyName" name="companyName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactName">Contact Person *</label>
+                            <input type="text" id="contactName" name="contactName" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vendorEmail">Email Address *</label>
+                            <input type="email" id="vendorEmail" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vendorPhone">Phone Number *</label>
+                            <input type="tel" id="vendorPhone" name="phone" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">Business Category *</label>
+                            <select id="category" name="category" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="supplier">Raw Material Supplier</option>
+                                <option value="service">Service Provider</option>
+                                <option value="logistics">Logistics & Transportation</option>
+                                <option value="electronics">Electronics Components</option>
+                                <option value="filters">Filter Manufacturer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="businessType">Business Type *</label>
+                            <select id="businessType" name="businessType" class="form-control" required>
+                                <option value="">Select Type</option>
+                                <option value="private">Private Limited</option>
+                                <option value="llp">LLP</option>
+                                <option value="proprietorship">Proprietorship</option>
+                                <option value="partnership">Partnership</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gstNumber">GST Number</label>
+                        <input type="text" id="gstNumber" name="gstNumber" class="form-control" placeholder="Enter GST Number (optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Business Address *</label>
+                        <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vendorMessage">Tell us about your products/services *</label>
+                        <textarea id="vendorMessage" name="message" class="form-control" rows="4" placeholder="Describe your offerings, experience, and why you'd like to partner with us" required></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="vendorTerms" required>
+                        <label for="vendorTerms">I agree to the Terms & Conditions and Privacy Policy, and certify that the information provided is accurate</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Registration</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Same as index page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zylm Energy</h3>
+                    <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="legal.html">Legal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>📍 B1/2, Alankar Plaza,Vidhyadhar Nagar,Jaipur - 302039</p>
+                    <p>📞 +91 141 4116525</p>
+                    <p>✉️ info@zylm.in</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zylm Energy Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // Vendor Form Submit
+        function handleVendorSubmit(event) {
+            event.preventDefault();
+            
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                contactName: document.getElementById('contactName').value,
+                email: document.getElementById('vendorEmail').value,
+                phone: document.getElementById('vendorPhone').value,
+                category: document.getElementById('category').value,
+                businessType: document.getElementById('businessType').value,
+                gstNumber: document.getElementById('gstNumber').value,
+                address: document.getElementById('address').value,
+                message: document.getElementById('vendorMessage').value
+            };
+
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            
+            // Scroll to success message
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Reset form
+            event.target.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+
+            console.log('Vendor Registration Data:', formData);
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mainNav').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
