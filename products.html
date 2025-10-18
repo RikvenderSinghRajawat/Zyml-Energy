@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/responsive.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Zylm Energy</title>
+    <link href="https://fonts.googleapis.com/css?family=Bodoni+Moda&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,12 +13,12 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #2c3e50;
             line-height: 1.6;
         }
 
-        /* Header */
+        /* ========== HEADER - SAME AS INDEX.HTML ========== */
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -47,6 +47,12 @@
             text-decoration: none;
         }
 
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -57,8 +63,8 @@
         nav a {
             text-decoration: none;
             color: #5a6c7d;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 700;
             transition: color 0.3s;
         }
 
@@ -76,17 +82,86 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            transition: all 0.3s;
             border: 1px solid #e0e0e0;
             font-size: 18px;
         }
 
+        .admin-login-btn:hover {
+            background: #e9e9e9;
+            color: #2c3e50;
+        }
+
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
             font-size: 24px;
             cursor: pointer;
+            color: #2c3e50;
         }
+
+        /* Mobile Menu Container - SAME AS INDEX.HTML */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .mobile-menu-container.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .mobile-menu-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mobile-menu-nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            padding: 15px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-nav a:hover, .mobile-menu-nav a.active {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        /* ========== PRODUCT PAGE SPECIFIC STYLES ========== */
 
         /* Product Tabs */
         .product-tabs {
@@ -99,8 +174,10 @@
 
         .tabs-container {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             padding: 20px 0;
+            justify-content: center;
+            flex-wrap: wrap;
             overflow-x: auto;
         }
 
@@ -344,7 +421,7 @@
             background: #1565c0;
         }
 
-        /* Footer */
+        /* Footer - Same as index.html */
         footer {
             background: #37474f;
             color: white;
@@ -359,19 +436,22 @@
             margin-bottom: 40px;
         }
 
-        .footer-section h3,
-        .footer-section h4 {
+        .footer-section h3, .footer-section h4 {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 20px;
+            color: white;
         }
 
-        .footer-section p,
-        .footer-section a {
+        .footer-section p, .footer-section a {
             font-size: 14px;
             color: #b0bec5;
             line-height: 1.8;
             text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
         }
 
         .footer-section ul {
@@ -382,6 +462,11 @@
             margin-bottom: 10px;
         }
 
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
@@ -390,44 +475,28 @@
             font-size: 14px;
         }
 
-        /* Responsive */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
             }
 
-            nav {
-                position: fixed;
-                top: 76px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 76px);
-                background: white;
-                transition: left 0.3s;
-                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            .admin-login-btn.desktop {
+                display: none;
             }
 
-            nav.active {
-                left: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-            }
-
-            nav ul li {
-                width: 100%;
-                margin-bottom: 15px;
+            .nav-center {
+                display: none;
             }
 
             .product-banner h1 {
                 font-size: 32px;
+                padding: 0 20px;
             }
 
             .tabs-container {
                 padding: 15px 0;
+                justify-content: flex-start;
             }
 
             .model-display {
@@ -437,32 +506,57 @@
             .form-container {
                 padding: 20px;
             }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header - EXACTLY SAME AS INDEX.HTML -->
     <header>
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">Zylm Energy</a>
+                <div class="nav-center">
+                    <nav id="mainNav">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="Hour.html">Need of The Hour</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html" class="active">Products</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="vendor.html">Vendor</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <a href="admin.html" class="admin-login-btn desktop" title="Admin Login">👤</a>
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
-                <nav id="mainNav">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="Hour.html">Need of The Hour</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="products.html" class="active">Products</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="vendor.html">Vendor</a></li>
-                    </ul>
-                </nav>
-                <a href="admin.html" class="admin-login-btn" title="Admin Login">👤</a>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu - EXACTLY SAME AS INDEX.HTML -->
+    <div class="mobile-menu-container" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">Zylm Energy</a>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Hour.html">Need of The Hour</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="vendor.html">Vendor</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <!-- Product Tabs -->
     <div class="product-tabs">
@@ -659,13 +753,19 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer - Same as index.html -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Zylm Energy</h3>
                     <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -692,33 +792,25 @@
     </footer>
 
     <script>
+        // Mobile Menu Toggle - EXACTLY SAME AS INDEX.HTML
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+
+        // Products Data
         const products = {
             outdoor: {
                 title: 'AirBin - Outdoor',
                 banner: 'https://images.unsplash.com/photo-1558618666-fcd25856cd63?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
                 description: 'Zylm Energy has designed a way to protect the environment & living being from the atrocities of dirty air. AirBin is an air pollution control device which has automated control system and uses IOT and AI.',
-                longDesc: 'AirBin helps reduce infection and mortality through the use of effective and data-driven artificial intelligence control systems. AirBin is ready to operate 24 hours a day, seven days a week on an Autopilot mode.',
-                tech: 'The unit has an IOT & AI for live monitoring. Designed to deliver clean air. AirBin is a next-generation device which can automate monitoring of air quality.',
-                sensors: 'Nitrogen Oxide, Ozone, PM2.5, PM10, Carbon Monoxide, Sulphur Oxide, temperature, Humidity.',
-                controls: 'Carbon Monoxide, PM 1 PM 2.5, PM 10, Sulphur Dioxide, Ozone, Carbon Monoxide, Nitrous Oxide, Dust particles, Heavy Metals, etc.',
-                utility: 'AirBin - Outdoor is a combination of 9 proven technology and methods used as an treatment control units installed in the city. The unit is designed to reduce air pollution & the waste is collected and disposed.',
-                models: ['S4', 'S1', 'S2', 'S3']
-            },
-            recd: {
-                title: 'RECD',
-                banner: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-                description: 'Residential and commercial air purification system designed for indoor environments with advanced filtration technology.',
-                longDesc: 'RECD system provides comprehensive air quality management for homes and offices with quiet operation and efficient performance.',
-                tech: 'Multi-stage filtration with HEPA H13 filters and activated carbon for comprehensive air purification.',
-                sensors: 'PM2.5, PM10, VOC detection, Temperature, Humidity monitoring.',
-                controls: 'PM2.5, PM10, VOCs, odors, allergens, bacteria, and viruses removal.',
-                utility: 'Perfect for residential spaces, offices, clinics, and commercial establishments requiring clean indoor air.',
-                models: ['M1', 'M2', 'M3', 'M4']
-            },
-            smog: {
-                title: 'SMOG',
-                banner: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-                description: 'High-performance fog cannon system for effective dust suppression in industrial and construction environments.',
                 longDesc: 'AirBin - Smog systems utilize high-pressure water technology to create fine mist for superior dust suppression.',
                 tech: 'Advanced mist generation technology capable of covering extensive areas up to several hundred meters.',
                 sensors: 'PM2.5, PM10, Humidity, Wind Speed, Temperature monitoring.',
@@ -788,23 +880,6 @@
             event.target.classList.add('active');
             document.getElementById('currentModel').textContent = 'Model ' + modelName;
         }
-
-        // Mobile Menu Toggle (consistent across pages)
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('active');
-            const btn = document.querySelector('.mobile-menu-btn');
-            if (btn) btn.classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mainNav').classList.remove('active');
-                const btn = document.querySelector('.mobile-menu-btn');
-                if (btn) btn.classList.remove('active');
-            });
-        });
 
         // Initialize with outdoor product
         window.onload = function() {

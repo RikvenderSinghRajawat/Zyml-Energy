@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="css/responsive.css">
-    <title>Zylm Energy | GPS Tracking Solutions</title>
+    <link href="https://fonts.googleapis.com/css?family=Bodoni+Moda&display=swap" rel="stylesheet">
+    <title>Need of The Hour - Zylm Energy</title>
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -14,25 +13,25 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #2c3e50;
             line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        /* Header - Consistent with other pages */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* ========== HEADER - SAME AS INDEX.HTML ========== */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .header-content {
@@ -49,6 +48,12 @@
             text-decoration: none;
         }
 
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -59,8 +64,8 @@
         nav a {
             text-decoration: none;
             color: #5a6c7d;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 700;
             transition: color 0.3s;
         }
 
@@ -88,7 +93,7 @@
             color: #2c3e50;
         }
 
-        /* Mobile Menu */
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -97,6 +102,67 @@
             cursor: pointer;
             color: #2c3e50;
         }
+
+        /* Mobile Menu Container - SAME AS INDEX.HTML */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .mobile-menu-container.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .mobile-menu-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mobile-menu-nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            padding: 15px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-nav a:hover, .mobile-menu-nav a.active {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        /* ========== PAGE SPECIFIC STYLES ========== */
 
         /* Page Hero Section */
         .page-hero {
@@ -254,7 +320,7 @@
             margin-top: 10px;
         }
 
-        /* Footer - Same as other pages */
+        /* Footer */
         footer {
             background: #37474f;
             color: white;
@@ -294,6 +360,11 @@
             margin-bottom: 10px;
         }
 
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
@@ -302,77 +373,18 @@
             font-size: 14px;
         }
 
-        /* Floating Action Button */
-        .fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .fab-button {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 24px;
-            text-decoration: none;
-        }
-
-        .fab-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .fab-button.primary {
-            background: #42a5f5;
-            color: white;
-        }
-
-        /* Responsive */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
             }
 
-            nav {
-                position: fixed;
-                top: 60px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 60px);
-                background: white;
-                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-                transition: left 0.3s;
-                z-index: 999;
+            .admin-login-btn.desktop {
+                display: none;
             }
 
-            nav.active {
-                left: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-            }
-
-            nav ul li {
-                width: 100%;
-                margin-bottom: 15px;
-            }
-
-            nav ul li a {
-                display: block;
-                padding: 10px;
+            .nav-center {
+                display: none;
             }
 
             .page-hero h1 {
@@ -386,12 +398,6 @@
             .section-title h2 {
                 font-size: 28px;
             }
-        }
-
-        @media (max-width: 576px) {
-            .container {
-                padding: 0 10px;
-            }
 
             .page-hero {
                 padding: 60px 0;
@@ -400,37 +406,68 @@
             .certificates, .blog {
                 padding: 60px 0;
             }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 10px;
+            }
 
             .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-grid,
+            .blog-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header - Same as other pages -->
+    <!-- Header - EXACTLY SAME AS INDEX.HTML -->
     <header>
         <div class="container">
-            <link rel="stylesheet" href="css/responsive.css">
             <div class="header-content">
                 <a href="index.html" class="logo">Zylm Energy</a>
+                <div class="nav-center">
+                    <nav id="mainNav">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="Hour.html" class="active">Need of The Hour</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="vendor.html">Vendor</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <a href="admin.html" class="admin-login-btn desktop" title="Admin Login">👤</a>
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
-                <nav id="mainNav">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="Hour.html" class="active">Need of The Hour</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="vendor.html">Vendor</a></li>
-                    </ul>
-                </nav>
-                <a href="admin.html" class="admin-login-btn" title="Admin Login">👤</a>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu - EXACTLY SAME AS INDEX.HTML -->
+    <div class="mobile-menu-container" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">Zylm Energy</a>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Hour.html" class="active">Need of The Hour</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="vendor.html">Vendor</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <!-- Page Hero -->
     <section class="page-hero">
@@ -449,36 +486,28 @@
             </div>
             <div class="cert-grid">
                 <div class="cert-card">
-                    <div class="cert-image">
-                        📄
-                    </div>
+                    <div class="cert-image">📄</div>
                     <div class="cert-content">
                         <h3>ISO 9001:2015 Certified</h3>
                         <p>Quality Management System Certification for our manufacturing processes and product development.</p>
                     </div>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-image">
-                        📡
-                    </div>
+                    <div class="cert-image">📡</div>
                     <div class="cert-content">
                         <h3>FCC Part 15 Compliance</h3>
                         <p>Our GPS tracking devices meet FCC standards for electromagnetic compatibility and radio frequency emissions.</p>
                     </div>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-image">
-                        🇪🇺
-                    </div>
+                    <div class="cert-image">🇪🇺</div>
                     <div class="cert-content">
                         <h3>CE Marking</h3>
                         <p>Our products comply with EU safety, health, and environmental requirements for market distribution.</p>
                     </div>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-image">
-                        🌱
-                    </div>
+                    <div class="cert-image">🌱</div>
                     <div class="cert-content">
                         <h3>RoHS Compliant</h3>
                         <p>All our electronic components meet Restriction of Hazardous Substances directives for environmental safety.</p>
@@ -497,9 +526,7 @@
             </div>
             <div class="blog-grid">
                 <div class="blog-card">
-                    <div class="blog-image">
-                        🛰️
-                    </div>
+                    <div class="blog-image">🛰️</div>
                     <div class="blog-content">
                         <h3>Advancements in Low-Power GPS Tracking</h3>
                         <div class="blog-meta">
@@ -511,9 +538,7 @@
                     </div>
                 </div>
                 <div class="blog-card">
-                    <div class="blog-image">
-                        🚚
-                    </div>
+                    <div class="blog-image">🚚</div>
                     <div class="blog-content">
                         <h3>Optimizing Fleet Management with Real-Time Tracking</h3>
                         <div class="blog-meta">
@@ -525,9 +550,7 @@
                     </div>
                 </div>
                 <div class="blog-card">
-                    <div class="blog-image">
-                        📱
-                    </div>
+                    <div class="blog-image">📱</div>
                     <div class="blog-content">
                         <h3>The Role of GPS in the Expanding IoT Ecosystem</h3>
                         <div class="blog-meta">
@@ -539,9 +562,7 @@
                     </div>
                 </div>
                 <div class="blog-card">
-                    <div class="blog-image">
-                        🔋
-                    </div>
+                    <div class="blog-image">🔋</div>
                     <div class="blog-content">
                         <h3>Battery Life Optimization in Wearable Trackers</h3>
                         <div class="blog-meta">
@@ -553,9 +574,7 @@
                     </div>
                 </div>
                 <div class="blog-card">
-                    <div class="blog-image">
-                        🔒
-                    </div>
+                    <div class="blog-image">🔒</div>
                     <div class="blog-content">
                         <h3>Ensuring Data Security in Location Tracking Systems</h3>
                         <div class="blog-meta">
@@ -567,9 +586,7 @@
                     </div>
                 </div>
                 <div class="blog-card">
-                    <div class="blog-image">
-                        🚀
-                    </div>
+                    <div class="blog-image">🚀</div>
                     <div class="blog-content">
                         <h3>The Future of GPS: What's Next in Location Technology?</h3>
                         <div class="blog-meta">
@@ -584,19 +601,25 @@
         </div>
     </section>
 
-    <!-- Footer - Same as other pages -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Zylm Energy</h3>
                     <p>Leading provider of GPS tracking solutions for personal, commercial, and industrial applications.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="hour.html">Hour</a></li>
+                        <li><a href="Hour.html">Need of The Hour</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="products.html">Products</a></li>
                         <li><a href="careers.html">Careers</a></li>
@@ -606,9 +629,9 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact Us</h4>
-                    <p>📍 123 Tech Park, Innovation Road, Bangalore - 560001</p>
-                    <p>📞 +91 80 4123 4567</p>
-                    <p>✉️ info@stepwhere.in</p>
+                    <p>📍 B1/2, Alankar Plaza, Vidhyadhar Nagar, Jaipur - 302039</p>
+                    <p>📞 +91 141 4116525</p>
+                    <p>✉️ info@zylm.in</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -617,25 +640,17 @@
         </div>
     </footer>
 
-    <!-- Floating Action Buttons -->
-    <!-- <div class="fab">
-        <a href="mailto:info@stepwhere.in" class="fab-button" title="Email">📧</a>
-        <a href="contact.html" class="fab-button" title="Support">👋</a>
-        <a href="contact.html" class="fab-button" title="Chat">💬</a>
-        <a href="contact.html" class="fab-button primary" title="Help">❓</a>
-    </div> -->
-
     <script>
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle - EXACTLY SAME AS INDEX.HTML
         function toggleMobileMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('active');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
         }
 
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('nav a').forEach(link => {
+        document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
             link.addEventListener('click', () => {
-                document.getElementById('mainNav').classList.remove('active');
+                document.getElementById('mobileMenu').classList.remove('active');
             });
         });
     </script>

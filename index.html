@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="css/responsive.css">
     <title>Zylm Energy - Air Purification Solutions</title>
     <style>
         * {
@@ -13,7 +12,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #2c3e50;
             line-height: 1.6;
             overflow-x: hidden;
@@ -48,6 +47,12 @@
             text-decoration: none;
         }
 
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -58,8 +63,8 @@
         nav a {
             text-decoration: none;
             color: #5a6c7d;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 700;
             transition: color 0.3s;
         }
 
@@ -95,6 +100,65 @@
             font-size: 24px;
             cursor: pointer;
             color: #2c3e50;
+        }
+
+        /* Mobile Menu with Admin Login */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .mobile-menu-container.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .mobile-menu-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mobile-menu-nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            padding: 15px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-nav a:hover, .mobile-menu-nav a.active {
+            background: #e3f2fd;
+            color: #1976d2;
         }
 
         /* Hero Section */
@@ -278,13 +342,13 @@
         /* Products Section */
         .products {
             padding: 80px 0;
-            background: #e8f4f8;
+            background: #e0e0e0;
         }
 
         .products-carousel {
             position: relative;
             margin-top: 50px;
-            overflow: visible;
+            overflow: hidden;
         }
 
         .carousel-wrapper {
@@ -293,9 +357,10 @@
         }
 
         .products-slider {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
             gap: 25px;
+            transition: transform 0.5s ease;
+            width: max-content;
         }
 
         .product-card {
@@ -304,6 +369,8 @@
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             transition: all 0.3s;
+            width: 280px;
+            flex-shrink: 0;
         }
 
         .product-card:hover {
@@ -390,16 +457,22 @@
         .product-link {
             flex: 1;
             text-align: center;
-            font-size: 13px;
-            color: #1976d2;
+            padding: 10px 16px;
+            background: #1976d2;
+            color: white;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
         }
 
         .product-link:hover {
-            color: #1565c0;
-            text-decoration: underline;
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .carousel-button {
@@ -513,45 +586,10 @@
             font-size: 14px;
         }
 
-        /* Floating Action Button */
-        .fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .fab-button {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 24px;
-            text-decoration: none;
-        }
-
-        .fab-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .fab-button.primary {
-            background: #42a5f5;
-            color: white;
-        }
-
         /* Responsive */
         @media (max-width: 1024px) {
-            .products-slider {
-                grid-template-columns: repeat(2, 1fr);
+            .product-card {
+                width: 250px;
             }
         }
 
@@ -560,36 +598,12 @@
                 display: block;
             }
 
-            nav {
-                position: fixed;
-                top: 60px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 60px);
-                background: white;
-                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-                transition: left 0.3s;
-                z-index: 999;
+            .admin-login-btn.desktop {
+                display: none;
             }
 
-            nav.active {
-                left: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-                gap: 0;
-            }
-
-            nav ul li {
-                width: 100%;
-                margin-bottom: 15px;
-            }
-
-            nav ul li a {
-                display: block;
-                padding: 10px;
+            .nav-center {
+                display: none;
             }
 
             .hero-content {
@@ -613,10 +627,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .products-slider {
-                grid-template-columns: 1fr;
-            }
-
             .carousel-button {
                 display: none;
             }
@@ -632,23 +642,45 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">Zylm Energy </a>
+                <a href="index.html" class="logo">Zylm Energy</a>
+                <div class="nav-center">
+                    <nav id="mainNav">
+                        <ul>
+                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="Hour.html">Need of The Hour</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="vendor.html">Vendor</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <a href="admin.html" class="admin-login-btn desktop" title="Admin Login">👤</a>
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
-                <nav id="mainNav">
-                    <ul>
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="Hour.html">Need of The Hour</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="vendor.html">Vendor</a></li>
-                    </ul>
-                </nav>
-                <a href="admin.html" class="admin-login-btn" title="Admin Login">👤</a>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-container" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">Zylm Energy</a>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="Hour.html">Need of The Hour</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="vendor.html">Vendor</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -738,8 +770,7 @@
                                     <li>3-stage filtration</li>
                                 </ul>
                                 <div class="product-actions">
-                                    <a href="products.html#outdoor" class="product-link">View specs</a>
-                                    <a href="contact.html" class="product-link">Request demo</a>
+                                    <a href="products.html#outdoor" class="product-link">View Product</a>
                                 </div>
                             </div>
                         </div>
@@ -760,8 +791,7 @@
                                     <li>500-3000 m³/hr airflow</li>
                                 </ul>
                                 <div class="product-actions">
-                                    <a href="products.html#smog" class="product-link">View specs</a>
-                                    <a href="contact.html" class="product-link">Request demo</a>
+                                    <a href="products.html#smog" class="product-link">View Product</a>
                                 </div>
                             </div>
                         </div>
@@ -781,8 +811,7 @@
                                     <li>Wall-mount option</li>
                                 </ul>
                                 <div class="product-actions">
-                                    <a href="products.html#recd" class="product-link">View specs</a>
-                                    <a href="contact.html" class="product-link">Request demo</a>
+                                    <a href="products.html#recd" class="product-link">View Product</a>
                                 </div>
                             </div>
                         </div>
@@ -802,8 +831,27 @@
                                     <li>Integrated monitoring</li>
                                 </ul>
                                 <div class="product-actions">
-                                    <a href="products.html#pole" class="product-link">View specs</a>
-                                    <a href="contact.html" class="product-link">Request demo</a>
+                                    <a href="products.html#pole" class="product-link">View Product</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <div class="product-icon-large">🖥️</div>
+                            </div>
+                            <div class="product-info">
+                                <h3>AirBin ART‑UI</h3>
+                                <div class="product-tags">
+                                    <span class="product-tag">UI Module</span>
+                                    <span class="product-tag">Telemetry</span>
+                                </div>
+                                <ul class="product-features">
+                                    <li>Real-time dashboard and controls</li>
+                                    <li>Remote monitoring & analytics</li>
+                                    <li>Integrates with all AirBin models</li>
+                                </ul>
+                                <div class="product-actions">
+                                    <a href="products.html#artui" class="product-link">View Product</a>
                                 </div>
                             </div>
                         </div>
@@ -857,39 +905,29 @@
         </div>
     </footer>
 
-    <!-- Floating Action Buttons -->
-    <!-- <div class="fab">
-        <a href="mailto:info@zylm.in" class="fab-button" title="Email">📧</a>
-        <a href="contact.html" class="fab-button" title="Support">👋</a>
-        <a href="contact.html" class="fab-button" title="Chat">💬</a>
-        <a href="contact.html" class="fab-button primary" title="Help">❓</a>
-    </div> -->
-
     <script>
         // Mobile Menu Toggle
         function toggleMobileMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('active');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
         }
 
         // Carousel functionality
         let currentSlide = 0;
         const slider = document.getElementById('productsSlider');
+        const cards = slider.children;
+        const cardWidth = cards[0].offsetWidth;
+        const gap = 25;
+        const sliderWidth = slider.offsetWidth;
+        const maxSlide = Math.ceil(cards.length - (sliderWidth / (cardWidth + gap)));
         
         function scrollCarousel(direction) {
-            const cards = slider.children;
-            const cardWidth = cards[0].offsetWidth;
-            const gap = 25;
-            const visibleCards = window.innerWidth > 1024 ? 4 : window.innerWidth > 768 ? 2 : 1;
-            const maxSlide = cards.length - visibleCards;
-            
             currentSlide += direction;
             if (currentSlide < 0) currentSlide = 0;
             if (currentSlide > maxSlide) currentSlide = maxSlide;
             
             const scrollAmount = currentSlide * (cardWidth + gap);
             slider.style.transform = `translateX(-${scrollAmount}px)`;
-            slider.style.transition = 'transform 0.3s ease';
         }
 
         // CTA Form Submit
@@ -901,10 +939,26 @@
         }
 
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('nav a').forEach(link => {
+        document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
             link.addEventListener('click', () => {
-                document.getElementById('mainNav').classList.remove('active');
+                document.getElementById('mobileMenu').classList.remove('active');
             });
+        });
+
+        // Touch swipe support for mobile
+        let startX = 0;
+        let deltaX = 0;
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            deltaX = 0;
+        }, { passive: true });
+        slider.addEventListener('touchmove', (e) => {
+            deltaX = e.touches[0].clientX - startX;
+        }, { passive: true });
+        slider.addEventListener('touchend', () => {
+            if (Math.abs(deltaX) > 50) {
+                if (deltaX < 0) { scrollCarousel(1); } else { scrollCarousel(-1); }
+            }
         });
     </script>
 </body>

@@ -8,26 +8,49 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+    <!-- Header - Consistent with index.html -->
     <header>
         <div class="container">
-            <div class="logo">
-                <span class="logo-icon">🌿</span>
-                <h1>Zylm Energy</h1>
+            <div class="header-content">
+                <a href="index.html" class="logo">Zylm Energy</a>
+                <div class="nav-center">
+                    <nav id="mainNav">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="Hour.html">Need of The Hour</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="vendor.html">Vendor</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <a href="admin.html" class="admin-login-btn desktop" title="Admin Login">👤</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="vendor.html">Vendor</a></li>
-                    <li><a href="admin.html" class="admin-link">Admin</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-menu-btn">☰</div>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-container" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">Zylm Energy</a>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Hour.html">Need of The Hour</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="vendor.html">Vendor</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <section class="page-hero">
         <div class="container">
@@ -168,6 +191,12 @@
                 <div class="footer-section">
                     <h3>Zylm Energy</h3>
                     <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -192,6 +221,21 @@
         </div>
     </footer>
 
+    <script>
+        // Mobile Menu Toggle - consistent with index.html
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link inside the mobile menu
+        document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                const mobileMenu = document.getElementById('mobileMenu');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
     <script src="js/main.js"></script>
     <script src="js/form-handler.js"></script>
 </body>
