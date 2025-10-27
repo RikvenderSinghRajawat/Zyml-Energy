@@ -350,6 +350,7 @@
             padding: 40px 0;
             background-color: #f9f9f9;
             border-radius: 12px;
+            display: none; /* Initially hidden */
         }
         
         .upcoming-products h2 {
@@ -715,11 +716,12 @@
     <div class="product-tabs">
         <div class="container">
             <div class="tabs-container">
-                <button class="tab-btn active" onclick="switchProduct('outdoor')">Outdoor</button>
-                <button class="tab-btn" onclick="switchProduct('recd')">RECD</button>
-                <button class="tab-btn" onclick="switchProduct('smog')">SMOG</button>
-                <button class="tab-btn" onclick="switchProduct('pole')">POLE</button>
-                <button class="tab-btn" onclick="switchProduct('art2')">ART-2</button>
+                <button class="tab-btn active" onclick="switchProduct('outdoor', event)">Outdoor</button>
+                <button class="tab-btn" onclick="switchProduct('recd', event)">RECD</button>
+                <button class="tab-btn" onclick="switchProduct('smog', event)">SMOG</button>
+                <button class="tab-btn" onclick="switchProduct('pole', event)">POLE</button>
+                <button class="tab-btn" onclick="switchProduct('art2', event)">ART-2</button>
+                <button class="tab-btn" onclick="switchProduct('upcoming', event)">Upcoming</button>
             </div>
         </div>
     </div>
@@ -994,17 +996,58 @@
                 utility: 'Ideal for public transport buses, commercial fleets, and vehicles in high-pollution urban areas.',
                 models: ['V1', 'V2', 'V3', 'V4']
             }
++            upcoming: {
++                title: 'Upcoming Products',
++                banner: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
++                description: 'Sneak peek into upcoming Zylm Energy innovations — cleaner, smarter air solutions.',
++                longDesc: 'A preview of products currently under development and testing. Specifications may change in final release.',
++                tech: 'Next-gen filtration with AI-assisted performance tuning and improved outdoor resilience.',
++                sensors: 'Advanced PM monitoring, VOC detection, temperature, humidity, wind profiling.',
++                controls: 'Adaptive control strategies, energy efficiency improvements, remote update support.',
++                utility: 'Designed for challenging environments including industrial zones and high-traffic urban areas.',
++                models: ['U1', 'U2', 'U3']
++            }
         };
 
         let currentProduct = 'outdoor';
 
-        function switchProduct(productKey) {
+        function switchProduct(productKey, clickEvent) {
             currentProduct = productKey;
             const product = products[productKey];
             
             // Update tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            // Use the event from parameter or find the button by product key
+            if (clickEvent && clickEvent.target) {
+                clickEvent.target.classList.add('active');
+            } else {
+                // Find the button by its onclick attribute
+                const buttons = document.querySelectorAll('.tab-btn');
+                for (let btn of buttons) {
+                    if (btn.getAttribute('onclick').includes(`'${productKey}'`)) {
+                        btn.classList.add('active');
+                        break;
+                    }
+                }
+            }
+            
+            // Handle upcoming products differently
+            if (productKey === 'upcoming') {
+                // Hide regular product details
+                document.querySelector('.product-details').style.display = 'none';
+                // Show upcoming products section
+                document.querySelector('.upcoming-products').style.display = 'block';
+                
+                // Update banner for upcoming products
+                document.getElementById('productBanner').style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${product.banner}) center/cover`;
+                
+                return;
+            }
+            
+            // Show regular product details and hide upcoming products
+            document.querySelector('.product-details').style.display = 'block';
+            document.querySelector('.upcoming-products').style.display = 'none';
             
             // Update content
             document.getElementById('productBanner').style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${product.banner}) center/cover`;

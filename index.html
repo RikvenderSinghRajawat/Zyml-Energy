@@ -355,6 +355,26 @@
             position: relative;
             padding: 0 50px;
         }
+        
+        @media (max-width: 768px) {
+            .carousel-wrapper {
+                padding: 0 20px;
+            }
+            
+            .product-card {
+                width: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .carousel-wrapper {
+                padding: 0 10px;
+            }
+            
+            .product-card {
+                width: 220px;
+            }
+        }
 
         .products-slider {
             display: flex;
@@ -628,7 +648,9 @@
             }
 
             .carousel-button {
-                display: none;
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
             }
 
             .cta-input {
@@ -643,7 +665,9 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">Zylm Energy</a>
+                <a href="index.html" class="logo">
+    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 40px;">
+</a>
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
@@ -668,7 +692,9 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu-container" id="mobileMenu">
         <div class="mobile-menu-header">
-            <a href="index.html" class="logo">Zylm Energy</a>
+            <a href="index.html" class="logo">
+    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 40px;">
+</a>
             <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
         </div>
         <nav class="mobile-menu-nav">
@@ -753,8 +779,8 @@
             <div class="section-title">
                 <h2>Our Products</h2>
             </div>
-            <div class="products-carousel">
-                <div class="carousel-wrapper">
+            <div class="products-carousel" id="productsCarousel">
+                <div class="carousel-wrapper" id="productsViewport">
                     <button class="carousel-button prev" onclick="scrollCarousel(-1)">‹</button>
                     <div class="products-slider" id="productsSlider">
                         <div class="product-card">
@@ -924,21 +950,100 @@
 
         // Carousel functionality
         let currentSlide = 0;
-        const slider = document.getElementById('productsSlider');
-        const cards = slider.children;
-        const cardWidth = cards[0].offsetWidth;
+        let slider, cards, cardWidth, viewportWidth, visibleCards, maxSlide;
         const gap = 25;
-        const sliderWidth = slider.offsetWidth;
-        const maxSlide = Math.ceil(cards.length - (sliderWidth / (cardWidth + gap)));
         
-        function scrollCarousel(direction) {
-            currentSlide += direction;
-            if (currentSlide < 0) currentSlide = 0;
-            if (currentSlide > maxSlide) currentSlide = maxSlide;
+        function initCarousel() {
+            slider = document.getElementById('productsSlider');
+            if (!slider) return;
+            cards = Array.from(slider.children);
+            if (!cards.length) return;
+            measure();
+        }
+        
+        function measure() {
+            if (!slider || !cards.length) return;
             
+            // Force layout recalculation
+            slider.style.transform = 'translateX(0px)';
+            
+            // Get actual card width
+            cardWidth = cards[0].offsetWidth;
+            
+            // Get viewport width (carousel wrapper minus padding)
+            const carouselWrapper = slider.parentElement;
+            if (!carouselWrapper) return;
+            
+            // Adjust padding based on screen size
+            let paddingOffset = 100; // Default for desktop
+            if (window.innerWidth <= 480) {
+                paddingOffset = 20; // Mobile
+            } else if (window.innerWidth <= 768) {
+                paddingOffset = 40; // Tablet
+            }
+            
+            viewportWidth = carouselWrapper.offsetWidth - paddingOffset;
+            
+            // Calculate visible cards based on viewport
+            visibleCards = Math.max(1, Math.floor(viewportWidth / (cardWidth + gap)));
+            
+            // Calculate maximum slide position
+            maxSlide = Math.max(0, cards.length - visibleCards);
+            
+            // Ensure current slide is within bounds
+            currentSlide = Math.min(currentSlide, maxSlide);
+            
+            // Apply transform
+            updateSliderPosition();
+            
+            console.log('Carousel measured:', {
+                screenWidth: window.innerWidth,
+                cardWidth,
+                viewportWidth,
+                visibleCards,
+                maxSlide,
+                currentSlide,
+                totalCards: cards.length,
+                paddingOffset
+            });
+        }
+        
+        function updateSliderPosition() {
+            if (!slider) return;
             const scrollAmount = currentSlide * (cardWidth + gap);
             slider.style.transform = `translateX(-${scrollAmount}px)`;
         }
+        
+        function scrollCarousel(direction) {
+            if (!slider || !cards.length) return;
+            
+            console.log('Scrolling carousel:', { direction, currentSlide, maxSlide });
+            
+            const newSlide = currentSlide + direction;
+            
+            // Boundary checks
+            if (newSlide < 0) {
+                currentSlide = 0;
+            } else if (newSlide > maxSlide) {
+                currentSlide = maxSlide;
+            } else {
+                currentSlide = newSlide;
+            }
+            
+            console.log('New slide position:', currentSlide);
+            updateSliderPosition();
+        }
+        
+        // Initialize carousel when DOM is ready
+        document.addEventListener('DOMContentLoaded', initCarousel);
+        
+        // Re-measure on resize and orientation change
+        window.addEventListener('resize', () => {
+            setTimeout(measure, 100); // Small delay to ensure layout is complete
+        });
+        window.addEventListener('orientationchange', () => {
+            setTimeout(measure, 300); // Longer delay for orientation change
+        });
 
         // CTA Form Submit
         function handleCTASubmit(event) {

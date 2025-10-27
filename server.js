@@ -415,13 +415,15 @@ function saveFormSubmission(formData, res) {
             
             console.log('✅ Form saved, ID:', this.lastID);
             
-            await sendEmail(formData);
+            // Send email and handle result
+            const emailSent = await sendEmail(formData);
             
             res.json({ 
                 success: true, 
                 message: 'Form submitted successfully!',
                 submissionId: this.lastID,
-                otpVerified: otpVerified
+                otpVerified: otpVerified,
+                emailSent: emailSent
             });
         }
     );
@@ -430,7 +432,15 @@ function saveFormSubmission(formData, res) {
 async function sendEmail(formData) {
     try {
         const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-        const userEmail = process.env.USER_EMAIL || 'divyanshujpr027@gmail.com'; // Replace with your email
+        const recipient = RECIPIENT_EMAIL;
+        console.log('📧 Attempting to send email to:', recipient);
+        console.log('📋 Form data:', {
+            type: formData.formType,
+            name: formData.name || formData.fullName,
+            email: formData.email,
+            phone: formData.phone || formData.mobile,
+            cvFilePath: formData.cvFilePath
+        });
         
         let emailBody = `
         <!DOCTYPE html>
@@ -491,17 +501,63 @@ async function sendEmail(formData) {
         </body>
         </html>`;
 
-        await emailTransporter.sendMail({
+        // Attach CV if available
+        const attachments = [];
+        try {
+            if (formData.cvFilePath) {
+                // Handle both relative and absolute paths
+                let fileDiskPath;
+                if (formData.cvFilePath.startsWith('/uploads/cv/')) {
+                    // Remove leading slash and construct full path
+                    const filename = path.basename(formData.cvFilePath);
+                    fileDiskPath = path.join(__dirname, 'uploads', 'cv', filename);
+                } else {
+                    fileDiskPath = formData.cvFilePath;
+                }
+                
+                // Check if file exists before attaching
+                const fs = require('fs');
+                if (fs.existsSync(fileDiskPath)) {
+                    const filename = path.basename(fileDiskPath);
+                    attachments.push({ 
+                        filename: `CV_${formData.fullName || formData.name || 'Resume'}_${filename}`, 
+                        path: fileDiskPath 
+                    });
+                    console.log('📎 CV attachment added:', filename);
+                } else {
+                    console.warn('⚠️ CV file not found:', fileDiskPath);
+                }
+            } else if (formData.cvLink) {
+                // Handle URL-based CV links (if any)
+                attachments.push({ filename: 'CV.pdf', path: formData.cvLink });
+            }
+        } catch (attErr) {
+            console.warn('⚠️ Attachment handling issue:', attErr.message);
+        }
+
+        const mailOptions = {
             from: process.env.EMAIL_USER || 'divyanshujpr027@gmail.com',
-            to: userEmail, // Send to user's email
+            to: recipient,
             subject: `[Zylm Energy] ${formData.formType.toUpperCase()} - ${formData.name || formData.fullName || 'New Submission'}`,
-            html: emailBody
+            html: emailBody,
+            attachments: attachments.length ? attachments : undefined
+        };
+
+        console.log('📤 Sending email with options:', {
+            from: mailOptions.from,
+            to: mailOptions.to,
+            subject: mailOptions.subject,
+            attachmentCount: attachments.length
         });
 
-        console.log('✅ Email sent to:', userEmail);
+        const result = await emailTransporter.sendMail(mailOptions);
+        console.log('✅ Email sent successfully:', result.messageId);
         return true;
     } catch (error) {
-        console.error('❌ Email failed:', error.message);
+        console.error('❌ Email sending failed:');
+        console.error('   Error message:', error.message);
+        console.error('   Error code:', error.code);
+        console.error('   Error response:', error.response);
         return false;
     }
 }
