@@ -319,12 +319,12 @@ nav ul li a.active {
 .mobile-menu-nav a:hover,
 .mobile-menu-nav a.active {
     background: #e3f2fd;
-    color: #1976d2;
+    color: #2F3E46;
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(26, 82, 118, 0.8), rgba(52, 152, 219, 0.8)), url('../assets/images/hero-bg.jpg');
+    background: linear-gradient(rgba(47, 62, 70, 0.8), rgba(47, 62, 70, 0.8)), url('../assets/images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -1380,7 +1380,7 @@ footer {
 }
 
 .admin-btn-edit {
-    background: #17a2b8;
+    background: #2F3E46;
     color: white;
 }
 
@@ -1678,7 +1678,7 @@ footer {
 
 /* Products Page Hero */
 .products-detail .page-hero {
-    background: linear-gradient(135deg, #1a5276 0%, #3498db 100%);
+    background: linear-gradient(135deg, #2F3E46 0%, #2F3E46 100%);
     position: relative;
     overflow: hidden;
 }
@@ -1741,7 +1741,7 @@ footer {
 }
 
 .product-header h2 {
-    color: #1a5276;
+    color: #2F3E46;
     font-size: 42px;
     font-weight: 700;
     margin-bottom: 12px;
@@ -1821,7 +1821,7 @@ footer {
 }
 
 .product-description h3 {
-    color: #1a5276;
+    color: #2F3E46;
     font-size: 28px;
     font-weight: 700;
     margin: 35px 0 18px;
@@ -1883,7 +1883,7 @@ footer {
 
 .product-description ul li:hover {
     padding-left: 45px;
-    color: #1a5276;
+    color: #2F3E46;
 }
 
 /* Technical Specs Section */
@@ -1904,11 +1904,11 @@ footer {
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(90deg, #1a5276, #3498db, #2ecc71);
+    background: linear-gradient(90deg, #2F3E46, #2F3E46, #2ecc71);
 }
 
 .tech-specs h3 {
-    color: #1a5276;
+    color: #2F3E46;
     font-size: 26px;
     font-weight: 700;
     margin-bottom: 30px;
@@ -1954,7 +1954,7 @@ footer {
 .spec-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    border-color: #3498db;
+    border-color: #2F3E46;
 }
 
 .spec-item strong {
@@ -2067,8 +2067,8 @@ footer {
 }
 
 .inquiry-section .form-control:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+    border-color: #2F3E46;
+    box-shadow: 0 0 0 4px rgba(47, 62, 70, 0.1);
 }
 
 .inquiry-section .btn-primary {
@@ -2162,3 +2162,5 @@ footer {
         padding: 60px 0;
     }
 }
+
+
