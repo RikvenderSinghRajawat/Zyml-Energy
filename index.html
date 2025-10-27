@@ -636,6 +636,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <!-- Header - Consistent with other pages -->
@@ -646,14 +647,15 @@
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <li><a href="index.html" class="active">Home</a></li>
+                            <!-- <li><a href="index.html" class="active">Home</a></li> -->
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html">Products</a></li>
                             <li><a href="careers.html">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
+                            <!-- <li><a href="vendor.html" class="active">Vendor</a></li> -->
                             <li><a href="media.html">Media</a></li>
-                            <li><a href="vendor.html">Vendor</a></li>
+                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -678,7 +680,7 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <li><a href="vendor.html">Vendor</a></li>
+                <!-- <li><a href="vendor.html">Vendor</a></li> -->
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
@@ -692,8 +694,7 @@
                     <h1>Clean air. Safer workplaces.</h1>
                     <p>Zylm Air purifiers are precision-engineered for even the harshest environments. With Zylm Air, you get more than just air purifying, and solutions that are built to last.</p>
                     <div class="hero-buttons">
-                        <a href="contact.html" class="btn btn-primary">Enquire Online</a>
-                        <a href="products.html" class="btn btn-secondary">Explore Products</a>
+                        <a href="products.html" class="btn btn-primary">Explore Products</a>
                     </div>
                 </div>
                 <div class="hero-illustration">
@@ -882,6 +883,12 @@
                 <div class="footer-section">
                     <h3>Zylm Energy</h3>
                     <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
+                    <div class="social-links" style="margin-top:15px; display: flex; gap: 15px;">
+                        <a href="https://instagram.com/" target="_blank" rel="noopener" style="color: #e1306c;"><i class="fab fa-instagram"></i> Instagram</a><br>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" style="color: #0077b5;"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" style="color: #1877f2;"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="https://x.com/" target="_blank" rel="noopener" style="color: #1da1f2;"><i class="fab fa-twitter"></i> X</a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -891,6 +898,7 @@
                         <li><a href="products.html">Products</a></li>
                         <li><a href="careers.html">Careers</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li><a href="vendor.html" class="active">Vendor</a></li>
                         <li><a href="legal.html">Legal</a></li>
                     </ul>
                 </div>
@@ -963,5 +971,10 @@
             }
         });
     </script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/form-handler.js"></script>
 </body>
 </html>

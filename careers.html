@@ -487,14 +487,14 @@
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <!-- <li><a href="index.html">Home</a></li> -->
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html">Products</a></li>
                             <li><a href="careers.html" class="active">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <li><a href="vendor.html">Vendor</a></li>
+                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -518,7 +518,7 @@
                 <li><a href="careers.html" class="active">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <li><a href="vendor.html">Vendor</a></li>
+                <!-- <li><a href="vendor.html">Vendor</a></li> -->
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
@@ -669,24 +669,29 @@
                         <input type="text" id="expectedPosition" name="expectedPosition" class="form-control">
                     </div>
 
-                    <div class="department-selection">
-                        <label>Department *</label>
-                        <div class="department-options">
-                            <div class="dept-option" data-value="hr-executive"><strong>Human Resource - Executive</strong></div>
-                            <div class="dept-option" data-value="production-technician"><strong>Production - Technician</strong></div>
-                            <div class="dept-option" data-value="finance-accountant"><strong>Finance - Accountant</strong></div>
-                            <div class="dept-option" data-value="procurement-supervisor"><strong>Procurement - Supervisor</strong></div>
-                            <div class="dept-option" data-value="operation-manager"><strong>Operation - Manager</strong></div>
-                            <div class="dept-option" data-value="sales-executive"><strong>Sales - Executive</strong></div>
-                            <div class="dept-option" data-value="marketing-executive"><strong>Marketing - Executive</strong></div>
-                            <div class="dept-option" data-value="rnd-mechanical"><strong>R&D - Mechanical</strong></div>
-                        </div>
-                        <input type="hidden" id="department" name="department" required>
+                    <div class="form-group">
+                        <label for="department">Department *</label>
+                        <select id="department" name="department" class="form-control" required>
+                            <option value="">Select Department</option>
+                            <option value="hr-executive">Human Resource - Executive</option>
+                            <option value="production-technician">Production - Technician</option>
+                            <option value="finance-accountant">Finance - Accountant</option>
+                            <option value="procurement-supervisor">Procurement - Supervisor</option>
+                            <option value="operation-manager">Operation - Manager</option>
+                            <option value="sales-executive">Sales - Executive</option>
+                            <option value="marketing-executive">Marketing - Executive</option>
+                            <option value="rnd-mechanical">R&D - Mechanical</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="cv">CV Link or Additional Information</label>
-                        <input type="text" id="cv" name="cv" class="form-control" placeholder="You can share your LinkedIn profile or portfolio link">
+                        <label for="cvFile">Upload CV (PDF/DOC, max 5 MB)</label>
+                        <input type="file" id="cvFile" name="cvFile" class="form-control" accept=".pdf,.doc,.docx">
+                        <small style="color:#5a6c7d; display:block; margin-top:6px;">Alternatively, share a link to your portfolio or LinkedIn below.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv">CV/Portfolio Link (optional)</label>
+                        <input type="text" id="cv" name="cv" class="form-control" placeholder="LinkedIn or portfolio URL">
                     </div>
                     <div class="form-group">
                         <label for="remarks">Additional Remarks</label>
@@ -708,43 +713,7 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Zylm Energy</h3>
-                    <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
-                    <div class="social-links">
-                        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
-                        <a href="https://x.com/" target="_blank" rel="noopener">X</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="Hour.html">Need of The Hour</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="legal.html">Legal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <p>📍 B1/2, Alankar Plaza, Vidhyadhar Nagar, Jaipur - 302039</p>
-                    <p>📞 +91 141 4116525</p>
-                    <p>✉️ info@zylm.in</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Zylm Energy Private Limited. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer removed as per requirement - only needed on home page -->
 
     <script>
         function toggleMobileMenu() {
@@ -770,5 +739,11 @@
             });
         }
     </script>
+</body>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/form-handler.js"></script>
 </body>
 </html>

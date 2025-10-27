@@ -481,6 +481,73 @@
             font-size: 14px;
         }
 
+        /* OTP Styles */
+        .otp-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .otp-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .otp-input {
+            flex: 1;
+            max-width: 200px;
+            font-family: monospace;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #545b62;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary:disabled {
+            background: #a0a0a0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .otp-timer {
+            display: block;
+            margin-top: 8px;
+            color: #dc3545;
+            font-weight: 500;
+        }
+
+        .otp-hint {
+            display: block;
+            margin-top: 5px;
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        .otp-status {
+            margin-top: 8px;
+            font-size: 13px;
+            min-height: 20px;
+        }
+
         @media (max-width: 768px) {
             .mobile-menu-btn { display: block; }
             .admin-login-btn.desktop { display: none; }
@@ -495,6 +562,18 @@
             .map-placeholder { padding: 30px 20px; }
             .page-hero { padding: 60px 0; }
             .contact-info, .contact-details, .map-section { padding: 60px 0; }
+            
+            .otp-input-group {
+                flex-direction: column;
+            }
+            
+            .otp-input {
+                max-width: 100%;
+            }
+            
+            .btn-secondary {
+                width: 100%;
+            }
         }
 
         @media (max-width: 576px) {
@@ -512,14 +591,12 @@
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html">Products</a></li>
                             <li><a href="careers.html">Careers</a></li>
                             <li><a href="contact.html" class="active">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <li><a href="vendor.html">Vendor</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -543,7 +620,6 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <li><a href="vendor.html">Vendor</a></li>
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
@@ -633,9 +709,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="contactPhone">Phone Number *</label>
-                                <input type="tel" id="contactPhone" name="phone" class="form-control" required>
+                                <input type="tel" id="contactPhone" name="phone" class="form-control" 
+                                       pattern="[6-9][0-9]{9}" 
+                                       title="Please enter a valid 10-digit Indian phone number"
+                                       required>
                             </div>
                         </div>
+                        <!-- OTP Section will be automatically added here by JavaScript -->
                         <div class="form-group">
                             <label for="contactSubject">Subject *</label>
                             <input type="text" id="contactSubject" name="subject" class="form-control" required>
@@ -679,44 +759,13 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Zylm Energy</h3>
-                    <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
-                    <div class="social-links">
-                        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
-                        <a href="https://x.com/" target="_blank" rel="noopener">X</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="Hour.html">Need of The Hour</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="legal.html">Legal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <p>📍 B1/2, Alankar Plaza, Vidhyadhar Nagar, Jaipur - 302039</p>
-                    <p>📞 +91 141 4116525</p>
-                    <p>✉️ info@zylm.in</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Zylm Energy Private Limited. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer removed as per requirement - only needed on home page -->
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/form-handler.js"></script>
     <script>
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');

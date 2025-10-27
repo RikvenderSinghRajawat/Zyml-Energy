@@ -344,6 +344,157 @@
             color: #ccc;
         }
 
+        /* Upcoming Products Section */
+        .upcoming-products {
+            margin-top: 60px;
+            padding: 40px 0;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+        }
+        
+        .upcoming-products h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .upcoming-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .upcoming-product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .upcoming-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .upcoming-product-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #aaa;
+        }
+        
+        .upcoming-product-content {
+            padding: 20px;
+        }
+        
+        .upcoming-product-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .upcoming-product-desc {
+            font-size: 14px;
+            color: #5a6c7d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .upcoming-product-date {
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* Upcoming Products Section */
+        .upcoming-products {
+            margin-top: 60px;
+            padding: 40px 0;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+        }
+        
+        .upcoming-products h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .upcoming-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .upcoming-product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .upcoming-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .upcoming-product-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #aaa;
+        }
+        
+        .upcoming-product-content {
+            padding: 20px;
+        }
+        
+        .upcoming-product-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .upcoming-product-desc {
+            font-size: 14px;
+            color: #5a6c7d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .upcoming-product-date {
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .coming-soon-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
         /* Form Section */
         .form-section {
             margin-top: 80px;
@@ -522,14 +673,14 @@
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <!-- <li><a href="index.html">Home</a></li> -->
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html" class="active">Products</a></li>
                             <li><a href="careers.html">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <li><a href="vendor.html">Vendor</a></li>
+                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -554,7 +705,7 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <li><a href="vendor.html">Vendor</a></li>
+                <!-- <li><a href="vendor.html">Vendor</a></li> -->
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
@@ -640,6 +791,42 @@
                         <div class="gallery-item">📷</div>
                         <div class="gallery-item">📷</div>
                         <div class="gallery-item">📷</div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Products Section -->
+                <div class="upcoming-products">
+                    <div class="container">
+                        <h2>Upcoming Products</h2>
+                        <div class="upcoming-products-grid">
+                            <div class="upcoming-product-card">
+                                <div class="upcoming-product-image">🌬️</div>
+                                <div class="upcoming-product-content">
+                                    <span class="coming-soon-badge">Coming Soon</span>
+                                    <h3 class="upcoming-product-title">AirBin Pro Max</h3>
+                                    <p class="upcoming-product-desc">Our most advanced air purification system with AI-powered pollution detection and 99.9% filtration efficiency for industrial environments.</p>
+                                    <p class="upcoming-product-date">Expected: Q3 2023</p>
+                                </div>
+                            </div>
+                            <div class="upcoming-product-card">
+                                <div class="upcoming-product-image">🏠</div>
+                                <div class="upcoming-product-content">
+                                    <span class="coming-soon-badge">Coming Soon</span>
+                                    <h3 class="upcoming-product-title">ZylmHome Mini</h3>
+                                    <p class="upcoming-product-desc">Compact residential air purifier with smart home integration, perfect for apartments and small spaces with whisper-quiet operation.</p>
+                                    <p class="upcoming-product-date">Expected: Q4 2023</p>
+                                </div>
+                            </div>
+                            <div class="upcoming-product-card">
+                                <div class="upcoming-product-image">🔬</div>
+                                <div class="upcoming-product-content">
+                                    <span class="coming-soon-badge">Coming Soon</span>
+                                    <h3 class="upcoming-product-title">AirSense Pro</h3>
+                                    <p class="upcoming-product-desc">Advanced air quality monitoring system with real-time analytics dashboard and mobile alerts for commercial and healthcare facilities.</p>
+                                    <p class="upcoming-product-date">Expected: Q1 2024</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -756,42 +943,7 @@
     </div>
 
     <!-- Footer - Same as index.html -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Zylm Energy</h3>
-                    <p>Leading manufacturer of air purification systems for commercial, industrial and residential use.</p>
-                    <div class="social-links">
-                        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
-                        <a href="https://x.com/" target="_blank" rel="noopener">X</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="legal.html">Legal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <p>📍 B1/2, Alankar Plaza, Vidhyadhar Nagar, Jaipur - 302039</p>
-                    <p>📞 +91 141 4116525</p>
-                    <p>✉️ info@zylm.in</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Zylm Energy Private Limited. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer removed as per requirement - only needed on home page -->
 
     <script>
         // Mobile Menu Toggle - EXACTLY SAME AS INDEX.HTML
@@ -889,5 +1041,10 @@
             banner.style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${products.outdoor.banner}) center/cover`;
         };
     </script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/form-handler.js"></script>
 </body>
 </html>
