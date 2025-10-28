@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Bodoni+Moda&display=swap" rel="stylesheet">
     <title>Careers - Zylm Energy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,10 +14,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #2c3e50;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
+            background: #f8f9fa;
         }
 
         .container {
@@ -38,7 +40,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 0;
+            padding: 8px 0;
         }
 
         .logo {
@@ -46,6 +48,12 @@
             font-weight: 600;
             color: #2c3e50;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 46px;
         }
 
         .nav-center {
@@ -162,113 +170,129 @@
 
         /* ========== PAGE SPECIFIC STYLES ========== */
 
+        /* Page Hero Section */
         .page-hero {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 80px 0;
+            background: linear-gradient(rgba(45, 55, 72, 0.85), rgba(45, 55, 72, 0.92)), url('assets/images/careers-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
             text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.05"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
         }
 
         .page-hero h1 {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 15px;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
 
         .page-hero p {
             font-size: 18px;
             max-width: 700px;
             margin: 0 auto;
-            color: #5a6c7d;
+            color: #e2e8f0;
+            line-height: 1.8;
         }
 
+        /* Careers Intro Section */
         .careers-intro {
             padding: 80px 0;
             background: white;
         }
 
-        .careers-content h2 {
-            color: #1a237e;
-            font-size: 32px;
-            margin-bottom: 20px;
+        .section-title {
             text-align: center;
+            margin-bottom: 60px;
         }
 
-        .careers-content > p {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 50px;
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title p {
+            font-size: 15px;
             color: #5a6c7d;
-            font-size: 16px;
-            line-height: 1.7;
         }
 
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
 
         .benefit-card {
             background: white;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #e8eaed;
             border-radius: 12px;
-            padding: 35px 25px;
+            padding: 30px 25px;
             text-align: center;
             transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-color: #90caf9;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-color: #4a5568;
         }
 
         .benefit-icon {
             width: 60px;
             height: 60px;
-            background: #e3f2fd;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             font-size: 28px;
+            color: white;
+            box-shadow: 0 3px 12px rgba(74, 85, 104, 0.25);
         }
 
         .benefit-card h3 {
             font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 12px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.3;
         }
 
         .benefit-card p {
-            font-size: 14px;
+            font-size: 14.5px;
             color: #5a6c7d;
             line-height: 1.7;
         }
 
+        /* Careers Form Section */
         .careers-form-section {
             padding: 80px 0;
-            background: #e8f4f8;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #5a6c7d;
-            font-size: 16px;
+            background: white;
         }
 
         .form-container {
@@ -277,14 +301,17 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             border: 1px solid #e0e0e0;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .form-container h3 {
-            color: #1a237e;
-            font-size: 22px;
+            font-size: 20px;
+            font-weight: 600;
             margin: 30px 0 20px;
             padding-bottom: 10px;
             border-bottom: 1px solid #e0e0e0;
+            color: #2d3748;
         }
 
         .form-container h3:first-child {
@@ -306,15 +333,15 @@
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #e8eaed;
             border-radius: 8px;
             font-size: 14px;
             transition: border-color 0.3s;
-            background: #fafafa;
+            background: #f8f9fa;
         }
 
         .form-control:focus {
-            border-color: #1976d2;
+            border-color: #4a5568;
             outline: none;
             background: white;
         }
@@ -346,17 +373,47 @@
         .checkbox-group label {
             margin-bottom: 0;
             font-size: 14px;
+            color: #5a6c7d;
         }
 
+        .submit-btn {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(74, 85, 104, 0.3);
+        }
+
+        /* Department Selection Styles */
         .department-selection {
             margin: 20px 0;
         }
 
         .department-options {
-            display: grid;
+            display: none;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 10px;
             margin-top: 10px;
+            background: white;
+            border: 1px solid #e8eaed;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .department-options.active {
+            display: grid;
         }
 
         .dept-option {
@@ -366,137 +423,136 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid #e0e0e0;
+            text-align: center;
+            font-weight: 500;
         }
 
         .dept-option:hover {
-            border-color: #1976d2;
-            background: #e3f2fd;
+            border-color: #4a5568;
+            background: #edf2f7;
         }
 
         .dept-option.selected {
-            background: #1976d2;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             color: white;
-            border-color: #1976d2;
+            border-color: #4a5568;
         }
 
-        .dept-option strong {
-            font-size: 14px;
-        }
-
-        .btn {
-            padding: 14px 32px;
+        .choose-dept-btn {
+            background: #f8f9fa;
+            border: 1px solid #e8eaed;
             border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
+            padding: 12px 15px;
             font-size: 14px;
-            transition: all 0.3s;
             cursor: pointer;
-            border: none;
-            display: inline-block;
+            transition: all 0.3s;
+            width: 100%;
+            text-align: left;
+            position: relative;
+            color: #5a6c7d;
         }
 
-        .btn-primary {
-            background: #1976d2;
-            color: white;
+        .choose-dept-btn:after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
         }
 
-        .btn-primary:hover {
-            background: #1565c0;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3);
+        .choose-dept-btn.active:after {
+            content: '▲';
         }
 
-        footer {
-            background: #37474f;
-            color: white;
-            padding: 60px 0 30px;
+        .choose-dept-btn:hover {
+            border-color: #4a5568;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3, .footer-section h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .footer-section p, .footer-section a {
-            font-size: 14px;
-            color: #b0bec5;
-            line-height: 1.8;
-            text-decoration: none;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .social-links a {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #b0bec5;
-            font-size: 14px;
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .department-options {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
-            .mobile-menu-btn { display: block; }
-            .admin-login-btn.desktop { display: none; }
-            .nav-center { display: none; }
-            .page-hero h1 { font-size: 32px; }
-            .page-hero p { font-size: 16px; }
-            .careers-content h2 { font-size: 28px; }
-            .section-title h2 { font-size: 28px; }
-            .form-row { flex-direction: column; gap: 0; }
-            .form-container { padding: 25px; }
-            .department-options { grid-template-columns: 1fr; }
-            .page-hero { padding: 60px 0; }
-            .careers-intro, .careers-form-section { padding: 60px 0; }
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .admin-login-btn.desktop {
+                display: none;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            .page-hero {
+                padding: 80px 0;
+            }
+
+            .page-hero h1 {
+                font-size: 36px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .careers-intro, .careers-form-section {
+                padding: 60px 0;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-container {
+                padding: 25px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .department-options {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 576px) {
-            .container { padding: 0 10px; }
-            .footer-content { grid-template-columns: 1fr; }
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-hero h1 {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header - SAME AS INDEX.HTML -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+                <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo"></a>
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <!-- <li><a href="index.html">Home</a></li> -->
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html">Products</a></li>
                             <li><a href="careers.html" class="active">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -506,11 +562,10 @@
         </div>
     </header>
 
+    <!-- Mobile Menu - SAME AS INDEX.HTML -->
     <div class="mobile-menu-container" id="mobileMenu">
         <div class="mobile-menu-header">
-            <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+            <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 34px;"></a>
             <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
         </div>
         <nav class="mobile-menu-nav">
@@ -522,12 +577,12 @@
                 <li><a href="careers.html" class="active">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <!-- <li><a href="vendor.html">Vendor</a></li> -->
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
     </div>
 
+    <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
             <h1>Join Our Team</h1>
@@ -535,38 +590,40 @@
         </div>
     </section>
 
+    <!-- Careers Intro Section -->
     <section class="careers-intro">
         <div class="container">
-            <div class="careers-content">
+            <div class="section-title">
                 <h2>Why Work at Zylm Energy?</h2>
-                <p>At Zylm Energy, we're not just building products - we're building solutions for a sustainable future. Join us in our mission to combat air pollution and create cleaner environments for generations to come.</p>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">💼</div>
-                        <h3>Professional Growth</h3>
-                        <p>Continuous learning opportunities and career advancement</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🌍</div>
-                        <h3>Meaningful Work</h3>
-                        <p>Contribute to environmental conservation and public health</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">⚡</div>
-                        <h3>Innovation</h3>
-                        <p>Work with cutting-edge technology in air purification</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🤝</div>
-                        <h3>Team Culture</h3>
-                        <p>Collaborative environment with experienced professionals</p>
-                    </div>
+                <p>At Zylm Energy, we're not just building products - we're building solutions for a sustainable future</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💼</div>
+                    <h3>Professional Growth</h3>
+                    <p>Continuous learning opportunities and career advancement in the fast-growing clean air technology sector.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌍</div>
+                    <h3>Meaningful Work</h3>
+                    <p>Contribute directly to environmental conservation and public health through innovative air purification solutions.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Innovation Focus</h3>
+                    <p>Work with cutting-edge IoT and AI technologies in the rapidly evolving air purification industry.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Collaborative Culture</h3>
+                    <p>Join a team of passionate professionals dedicated to making a tangible impact on air quality worldwide.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Careers Form Section -->
     <section class="careers-form-section">
         <div class="container">
             <div class="section-title">
@@ -673,19 +730,21 @@
                         <input type="text" id="expectedPosition" name="expectedPosition" class="form-control">
                     </div>
 
+                    <!-- Department Selection -->
                     <div class="form-group">
                         <label for="department">Department *</label>
-                        <select id="department" name="department" class="form-control" required>
-                            <option value="">Select Department</option>
-                            <option value="hr-executive">Human Resource - Executive</option>
-                            <option value="production-technician">Production - Technician</option>
-                            <option value="finance-accountant">Finance - Accountant</option>
-                            <option value="procurement-supervisor">Procurement - Supervisor</option>
-                            <option value="operation-manager">Operation - Manager</option>
-                            <option value="sales-executive">Sales - Executive</option>
-                            <option value="marketing-executive">Marketing - Executive</option>
-                            <option value="rnd-mechanical">R&D - Mechanical</option>
-                        </select>
+                        <button type="button" class="choose-dept-btn" id="chooseDeptBtn">Choose One</button>
+                        <div class="department-options" id="departmentOptions">
+                            <div class="dept-option" data-value="Human Resource">Human Resource</div>
+                            <div class="dept-option" data-value="Production">Production</div>
+                            <div class="dept-option" data-value="Finance">Finance</div>
+                            <div class="dept-option" data-value="Procurement">Procurement</div>
+                            <div class="dept-option" data-value="Operation">Operation</div>
+                            <div class="dept-option" data-value="Sales">Sales</div>
+                            <div class="dept-option" data-value="Marketing">Marketing</div>
+                            <div class="dept-option" data-value="Research & Development">Research & Development</div>
+                        </div>
+                        <input type="hidden" id="department" name="department" required>
                     </div>
 
                     <div class="form-group">
@@ -704,50 +763,87 @@
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="careerTerms" required>
-                        <label for="careerTerms">I accept the Terms & Conditions and Privacy Policy</label>
+                        <label for="careerTerms">I accept the Terms & Conditions and Privacy Policy *</label>
                     </div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="newsletter" name="newsletter">
                         <label for="newsletter">Subscribe to our newsletter for updates</label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                    <button type="submit" class="submit-btn">Submit Application</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer removed as per requirement - only needed on home page -->
-
     <script>
+        // Mobile Menu Toggle - SAME AS INDEX.HTML
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('active');
         }
 
+        // Close mobile menu when clicking on a link
         document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('mobileMenu').classList.remove('active');
             });
         });
 
+        // Department Selection Functionality
+        const chooseDeptBtn = document.getElementById('chooseDeptBtn');
+        const departmentOptions = document.getElementById('departmentOptions');
         const deptOptions = document.querySelectorAll('.dept-option');
-        const deptInput = document.getElementById('department');
-        if (deptOptions && deptInput) {
-            deptOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    deptOptions.forEach(opt => opt.classList.remove('selected'));
-                    option.classList.add('selected');
-                    deptInput.value = option.getAttribute('data-value');
-                });
+        const departmentInput = document.getElementById('department');
+
+        // Toggle department options visibility
+        chooseDeptBtn.addEventListener('click', function() {
+            departmentOptions.classList.toggle('active');
+            chooseDeptBtn.classList.toggle('active');
+        });
+
+        // Handle department selection
+        deptOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                deptOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Update button text and hidden input value
+                chooseDeptBtn.textContent = this.textContent;
+                departmentInput.value = this.getAttribute('data-value');
+                
+                // Close the options dropdown
+                departmentOptions.classList.remove('active');
+                chooseDeptBtn.classList.remove('active');
             });
-        }
+        });
+
+        // Close department options when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!chooseDeptBtn.contains(event.target) && !departmentOptions.contains(event.target)) {
+                departmentOptions.classList.remove('active');
+                chooseDeptBtn.classList.remove('active');
+            }
+        });
+
+        // Form submission handler
+        document.getElementById('careerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate department selection
+            if (!departmentInput.value) {
+                alert('Please select a department');
+                return;
+            }
+            
+            alert('Thank you for your application! We will review your details and contact you soon.');
+            this.reset();
+            chooseDeptBtn.textContent = 'Choose One';
+            deptOptions.forEach(opt => opt.classList.remove('selected'));
+        });
     </script>
-</body>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="js/firebase-config.js"></script>
-<script src="js/firebase-init.js"></script>
-<script src="js/form-handler.js"></script>
 </body>
 </html>

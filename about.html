@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Bodoni+Moda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>About Us - Zylm Energy</title>
     <style>
         * {
@@ -13,10 +13,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #2c3e50;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
+            background: #f8f9fa;
         }
 
         .container {
@@ -25,7 +26,7 @@
             padding: 0 20px;
         }
 
-        /* ========== HEADER - SAME AS INDEX.HTML ========== */
+        /* ========== HEADER ========== */
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -38,7 +39,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 0;
+            padding: 8px 0;
         }
 
         .logo {
@@ -46,6 +47,12 @@
             font-weight: 600;
             color: #2c3e50;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 46px;
         }
 
         .nav-center {
@@ -93,7 +100,6 @@
             color: #2c3e50;
         }
 
-        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -103,7 +109,6 @@
             color: #2c3e50;
         }
 
-        /* Mobile Menu Container - SAME AS INDEX.HTML */
         .mobile-menu-container {
             position: fixed;
             top: 0;
@@ -162,121 +167,220 @@
             color: #1976d2;
         }
 
-        /* ========== PAGE SPECIFIC STYLES ========== */
-
-        /* Page Hero Section */
+        /* ========== PAGE HERO - GRAY THEME ========== */
         .page-hero {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 80px 0;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            padding: 100px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
         }
 
         .page-hero h1 {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 15px;
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
 
-        .page-hero p {
-            font-size: 18px;
-            max-width: 700px;
+        .page-hero .tagline {
+            font-size: 19px;
+            max-width: 850px;
             margin: 0 auto;
-            color: #5a6c7d;
+            color: #e2e8f0;
+            font-style: italic;
+            line-height: 1.8;
+            font-weight: 400;
         }
 
-        /* About Content Section */
+        /* ========== ABOUT CONTENT ========== */
         .about-content {
             padding: 80px 0;
-            background: white;
+            background: #f8f9fa;
         }
 
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: start;
+            grid-template-columns: 1fr;
+            gap: 40px;
         }
 
-        .about-text h2 {
-            color: #1a237e;
-            font-size: 32px;
-            margin-bottom: 20px;
+        .about-section {
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e8eaed;
         }
 
+        .about-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Section Headers with Gray Theme */
+        .section-header {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 10px;
+            margin-bottom: 35px;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 15px rgba(74, 85, 104, 0.25);
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 30px;
+            width: 60px;
+            height: 3px;
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        /* Improved Typography */
         .about-text p {
-            margin-bottom: 20px;
-            line-height: 1.7;
-            color: #5a6c7d;
+            margin-bottom: 22px;
+            line-height: 1.85;
+            color: #3a4a5c;
+            font-size: 16.5px;
+            text-align: justify;
+            font-weight: 400;
+            letter-spacing: 0.2px;
         }
 
-        .about-text h3 {
-            color: #1a237e;
-            font-size: 24px;
-            margin: 30px 0 15px;
+        .about-text p:last-child {
+            margin-bottom: 0;
         }
 
+        .about-text strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        /* Overview Section Special Styling */
+        .overview-section {
+            background: linear-gradient(to bottom right, #f7fafc 0%, #edf2f7 100%);
+            border-left: 4px solid #4a5568;
+        }
+
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+            gap: 30px;
+            margin-top: 0;
         }
 
         .stat {
             text-align: center;
-            padding: 25px 15px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e0e0e0;
+            padding: 45px 25px;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(74, 85, 104, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(74, 85, 104, 0.4);
         }
 
         .stat h4 {
-            font-size: 36px;
-            color: #1a237e;
-            margin-bottom: 8px;
+            font-size: 48px;
+            color: white;
+            margin-bottom: 12px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
         }
 
         .stat p {
-            color: #5a6c7d;
+            color: #e2e8f0;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 17px;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
         }
 
-        .about-image {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* NCAP Info Section */
+        /* NCAP Section */
         .ncap-info {
-            background: #e8f4f8;
+            background: linear-gradient(to bottom, #edf2f7 0%, #e2e8f0 100%);
             padding: 80px 0;
         }
 
         .ncap-info h2 {
-            color: #1a237e;
-            font-size: 32px;
-            margin-bottom: 20px;
+            color: #2d3748;
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .ncap-content {
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e8eaed;
         }
 
         .ncap-info p {
-            margin-bottom: 15px;
-            line-height: 1.7;
-            color: #5a6c7d;
+            margin-bottom: 24px;
+            line-height: 1.85;
+            color: #3a4a5c;
+            font-size: 16.5px;
+            text-align: justify;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .ncap-info p:last-child {
+            margin-bottom: 0;
         }
 
         /* Footer */
         footer {
-            background: #37474f;
+            background: #2d3748;
             color: white;
             padding: 60px 0 30px;
         }
@@ -297,7 +401,7 @@
 
         .footer-section p, .footer-section a {
             font-size: 14px;
-            color: #b0bec5;
+            color: #cbd5e0;
             line-height: 1.8;
             text-decoration: none;
         }
@@ -323,17 +427,11 @@
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            color: #b0bec5;
+            color: #cbd5e0;
             font-size: 14px;
         }
 
         /* ========== RESPONSIVE ========== */
-        @media (max-width: 1024px) {
-            .about-grid {
-                gap: 40px;
-            }
-        }
-
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
@@ -347,33 +445,43 @@
                 display: none;
             }
 
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .page-hero {
+                padding: 70px 0;
+            }
+
+            .page-hero h1 {
+                font-size: 34px;
+            }
+
+            .page-hero .tagline {
+                font-size: 17px;
+            }
+
+            .about-section {
+                padding: 35px 25px;
+            }
+
+            .section-header {
+                font-size: 22px;
+                padding: 15px 20px;
+            }
+
+            .about-text p,
+            .ncap-info p {
+                font-size: 15.5px;
+                text-align: left;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
             }
 
-            .page-hero h1 {
-                font-size: 32px;
-            }
-
-            .page-hero p {
-                font-size: 16px;
-            }
-
-            .about-text h2 {
-                font-size: 28px;
-            }
-
             .ncap-info h2 {
-                font-size: 28px;
+                font-size: 30px;
             }
 
-            .page-hero {
-                padding: 60px 0;
+            .ncap-content {
+                padding: 35px 25px;
             }
 
             .about-content,
@@ -384,7 +492,24 @@
 
         @media (max-width: 576px) {
             .container {
-                padding: 0 10px;
+                padding: 0 15px;
+            }
+
+            .page-hero h1 {
+                font-size: 28px;
+            }
+
+            .page-hero .tagline {
+                font-size: 16px;
+            }
+
+            .about-section {
+                padding: 25px 20px;
+            }
+
+            .section-header {
+                font-size: 20px;
+                padding: 12px 18px;
             }
 
             .footer-content {
@@ -394,24 +519,22 @@
     </style>
 </head>
 <body>
-    <!-- Header - EXACTLY SAME AS INDEX.HTML -->
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+                    <img src="assets/images/logo.png" alt="Zylm Energy Logo">
+                </a>
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <!-- <li><a href="index.html">Home</a></li> -->
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html" class="active">About</a></li>
                             <li><a href="products.html">Products</a></li>
                             <li><a href="careers.html">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -421,12 +544,12 @@
         </div>
     </header>
 
-    <!-- Mobile Menu - EXACTLY SAME AS INDEX.HTML -->
+    <!-- Mobile Menu -->
     <div class="mobile-menu-container" id="mobileMenu">
         <div class="mobile-menu-header">
             <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+                <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 34px;">
+            </a>
             <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
         </div>
         <nav class="mobile-menu-nav">
@@ -438,17 +561,16 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <!-- <li><a href="vendor.html">Vendor</a></li> -->
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- Page Hero -->
+    <!-- Page Hero - Gray Theme with Quote -->
     <section class="page-hero">
         <div class="container">
             <h1>About Zylm Energy</h1>
-            <p>Leading the fight against air pollution with innovative solutions</p>
+            <p class="tagline">"Environmental pollution is not only humanity's treason to humanity but also a treason to all other living creatures on earth."</p>
         </div>
     </section>
 
@@ -456,31 +578,69 @@
     <section class="about-content">
         <div class="container">
             <div class="about-grid">
-                <div class="about-text">
-                    <h2>About Us</h2>
-                    
-                    <h3>Who We Are</h3>
-                    <p>At Zylm Energy, we are a team of dedicated professionals committed to addressing environmental pollution that affects all living creatures on Earth. We combine expertise in engineering, environmental science, and technology to create innovative air purification solutions.</p>
-                    
-                    <h3>What We Do</h3>
-                    <p>We design and develop cutting-edge air purification systems that effectively combat air pollution. Our products utilize the latest technologies to improve air quality without excessive resource consumption, making them both efficient and sustainable.</p>
-                    
-                    <h3>What We Give to Society as a Whole</h3>
-                    <p>Our mission extends beyond providing products – we contribute to a healthier planet for current and future generations. Through our solutions, we help reduce the health impacts of air pollution, create cleaner environments for communities, and support sustainable development goals globally.</p>
-                    
+                <!-- Company Overview -->
+                <div class="about-section overview-section">
+                    <div class="about-text">
+                        <p>An individual takes around <strong>20,000 breaths per day</strong>. Yet, consider the possibility that each breath we take was really hurting us. The most recent figures from the WHO are disturbing: the vast majority of the total population lives where air quality is classified as dangerous. The effect of air contamination on individuals and their wellbeing is gigantic.</p>
+                        
+                        <p>Specialists trust that fine residue and especially ultra-fine particles can reach and go after each organ in the body. Overall, poor outside and indoor air quality lessens future by three years. Furthermore, consistently around <strong>7 million individuals around the world</strong> - including 600,000 kids - kick the bucket as an immediate consequence of air contamination.</p>
+                        
+                        <p>According to the <strong>Organization for Economic Co-operation and Development (OECD)</strong>, there is a serious risk that these numbers could even double by 2050. The WHO has announced air contamination as the main ecological gamble. This issue is likewise a main concern at Zylm. With our technology & devices, we offer air contamination arrangements that guarantee cleaner and better air.</p>
+                    </div>
+                </div>
+
+                <!-- Who We Are -->
+                <div class="about-section">
+                    <h3 class="section-header">Who We Are</h3>
+                    <div class="about-text">
+                        <p><strong>Zylm Energy Private Limited</strong> is a leading manufacturer of air purification devices for commercial, industrial and residential use. We are dedicated to providing efficient and innovative solutions for air purification needs of all kinds. Our products are designed to help people and businesses live and work in a healthier environment.</p>
+                        
+                        <p>At Zylm Energy, we are a team of dedicated professionals committed to addressing environmental pollution that affects all living creatures on Earth. We combine expertise in engineering, environmental science, and technology to create innovative air purification solutions.</p>
+                        
+                        <p>Our team is composed of some of the most experienced and knowledgeable professionals in the industry. Each member is committed to developing only the best technologies to help our clients build safer and cleaner environments. We firmly believe that there is an urgent need to promote clean air across the globe, and are actively driving the development and adoption of energy efficient and reliable products.</p>
+                    </div>
+                </div>
+
+                <!-- What We Do -->
+                <div class="about-section">
+                    <h3 class="section-header">What We Do</h3>
+                    <div class="about-text">
+                        <p>We design and develop cutting-edge air purification systems that effectively combat air pollution. Our products utilize the latest technologies to improve air quality without excessive resource consumption, making them both efficient and sustainable. The motivation behind our lodge air channels and frameworks for vehicles is to safeguard drivers and travellers from the numerous dangers presented by the approaching air.</p>
+                        
+                        <p>We strive to provide the best possible products to our customers, and we work hard to ensure that our products are of the highest quality. We are committed to providing our clients with the latest technologies in air purification. Our products use cutting-edge filtration technologies that reduce air pollution, decrease emissions, and increase efficiency in both homes and businesses.</p>
+                        
+                        <p>Zylm Energy Private Limited is known for its <strong>patented technology</strong> that uses advanced air filtration systems to help reduce the pollution levels of the air around us. Our patented technology, known as <strong>"AirBin"</strong>, has a multi-stage purification process that can be customized for different environmental needs, such as the removal of dust, pollen, and other air contaminants. This technology helps to reduce the risk of health risks associated with air pollution.</p>
+                        
+                        <p>Our products are equipped with advanced technology that can reduce airborne particulate pollutants and eliminate unpleasant odors. All of our air purification systems are designed to operate in both indoor and outdoor environments with low energy consumption.</p>
+                    </div>
+                </div>
+
+                <!-- What We Give to Society -->
+                <div class="about-section">
+                    <h3 class="section-header">What We Give to Society as a Whole</h3>
+                    <div class="about-text">
+                        <p>Our mission extends beyond providing products – we contribute to a healthier planet for current and future generations. Through our solutions, we help reduce the health impacts of air pollution, create cleaner environments for communities, and support sustainable development goals globally.</p>
+                        
+                        <p>Our commitment to our clients and our commitment to providing a healthy and safe environment for our customers is what sets us apart from other companies in the industry. We are also dedicated to creating and distributing clean energy solutions that can be easily and cost-effectively implemented.</p>
+                        
+                        <p>At Zylm Energy, we aim to provide our customers with the best air purification and clean energy solutions. We strive to develop the most efficient and cost-effective systems, while providing superior customer service. Our team is dedicated to continuously developing and implementing new technologies and products. We are devoted to providing exceptional customer service and strive to always meet our customer's needs.</p>
+                        
+                        <p>Being environmentally conscious at home is one of the most effective methods to take a step farther toward living a sustainable existence while also helping to preserve the world in the process. Thus, while manufacturing its goods, the firm takes precautions to ensure that <strong>no hazardous or toxic chemicals</strong> are released into the environment, such as petroleum fumes or poisonous gases.</p>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="about-section">
                     <div class="stats-grid">
                         <div class="stat">
                             <h4>24/7</h4>
-                            <p>Operation</p>
+                            <p>CONTINUOUS OPERATION</p>
                         </div>
                         <div class="stat">
                             <h4>Expert</h4>
-                            <p>Support Team</p>
+                            <p>SUPPORT TEAM</p>
                         </div>
                     </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Zylm Energy Facility">
                 </div>
             </div>
         </div>
@@ -490,15 +650,18 @@
     <section class="ncap-info">
         <div class="container">
             <h2>National Clean Air Programme (NCAP)</h2>
-            <p>Government of India launched the National Clean Air Programme (NCAP) in 2019 to tackle the air pollution problem in a comprehensive manner, with a target to achieve 20-30% reduction in particulate matter (PM) concentrations by 2024.</p>
-            <p>The NCAP is implemented in 132 cities, with a focus on achieving Sustainable Development Goals 3, 11, and 13 which have direct reference to clean air and reducing air pollution.</p>
+            <div class="ncap-content">
+                <p>Government of India launched the <strong>National Clean Air Programme (NCAP)</strong> in 2019 to tackle the air pollution problem in a comprehensive manner, with a target to achieve <strong>20-30% reduction</strong> in particulate matter (PM) concentrations by 2024 across the country keeping 2017 as the base year for the comparison of concentration.</p>
+                
+                <p>The NCAP is implemented in <strong>132 cities</strong>, of which 124 cities have been identified based on non-conformity with national ambient air quality standards for five consecutive years. This includes 34 million plus cities/urban agglomerations identified by the Fifteenth Finance Commission (XV-FC). NCAP also covers eight other million plus cities, which fall under XV-FC grant for receiving performance-based grant for air quality improvement.</p>
+                
+                <p><strong>SDGs 3, 11, and 13</strong> have a direct reference to clean air and reducing air pollution. SDG 11 aims to "make cities and human settlements inclusive, safe, resilient, and sustainable." SDG target 11.6 prioritises reducing the negative environmental impacts of cities, including outdoor air pollution. SDG indicator 11.6.2 measures how much air quality (specifically, the annual mean levels of particulate matter) affects people living in urbanised areas.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Footer removed as per requirement - only needed on home page -->
-
     <script>
-        // Mobile Menu Toggle - EXACTLY SAME AS INDEX.HTML
+        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('active');

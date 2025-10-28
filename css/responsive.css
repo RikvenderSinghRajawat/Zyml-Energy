@@ -1,11 +1,11 @@
 /* Tablet Styles */
 @media (max-width: 992px) {
     .hero h2 {
-        font-size: 36px;
+        font-size: 2.8rem;
     }
     
     .hero p {
-        font-size: 18px;
+        font-size: 1.1rem;
     }
     
     .about-grid {
@@ -20,6 +20,11 @@
     
     section {
         padding: 60px 0;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 }
 
@@ -36,10 +41,10 @@
     
     nav {
         position: fixed;
-        top: 70px;
+        top: 53px;
         left: -100%;
         width: 80%;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 53px);
         background-color: white;
         transition: left 0.3s;
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -52,11 +57,11 @@
     
     nav ul {
         flex-direction: column;
-        padding: 20px;
+        padding: 15px;
     }
     
     nav ul li {
-        margin: 0 0 15px 0;
+        margin: 0 0 12px 0;
     }
     
     .admin-layout {
@@ -69,23 +74,27 @@
     }
     
     .hero {
-        padding: 80px 0;
+        padding: 100px 0;
+        min-height: 60vh;
+        background-attachment: scroll;
     }
     
     .hero h2 {
-        font-size: 28px;
+        font-size: 2.2rem;
     }
     
     .hero p {
-        font-size: 16px;
+        font-size: 1rem;
+        margin: 0 auto 30px;
     }
     
     .section-title h2 {
-        font-size: 28px;
+        font-size: 2rem;
     }
     
     .btn {
-        padding: 10px 25px;
+        padding: 12px 28px;
+        font-size: 14px;
     }
     
     .stats-grid {
@@ -93,28 +102,46 @@
     }
     
     .page-hero h1 {
-        font-size: 32px;
+        font-size: 2rem;
     }
 
     /* Stack product media and text on small screens */
     .product-content {
         grid-template-columns: 1fr !important;
-        gap: 24px !important;
+        gap: 20px !important;
     }
+    
     .product-image-large img {
         width: 100%;
+    }
+    
+    /* Mobile footer adjustments */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer-section h3,
+    .footer-section h4 {
+        font-size: 16px;
+    }
+    
+    .footer-section ul li a {
+        font-size: 13px;
     }
 }
 
 /* Small Mobile */
 @media (max-width: 576px) {
     .container {
-        padding: 0 10px;
+        padding: 0 15px;
     }
     
     .features-grid,
     .products-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
     
     .form-container {
@@ -123,5 +150,18 @@
     
     .footer-content {
         grid-template-columns: 1fr;
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 10px 24px;
+        font-size: 13px;
     }
 }

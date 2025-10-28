@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Zylm Energy</title>
-    <link href="https://fonts.googleapis.com/css?family=Bodoni+Moda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,9 +14,17 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #2c3e50;
-            line-height: 1.6;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* ========== HEADER - SAME AS INDEX.HTML ========== */
@@ -27,17 +36,11 @@
             z-index: 1000;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 0;
+            padding: 8px 0;
         }
 
         .logo {
@@ -45,6 +48,12 @@
             font-weight: 600;
             color: #2c3e50;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 46px;
         }
 
         .nav-center {
@@ -92,7 +101,6 @@
             color: #2c3e50;
         }
 
-        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -102,7 +110,6 @@
             color: #2c3e50;
         }
 
-        /* Mobile Menu Container - SAME AS INDEX.HTML */
         .mobile-menu-container {
             position: fixed;
             top: 0;
@@ -195,7 +202,7 @@
         }
 
         .tab-btn.active {
-            background: #000;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             color: #fff;
         }
 
@@ -262,7 +269,7 @@
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 30px;
-            color: #2c3e50;
+            color: #2d3748;
         }
 
         .model-tabs {
@@ -286,7 +293,7 @@
         }
 
         .model-btn.active {
-            background: #000;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             color: #fff;
         }
 
@@ -300,36 +307,39 @@
             justify-content: center;
         }
 
-        .model-icon {
+        .model-image-container {
             text-align: center;
         }
 
-        .model-icon-large {
-            font-size: 72px;
-            margin-bottom: 20px;
+        .model-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .model-name {
             font-size: 24px;
             color: #5a6c7d;
+            margin-top: 20px;
         }
 
-        /* Gallery */
+        /* Gallery Section */
         .gallery-section {
             margin-top: 60px;
-            text-align: center;
         }
 
         .gallery-section h2 {
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 30px;
+            text-align: center;
             color: #2c3e50;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
         }
 
@@ -340,8 +350,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            color: #ccc;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
         /* Upcoming Products Section */
@@ -350,77 +370,7 @@
             padding: 40px 0;
             background-color: #f9f9f9;
             border-radius: 12px;
-            display: none; /* Initially hidden */
-        }
-        
-        .upcoming-products h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #2c3e50;
-        }
-        
-        .upcoming-products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
-        }
-        
-        .upcoming-product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .upcoming-product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        .upcoming-product-image {
-            height: 200px;
-            background-color: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: #aaa;
-        }
-        
-        .upcoming-product-content {
-            padding: 20px;
-        }
-        
-        .upcoming-product-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        
-        .upcoming-product-desc {
-            font-size: 14px;
-            color: #5a6c7d;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        
-        .upcoming-product-date {
-            font-size: 12px;
-            color: #888;
-            font-style: italic;
-        }
-        
-        /* Upcoming Products Section */
-        .upcoming-products {
-            margin-top: 60px;
-            padding: 40px 0;
-            background-color: #f9f9f9;
-            border-radius: 12px;
+            display: none;
         }
         
         .upcoming-products h2 {
@@ -558,7 +508,7 @@
         }
 
         .submit-btn {
-            background: #1976d2;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             color: white;
             padding: 14px 40px;
             border: none;
@@ -570,64 +520,17 @@
         }
 
         .submit-btn:hover {
-            background: #1565c0;
-        }
-
-        /* Footer - Same as index.html */
-        footer {
-            background: #37474f;
-            color: white;
-            padding: 60px 0 30px;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3, .footer-section h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .footer-section p, .footer-section a {
-            font-size: 14px;
-            color: #b0bec5;
-            line-height: 1.8;
-            text-decoration: none;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .social-links a {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #b0bec5;
-            font-size: 14px;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(74, 85, 104, 0.3);
         }
 
         /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
@@ -660,30 +563,49 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .product-banner h1 {
+                font-size: 28px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .model-tabs {
+                gap: 10px;
+            }
+
+            .model-btn {
+                padding: 10px 20px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header - EXACTLY SAME AS INDEX.HTML -->
+    <!-- Header - SAME AS INDEX.HTML -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+                <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo"></a>
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <!-- <li><a href="index.html">Home</a></li> -->
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html" class="active">Products</a></li>
                             <li><a href="careers.html">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -693,12 +615,10 @@
         </div>
     </header>
 
-    <!-- Mobile Menu - EXACTLY SAME AS INDEX.HTML -->
+    <!-- Mobile Menu - SAME AS INDEX.HTML -->
     <div class="mobile-menu-container" id="mobileMenu">
         <div class="mobile-menu-header">
-            <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+            <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 34px;"></a>
             <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
         </div>
         <nav class="mobile-menu-nav">
@@ -710,7 +630,6 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <!-- <li><a href="vendor.html">Vendor</a></li> -->
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
@@ -721,10 +640,10 @@
         <div class="container">
             <div class="tabs-container">
                 <button class="tab-btn active" onclick="switchProduct('outdoor', event)">Outdoor</button>
-                <button class="tab-btn" onclick="switchProduct('recd', event)">RECD</button>
                 <button class="tab-btn" onclick="switchProduct('smog', event)">SMOG</button>
                 <button class="tab-btn" onclick="switchProduct('pole', event)">POLE</button>
                 <button class="tab-btn" onclick="switchProduct('art2', event)">ART-2</button>
+                <button class="tab-btn" onclick="switchProduct('recd', event)">RECD</button>
                 <button class="tab-btn" onclick="switchProduct('upcoming', event)">Upcoming</button>
             </div>
         </div>
@@ -737,53 +656,46 @@
             <h1 id="productTitle">AirBin - Outdoor</h1>
         </div>
 
-        <!-- Details -->
+        <!-- Product Details -->
         <div class="product-details">
             <div class="container">
                 <div class="detail-section">
-                    <p id="productDescription">Zylm Energy has designed a way to protect the environment & living being from the atrocities of dirty air. AirBin is an air pollution control device which has automated control system and uses IOT and AI.</p>
+                    <p id="productDescription">Zylm Energy has designed a way to protect the environment & living beings from the atrocities of dirty and polluted air with the brand - AirBin, which is a next-generation, multi-function for Outdoor / Indoor / RECD for DG set / Automobile / Pole.</p>
                 </div>
 
                 <div class="detail-section">
-                    <p id="productLongDesc">AirBin helps reduce infection and mortality through the use of effective and data-driven artificial intelligence control systems. AirBin is ready to operate 24 hours a day, seven days a week on an Autopilot mode.</p>
+                    <p id="productLongDesc">AirBin is an air pollution control device which has automated control system and uses IOT and AI. AirBin helps reduce infection and mortality through the use of effective and data-driven artificial intelligence. Air quality and other environmental factors are continuously monitored and accurate data is identified using artificial intelligence.</p>
                 </div>
 
                 <div class="detail-section">
-                    <h3>Tech:</h3>
-                    <p id="productTech">The unit has an IOT & AI for live monitoring. Designed to deliver clean air. AirBin is a next-generation device which can automate monitoring of air quality.</p>
+                    <h3>Technology</h3>
+                    <p id="productTech">The unit has an IoT & AI for live monitoring. Designed to deliver clean air, AirBin is a next-generation device which can automate monitoring of air quality. The Environmental Sensor Kit allows continuous monitoring of air quality.</p>
                 </div>
 
                 <div class="detail-section">
-                    <h3>Sensors:</h3>
-                    <p id="productSensors">Nitrogen Oxide, Ozone, PM2.5, PM10, Carbon Monoxide, Sulphur Oxide, temperature, Humidity.</p>
+                    <h3>Sensors</h3>
+                    <p id="productSensors">Nitrogen Oxide, Ozone, PM2.5, PM10, Carbon Monoxide, Sulphur Oxide, temperature, Humidity, Rain, etc.</p>
                 </div>
 
                 <div class="detail-section">
-                    <h3>Controls:</h3>
-                    <p id="productControls">Carbon Monoxide, PM 1 PM 2.5, PM 10, Sulphur Dioxide, Ozone, Carbon Monoxide, Nitrous Oxide, Dust particles, Heavy Metals, etc.</p>
-                </div>
-
-                <div class="detail-section">
-                    <h3>AirBin - Outdoor (basically usage +)</h3>
+                    <h3>Controls</h3>
+                    <p id="productControls">Carbon Monoxide, PM 1, PM 2.5, PM 10, Sulphur Dioxide, Ozone, Carbon Monoxide, Nitrogen Oxide, Lead, Aerosol, Hydrocarbon, Synthetic Vitreous Fibre, Fuel Oils / Kerosene, TVOC, Poisonous Gases, Airborne Bacteria & Virus, Dust particles, Heavy Metals, etc.</p>
                 </div>
 
                 <div class="detail-section">
                     <h3>Utility</h3>
-                    <p id="productUtility">AirBin - Outdoor is a combination of 9 proven technology and methods used as an treatment control units installed in the city. The unit is designed to reduce air pollution & the waste is collected and disposed.</p>
+                    <p id="productUtility">AirBin - Outdoor is a combination of 9 proven technology and methods used for air treatment combined in a unit for purification of polluted air. Live monitoring, data, Command centre, Control centre will be available, 24 x 7 x 365 for the units installed in the city. The unit is designed to reduce air pollution & the waste is collected and disposed of as per applicable laws for waste disposal which is non-hazardous in nature.</p>
                 </div>
 
                 <!-- Models Section -->
                 <div class="models-section">
                     <h2>MODELS</h2>
                     <div class="model-tabs" id="modelTabs">
-                        <button class="model-btn active" onclick="switchModel('S4')">S4</button>
-                        <button class="model-btn" onclick="switchModel('S1')">S1</button>
-                        <button class="model-btn" onclick="switchModel('S2')">S2</button>
-                        <button class="model-btn" onclick="switchModel('S3')">S3</button>
+                        <!-- Model buttons will be generated dynamically -->
                     </div>
                     <div class="model-display">
-                        <div class="model-icon">
-                            <div class="model-icon-large">🏭</div>
+                        <div class="model-image-container">
+                            <img id="modelImage" class="model-image" src="" alt="Model Image">
                             <div class="model-name" id="currentModel">Model S4</div>
                         </div>
                     </div>
@@ -792,167 +704,163 @@
                 <!-- Gallery Section -->
                 <div class="gallery-section">
                     <h2>Gallery</h2>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">📷</div>
-                        <div class="gallery-item">📷</div>
-                        <div class="gallery-item">📷</div>
-                        <div class="gallery-item">📷</div>
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Gallery images will be generated dynamically -->
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Upcoming Products Section -->
-                <div class="upcoming-products">
-                    <div class="container">
-                        <h2>Upcoming Products</h2>
-                        <div class="upcoming-products-grid">
-                            <div class="upcoming-product-card">
-                                <div class="upcoming-product-image">🌬️</div>
-                                <div class="upcoming-product-content">
-                                    <span class="coming-soon-badge">Coming Soon</span>
-                                    <h3 class="upcoming-product-title">AirBin Pro Max</h3>
-                                    <p class="upcoming-product-desc">Our most advanced air purification system with AI-powered pollution detection and 99.9% filtration efficiency for industrial environments.</p>
-                                    <p class="upcoming-product-date">Expected: Q3 2023</p>
-                                </div>
-                            </div>
-                            <div class="upcoming-product-card">
-                                <div class="upcoming-product-image">🏠</div>
-                                <div class="upcoming-product-content">
-                                    <span class="coming-soon-badge">Coming Soon</span>
-                                    <h3 class="upcoming-product-title">ZylmHome Mini</h3>
-                                    <p class="upcoming-product-desc">Compact residential air purifier with smart home integration, perfect for apartments and small spaces with whisper-quiet operation.</p>
-                                    <p class="upcoming-product-date">Expected: Q4 2023</p>
-                                </div>
-                            </div>
-                            <div class="upcoming-product-card">
-                                <div class="upcoming-product-image">🔬</div>
-                                <div class="upcoming-product-content">
-                                    <span class="coming-soon-badge">Coming Soon</span>
-                                    <h3 class="upcoming-product-title">AirSense Pro</h3>
-                                    <p class="upcoming-product-desc">Advanced air quality monitoring system with real-time analytics dashboard and mobile alerts for commercial and healthcare facilities.</p>
-                                    <p class="upcoming-product-date">Expected: Q1 2024</p>
-                                </div>
-                            </div>
+        <!-- Upcoming Products Section -->
+        <div class="upcoming-products" id="upcomingProducts">
+            <div class="container">
+                <h2>Upcoming Products</h2>
+                <div class="upcoming-products-grid">
+                    <div class="upcoming-product-card">
+                        <div class="upcoming-product-image">🌬️</div>
+                        <div class="upcoming-product-content">
+                            <span class="coming-soon-badge">Coming Soon</span>
+                            <h3 class="upcoming-product-title">AirBin Pro Max</h3>
+                            <p class="upcoming-product-desc">Our most advanced air purification system with AI-powered pollution detection and 99.9% filtration efficiency for industrial environments.</p>
+                            <p class="upcoming-product-date">Expected: Q3 2023</p>
+                        </div>
+                    </div>
+                    <div class="upcoming-product-card">
+                        <div class="upcoming-product-image">🏠</div>
+                        <div class="upcoming-product-content">
+                            <span class="coming-soon-badge">Coming Soon</span>
+                            <h3 class="upcoming-product-title">ZylmHome Mini</h3>
+                            <p class="upcoming-product-desc">Compact residential air purifier with smart home integration, perfect for apartments and small spaces with whisper-quiet operation.</p>
+                            <p class="upcoming-product-date">Expected: Q4 2023</p>
+                        </div>
+                    </div>
+                    <div class="upcoming-product-card">
+                        <div class="upcoming-product-image">🔬</div>
+                        <div class="upcoming-product-content">
+                            <span class="coming-soon-badge">Coming Soon</span>
+                            <h3 class="upcoming-product-title">AirSense Pro</h3>
+                            <p class="upcoming-product-desc">Advanced air quality monitoring system with real-time analytics dashboard and mobile alerts for commercial and healthcare facilities.</p>
+                            <p class="upcoming-product-date">Expected: Q1 2024</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Sales Inquiry Form -->
-                <div class="form-section">
-                    <h2>Sales Inquiry Form</h2>
-                    <div class="form-container">
-                        <form id="salesInquiryForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                            <h3>Company Information</h3>
-                            <table class="form-table">
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Name of the company *</label>
-                                        <input type="text" name="company_name" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Goods & Service Tax Number</label>
-                                        <input type="text" name="gst_number">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Contact Name *</label>
-                                        <input type="text" name="contact_name" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Address Line 1 *</label>
-                                        <input type="text" name="address_line1" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Address Line 2</label>
-                                        <input type="text" name="address_line2">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>City *</label>
-                                        <input type="text" name="city" required>
-                                    </td>
-                                    <td>
-                                        <label>State *</label>
-                                        <input type="text" name="state" required>
-                                    </td>
-                                    <td>
-                                        <label>Pincode *</label>
-                                        <input type="text" name="pincode" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <label>Landline Phone Number</label>
-                                        <input type="tel" name="landline">
-                                    </td>
-                                    <td>
-                                        <label>Mobile *</label>
-                                        <input type="tel" name="mobile" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Email *</label>
-                                        <input type="email" name="email" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Product of Interest *</label>
-                                        <select name="product" id="productSelect" required>
-                                            <option value="">Select a Product</option>
-                                            <option value="outdoor">AirBin - Outdoor</option>
-                                            <option value="recd">RECD</option>
-                                            <option value="smog">SMOG</option>
-                                            <option value="pole">POLE</option>
-                                            <option value="art2">ART-2</option>
-                                            <option value="multiple">Multiple Products</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Quantity Required</label>
-                                        <input type="number" name="quantity" min="1">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <label>Additional Requirements / Message</label>
-                                        <input type="text" name="message" style="height: 60px;">
-                                    </td>
-                                </tr>
-                            </table>
+        <!-- Sales Inquiry Form -->
+        <div class="form-section">
+            <div class="container">
+                <h2>Sales Inquiry Form</h2>
+                <div class="form-container">
+                    <form id="salesInquiryForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <h3>Company Information</h3>
+                        <table class="form-table">
+                            <tr>
+                                <td colspan="3">
+                                    <label>Name of the company *</label>
+                                    <input type="text" name="company_name" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Goods & Service Tax Number</label>
+                                    <input type="text" name="gst_number">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Contact Name *</label>
+                                    <input type="text" name="contact_name" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Address Line 1 *</label>
+                                    <input type="text" name="address_line1" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Address Line 2</label>
+                                    <input type="text" name="address_line2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>City *</label>
+                                    <input type="text" name="city" required>
+                                </td>
+                                <td>
+                                    <label>State *</label>
+                                    <input type="text" name="state" required>
+                                </td>
+                                <td>
+                                    <label>Pincode *</label>
+                                    <input type="text" name="pincode" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label>Landline Phone Number</label>
+                                    <input type="tel" name="landline">
+                                </td>
+                                <td>
+                                    <label>Mobile *</label>
+                                    <input type="tel" name="mobile" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Email *</label>
+                                    <input type="email" name="email" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Product of Interest *</label>
+                                    <select name="product" id="productSelect" required>
+                                        <option value="">Select a Product</option>
+                                        <option value="outdoor">AirBin - Outdoor</option>
+                                        <option value="smog">SMOG</option>
+                                        <option value="pole">POLE</option>
+                                        <option value="art2">ART-2</option>
+                                        <option value="recd">RECD</option>
+                                        <option value="multiple">Multiple Products</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Quantity Required</label>
+                                    <input type="number" name="quantity" min="1">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Additional Requirements / Message</label>
+                                    <input type="text" name="message" style="height: 60px;">
+                                </td>
+                            </tr>
+                        </table>
 
-                            <input type="hidden" name="_subject" value="New Product Inquiry from Zylm Energy Website">
-                            <input type="hidden" name="_next" value="thank-you.html">
+                        <input type="hidden" name="_subject" value="New Product Inquiry from Zylm Energy Website">
+                        <input type="hidden" name="_next" value="thank-you.html">
 
-                            <div style="text-align: center;">
-                                <div class="form-checkbox">
-                                    <input type="checkbox" id="terms" name="terms" required>
-                                    <label for="terms">I accept the Terms & Conditions and Privacy Policy *</label>
-                                </div>
-                                <button type="submit" class="submit-btn">Submit Inquiry</button>
+                        <div style="text-align: center;">
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">I accept the Terms & Conditions and Privacy Policy *</label>
                             </div>
-                        </form>
-                    </div>
+                            <button type="submit" class="submit-btn">Submit Inquiry</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer - Same as index.html -->
-    <!-- Footer removed as per requirement - only needed on home page -->
-
     <script>
-        // Mobile Menu Toggle - EXACTLY SAME AS INDEX.HTML
+        // Mobile Menu Toggle - SAME AS INDEX.HTML
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('active');
@@ -969,48 +877,126 @@
         const products = {
             outdoor: {
                 title: 'AirBin - Outdoor',
-                banner: 'https://images.unsplash.com/photo-1558618666-fcd25856cd63?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-                description: 'Zylm Energy has designed a way to protect the environment & living being from the atrocities of dirty air. AirBin is an air pollution control device which has automated control system and uses IOT and AI.',
-                longDesc: 'AirBin - Smog systems utilize high-pressure water technology to create fine mist for superior dust suppression.',
-                tech: 'Advanced mist generation technology capable of covering extensive areas up to several hundred meters.',
+                banner: 'assets/images/Airbin/Airbin.jfif',
+                description: 'Zylm Energy has designed a way to protect the environment & living beings from the atrocities of dirty and polluted air with the brand - AirBin, which is a next-generation, multi-function for Outdoor / Indoor / RECD for DG set / Automobile / Pole.',
+                longDesc: 'AirBin is an air pollution control device which has automated control system and uses IOT and AI. AirBin helps reduce infection and mortality through the use of effective and data-driven artificial intelligence. Air quality and other environmental factors are continuously monitored and accurate data is identified using artificial intelligence.',
+                tech: 'The unit has an IoT & AI for live monitoring. Designed to deliver clean air, AirBin is a next-generation device which can automate monitoring of air quality. The Environmental Sensor Kit allows continuous monitoring of air quality.',
+                sensors: 'Nitrogen Oxide, Ozone, PM2.5, PM10, Carbon Monoxide, Sulphur Oxide, temperature, Humidity, Rain, etc.',
+                controls: 'Carbon Monoxide, PM 1, PM 2.5, PM 10, Sulphur Dioxide, Ozone, Carbon Monoxide, Nitrogen Oxide, Lead, Aerosol, Hydrocarbon, Synthetic Vitreous Fibre, Fuel Oils / Kerosene, TVOC, Poisonous Gases, Airborne Bacteria & Virus, Dust particles, Heavy Metals, etc.',
+                utility: 'AirBin - Outdoor is a combination of 9 proven technology and methods used for air treatment combined in a unit for purification of polluted air. Live monitoring, data, Command centre, Control centre will be available, 24 x 7 x 365 for the units installed in the city. The unit is designed to reduce air pollution & the waste is collected and disposed of as per applicable laws for waste disposal which is non-hazardous in nature.',
+                models: [
+                    { name: 'S4', image: 'assets/images/Airbin/Airbin-m1.jfif' },
+                    { name: 'S1', image: 'assets/images/Airbin/Airbin-m2.jfif' },
+                    { name: 'S2', image: 'assets/images/Airbin/Airbin-m3.jfif' },
+                    { name: 'S3', image: 'assets/images/Airbin/Airbin-m4.jfif' }
+                ],
+                gallery: [
+                    'assets/images/gallery/gallery-airbin/airbin-gallery-1.jpg',
+                    'assets/images/gallery/gallery-airbin/airbin-gallery-2.jpg',
+                    'assets/images/gallery/gallery-airbin/airbin-gallery-3.jpg',
+                    'assets/images/gallery/gallery-airbin/airbin-gallery-4.jpg'
+                ]
+            },
+            smog: {
+                title: 'AirBin - SMOG',
+                banner: 'assets/images/SMOG/SMOG.jfif',
+                description: 'AirBin - Smog are powerful machines that use high-pressure water to create a fine mist, which is then sprayed over the affected area.',
+                longDesc: 'The mist particles attach to the dust particles, making them too heavy to remain in the air, causing them to fall to the ground. The result is a significant reduction in dust levels, creating a safer and healthier work environment.',
+                tech: 'Advanced mist generation technology capable of covering extensive areas up to several hundred meters. The cannon for dust control is then directed towards the targeted area where dust is present, effectively binding the dust particles together and causing them to settle.',
                 sensors: 'PM2.5, PM10, Humidity, Wind Speed, Temperature monitoring.',
                 controls: 'Water pressure control, Mist density adjustment, Coverage area configuration, Automated operation modes.',
-                utility: 'Designed for construction sites, mining operations, quarries, and industrial facilities requiring effective dust suppression.',
-                models: ['SG1', 'SG2', 'SG3', 'SG4']
+                utility: 'Designed for construction sites, mining operations, quarries, and industrial facilities requiring effective dust suppression. They can cover large areas, reaching distances of up to several hundred meters, depending on the specific model and configuration.',
+                models: [
+                    { name: 'SG1', image: 'assets/images/SMOG/SMOG-m1.jfif' },
+                    { name: 'SG2', image: 'assets/images/SMOG/SMOG-m2.jfif' },
+                    { name: 'SG3', image: 'assets/images/SMOG/SMOG-m3.jfif' },
+                    { name: 'SG4', image: 'assets/images/SMOG/SMOG-m4.jfif' }
+                ],
+                gallery: [
+                    'assets/images/gallery/gallery-SMOG/smog-gallery-1.jpg',
+                    'assets/images/gallery/gallery-SMOG/smog-gallery-2.jpg',
+                    'assets/images/gallery/gallery-SMOG/smog-gallery-3.jpg',
+                    'assets/images/gallery/gallery-SMOG/smog-gallery-4.jpg'
+                ]
             },
             pole: {
-                title: 'POLE',
-                banner: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                title: 'AirBin - POLE',
+                banner: 'assets/images/Pole/Pole.jfif',
                 description: 'Integrated temperature control and air purification system for outdoor public spaces.',
                 longDesc: 'Specialized environmental control system utilizing advanced water mist technology to lower ambient temperature and control air pollution.',
-                tech: 'Multi-zone coverage with intelligent climate control algorithms and real-time air quality monitoring.',
+                tech: 'Multi-zone coverage with intelligent climate control algorithms and real-time air quality monitoring. Small droplets ensure enhanced coverage and dispersion, thus covering a more significant area and increasing the cooling efficiency.',
                 sensors: 'Temperature, Humidity, PM2.5, PM10, Odor detection, Wind direction and speed.',
                 controls: 'Temperature reduction, Dust and pollen control, Odor neutralization, Automated climate management.',
-                utility: 'Perfect for streets, parks, outdoor events, and public spaces requiring climate control and air purification.',
-                models: ['P1', 'P2', 'P3', 'P4']
+                utility: 'Perfect for streets, parks, outdoor events, and public spaces requiring climate control and air purification. The created mist overpowers the wind or airflow, thus proving effective in areas where the wind flow is high.',
+                models: [
+                    { name: 'P1', image: 'assets/images/Pole/pole-m1.jfif' },
+                    { name: 'P2', image: 'assets/images/Pole/pole-m2.jfif' },
+                    { name: 'P3', image: 'assets/images/Pole/pole-m3.jfif' },
+                    { name: 'P4', image: 'assets/images/Pole/pole-m4.jfif' }
+                ],
+                gallery: [
+                    'assets/images/gallery/gallery-pole/pole-gallery-1.jpg',
+                    'assets/images/gallery/gallery-pole/pole-gallery-2.jpg',
+                    'assets/images/gallery/gallery-pole/pole-gallery-3.jpg',
+                    'assets/images/gallery/gallery-pole/pole-gallery-4.jpg'
+                ]
             },
             art2: {
-                title: 'ART-2',
-                banner: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                title: 'ART - 2',
+                banner: 'assets/images/ART-2/ART-2.jfif',
                 description: 'Roof-top air purification system designed specifically for urban vehicles and public transport.',
                 longDesc: 'Vehicle-mounted system that actively reduces pollutants from buses, lorries, and commercial vehicles operating in urban areas.',
-                tech: 'Energy-efficient mobile purification technology with minimal aerodynamic resistance and customizable installation.',
+                tech: 'Energy-efficient mobile purification technology with minimal aerodynamic resistance and customizable installation. The built-in filter elements are extremely energy efficient. The low flow resistance maximizes the volume of air passing through the filter and guarantees excellent filtration results.',
                 sensors: 'PM10, PM2.5, CO, NOx monitoring with GPS tracking and operational analytics.',
                 controls: 'Over 90% PM10 removal, Operates while stationary or moving, Low power consumption, Easy maintenance.',
-                utility: 'Ideal for public transport buses, commercial fleets, and vehicles in high-pollution urban areas.',
-                models: ['V1', 'V2', 'V3', 'V4']
+                utility: 'Ideal for public transport buses, commercial fleets, and vehicles in high-pollution urban areas. Customers have the option to customize the outside of the roof box with their own company branding or advertising material.',
+                models: [
+                    { name: 'V1', image: 'assets/images/ART-2/ART-2-m1.jfif' },
+                    { name: 'V2', image: 'assets/images/ART-2/ART-2-m2.jfif' },
+                    { name: 'V3', image: 'assets/images/ART-2/ART-2-m3.jfif' },
+                    { name: 'V4', image: 'assets/images/ART-2/ART-2-m4.jfif' }
+                ],
+                gallery: [
+                    'assets/images/gallery/gallery-ART-2/art2-gallery-1.jpg',
+                    'assets/images/gallery/gallery-ART-2/art2-gallery-2.jpg',
+                    'assets/images/gallery/gallery-ART-2/art2-gallery-3.jpg',
+                    'assets/images/gallery/gallery-ART-2/art2-gallery-4.jpg'
+                ]
+            },
+            recd: {
+                title: 'RECD',
+                banner: 'assets/images/RECD/RECD.jfif',
+                description: 'Retrofitted Emission Control Device for diesel generators and engines.',
+                longDesc: 'AMER – RECD is the unit of a central spot 50% relative emission control from the diesel engine power generation\'s dominant hazardous pollutants from the trioles, cabinets and refluxes cleaner air.',
+                tech: 'AMER – RECD can integrate with all kinds of diesel engine ground and power generator capture up to 50% of the particulars online, all hours, active, etc.',
+                sensors: 'PM2.5, PM10, CO, NOx, SO2, Temperature, Pressure',
+                controls: 'Emission monitoring, Filter regeneration, Pressure control, Temperature regulation',
+                utility: 'Designed for diesel generators and engines to reduce emissions and comply with environmental regulations. Our approach below the standard means of RECD\'s AIMT.',
+                models: [
+                    { name: 'R1', image: 'assets/images/RECD/RECD-m1.jfif' },
+                    { name: 'R2', image: 'assets/images/RECD/RECD-m2.jfif' },
+                    { name: 'R3', image: 'assets/images/RECD/RECD-m3.jfif' },
+                    { name: 'R4', image: 'assets/images/RECD/RECD-m4.jfif' }
+                ],
+                gallery: [
+                    'assets/images/gallery/gallery-RECD/recd-gallery-1.jpg',
+                    'assets/images/gallery/gallery-RECD/recd-gallery-2.jpg',
+                    'assets/images/gallery/gallery-RECD/recd-gallery-3.jpg',
+                    'assets/images/gallery/gallery-RECD/recd-gallery-4.jpg'
+                ]
+            },
+            upcoming: {
+                title: 'Upcoming Products',
+                banner: 'assets/images/Upcoming/upcoming-banner.jpg',
+                description: 'Sneak peek into upcoming Zylm Energy innovations — cleaner, smarter air solutions.',
+                longDesc: 'A preview of products currently under development and testing. Specifications may change in final release.',
+                tech: 'Next-gen filtration with AI-assisted performance tuning and improved outdoor resilience.',
+                sensors: 'Advanced PM monitoring, VOC detection, temperature, humidity, wind profiling.',
+                controls: 'Adaptive control strategies, energy efficiency improvements, remote update support.',
+                utility: 'Designed for challenging environments including industrial zones and high-traffic urban areas.',
+                models: [],
+                gallery: []
             }
-+            upcoming: {
-+                title: 'Upcoming Products',
-+                banner: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-+                description: 'Sneak peek into upcoming Zylm Energy innovations — cleaner, smarter air solutions.',
-+                longDesc: 'A preview of products currently under development and testing. Specifications may change in final release.',
-+                tech: 'Next-gen filtration with AI-assisted performance tuning and improved outdoor resilience.',
-+                sensors: 'Advanced PM monitoring, VOC detection, temperature, humidity, wind profiling.',
-+                controls: 'Adaptive control strategies, energy efficiency improvements, remote update support.',
-+                utility: 'Designed for challenging environments including industrial zones and high-traffic urban areas.',
-+                models: ['U1', 'U2', 'U3']
-+            }
         };
 
         let currentProduct = 'outdoor';
@@ -1041,17 +1027,18 @@
                 // Hide regular product details
                 document.querySelector('.product-details').style.display = 'none';
                 // Show upcoming products section
-                document.querySelector('.upcoming-products').style.display = 'block';
+                document.getElementById('upcomingProducts').style.display = 'block';
                 
                 // Update banner for upcoming products
                 document.getElementById('productBanner').style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${product.banner}) center/cover`;
+                document.getElementById('productTitle').textContent = product.title;
                 
                 return;
             }
             
             // Show regular product details and hide upcoming products
             document.querySelector('.product-details').style.display = 'block';
-            document.querySelector('.upcoming-products').style.display = 'none';
+            document.getElementById('upcomingProducts').style.display = 'none';
             
             // Update content
             document.getElementById('productBanner').style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${product.banner}) center/cover`;
@@ -1063,35 +1050,54 @@
             document.getElementById('productControls').textContent = product.controls;
             document.getElementById('productUtility').textContent = product.utility;
             
-            // Update model tabs
+            // Update model tabs and display
             const modelTabsContainer = document.getElementById('modelTabs');
-            modelTabsContainer.innerHTML = product.models.map((model, index) => 
-                `<button class="model-btn ${index === 0 ? 'active' : ''}" onclick="switchModel('${model}')">${model}</button>`
-            ).join('');
+            if (product.models.length > 0) {
+                modelTabsContainer.innerHTML = product.models.map((model, index) => 
+                    `<button class="model-btn ${index === 0 ? 'active' : ''}" onclick="switchModel('${model.name}', '${model.image}')">${model.name}</button>`
+                ).join('');
+                
+                document.getElementById('modelImage').src = product.models[0].image;
+                document.getElementById('currentModel').textContent = 'Model ' + product.models[0].name;
+                document.querySelector('.models-section').style.display = 'block';
+            } else {
+                document.querySelector('.models-section').style.display = 'none';
+            }
             
-            document.getElementById('currentModel').textContent = 'Model ' + product.models[0];
+            // Update gallery
+            const galleryGrid = document.getElementById('galleryGrid');
+            if (product.gallery.length > 0) {
+                galleryGrid.innerHTML = product.gallery.map(image => 
+                    `<div class="gallery-item"><img src="${image}" alt="Gallery Image"></div>`
+                ).join('');
+                document.querySelector('.gallery-section').style.display = 'block';
+            } else {
+                document.querySelector('.gallery-section').style.display = 'none';
+            }
             
             // Update product select in form
             const productSelect = document.getElementById('productSelect');
             productSelect.value = productKey;
         }
 
-        function switchModel(modelName) {
+        function switchModel(modelName, modelImage) {
             document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
+            document.getElementById('modelImage').src = modelImage;
             document.getElementById('currentModel').textContent = 'Model ' + modelName;
         }
 
         // Initialize with outdoor product
         window.onload = function() {
-            const banner = document.getElementById('productBanner');
-            banner.style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${products.outdoor.banner}) center/cover`;
+            switchProduct('outdoor');
         };
+
+        // Form submission handler
+        document.getElementById('salesInquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you shortly.');
+            this.reset();
+        });
     </script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="js/firebase-config.js"></script>
-<script src="js/firebase-init.js"></script>
-<script src="js/form-handler.js"></script>
 </body>
 </html>

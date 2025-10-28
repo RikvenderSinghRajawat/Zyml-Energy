@@ -4,28 +4,533 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal - Zylm Energy</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2c3e50;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== HEADER - SAME AS INDEX.HTML ========== */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 46px;
+        }
+
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5a6c7d;
+            font-size: 15px;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #2c3e50;
+        }
+
+        .admin-login-btn {
+            background: #f5f5f5;
+            color: #5a6c7d;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            font-size: 18px;
+        }
+
+        .admin-login-btn:hover {
+            background: #e9e9e9;
+            color: #2c3e50;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .mobile-menu-container.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .mobile-menu-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mobile-menu-nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            padding: 15px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-nav a:hover, .mobile-menu-nav a.active {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        /* ========== PAGE SPECIFIC STYLES ========== */
+
+        /* Page Hero Section */
+        .page-hero {
+            background: linear-gradient(rgba(45, 55, 72, 0.85), rgba(45, 55, 72, 0.92)), url('assets/images/legal-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.05"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #e2e8f0;
+            line-height: 1.8;
+        }
+
+        /* Legal Content Section */
+        .legal-content {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .legal-nav {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #e8eaed;
+        }
+
+        .legal-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .legal-nav a {
+            text-decoration: none;
+            color: #5a6c7d;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 1px solid #e8eaed;
+        }
+
+        .legal-nav a:hover {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            border-color: #4a5568;
+        }
+
+        .legal-sections {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-section {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e8eaed;
+        }
+
+        .legal-section:last-child {
+            border-bottom: none;
+        }
+
+        .legal-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: #5a6c7d;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .legal-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 25px 0 15px;
+            line-height: 1.4;
+        }
+
+        .legal-section p {
+            font-size: 16px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .legal-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .legal-section li {
+            font-size: 16px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        /* Legal Contact Section */
+        .legal-contact-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .legal-contact-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .contact-details {
+            margin: 20px 0;
+        }
+
+        .contact-details p {
+            font-size: 16px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+            margin-top: 20px;
+        }
+
+        .form-container h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e8eaed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            border-color: #4a5568;
+            outline: none;
+            background: white;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 14px;
+            color: #5a6c7d;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(74, 85, 104, 0.3);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .legal-nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .admin-login-btn.desktop {
+                display: none;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            .page-hero {
+                padding: 80px 0;
+            }
+
+            .page-hero h1 {
+                font-size: 36px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            .legal-content {
+                padding: 60px 0;
+            }
+
+            .legal-nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .legal-nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .legal-section h2 {
+                font-size: 28px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .legal-contact-info {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-hero h1 {
+                font-size: 30px;
+            }
+
+            .legal-section h2 {
+                font-size: 26px;
+            }
+
+            .legal-section h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header - Consistent with index.html -->
+    <!-- Header - SAME AS INDEX.HTML -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+                <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo"></a>
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <!-- <li><a href="index.html">Home</a></li> -->
                             <li><a href="Hour.html">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html">Products</a></li>
                             <li><a href="careers.html">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
+                            <li><a href="legal.html" class="active">Legal</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -35,12 +540,10 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu - SAME AS INDEX.HTML -->
     <div class="mobile-menu-container" id="mobileMenu">
         <div class="mobile-menu-header">
-            <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+            <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 34px;"></a>
             <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
         </div>
         <nav class="mobile-menu-nav">
@@ -52,12 +555,13 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <!-- <li><a href="vendor.html">Vendor</a></li> -->
+                <li><a href="legal.html" class="active">Legal</a></li>
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
     </div>
 
+    <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
             <h1>Legal Information</h1>
@@ -65,6 +569,7 @@
         </div>
     </section>
 
+    <!-- Legal Content Section -->
     <section class="legal-content">
         <div class="container">
             <div class="legal-nav">
@@ -182,7 +687,7 @@
                                     <input type="checkbox" id="legalTerms" required>
                                     <label for="legalTerms">I accept the Terms & Conditions and Privacy Policy</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+                                <button type="submit" class="submit-btn">Submit Inquiry</button>
                             </form>
                         </div>
                     </div>
@@ -191,28 +696,42 @@
         </div>
     </section>
 
-    <!-- Footer removed as per requirement - only needed on home page -->
-
     <script>
-        // Mobile Menu Toggle - consistent with index.html
+        // Mobile Menu Toggle - SAME AS INDEX.HTML
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('active');
         }
 
-        // Close mobile menu when clicking on a link inside the mobile menu
+        // Close mobile menu when clicking on a link
         document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
             link.addEventListener('click', () => {
-                const mobileMenu = document.getElementById('mobileMenu');
-                mobileMenu.classList.remove('active');
+                document.getElementById('mobileMenu').classList.remove('active');
             });
         });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.legal-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('legalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your legal inquiry! We will review your message and contact you soon.');
+            this.reset();
+        });
     </script>
-    <script src="js/main.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="js/firebase-config.js"></script>
-<script src="js/firebase-init.js"></script>
-<script src="js/form-handler.js"></script>
 </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Bodoni+Moda&display=swap" rel="stylesheet">
     <title>Need of The Hour - Zylm Energy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,10 +14,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #2c3e50;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
+            background: #f8f9fa;
         }
 
         .container {
@@ -38,7 +40,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 0;
+            padding: 8px 0;
         }
 
         .logo {
@@ -46,6 +48,12 @@
             font-weight: 600;
             color: #2c3e50;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 46px;
         }
 
         .nav-center {
@@ -93,7 +101,6 @@
             color: #2c3e50;
         }
 
-        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -103,7 +110,6 @@
             color: #2c3e50;
         }
 
-        /* Mobile Menu Container - SAME AS INDEX.HTML */
         .mobile-menu-container {
             position: fixed;
             top: 0;
@@ -166,27 +172,51 @@
 
         /* Page Hero Section */
         .page-hero {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 80px 0;
+            background: linear-gradient(rgba(45, 55, 72, 0.85), rgba(45, 55, 72, 0.92)), url('assets/images/air-pollution-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
             text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.05"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 1;
         }
 
         .page-hero h1 {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 15px;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
 
         .page-hero p {
             font-size: 18px;
             max-width: 700px;
             margin: 0 auto;
-            color: #5a6c7d;
+            color: #e2e8f0;
+            line-height: 1.8;
         }
 
-        /* Certificates Section */
-        .certificates {
+        /* Stats Section */
+        .stats {
             padding: 80px 0;
             background: white;
         }
@@ -199,114 +229,127 @@
         .section-title h2 {
             font-size: 36px;
             font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 10px;
+            color: #2d3748;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
-        .cert-grid {
+        .section-title p {
+            font-size: 15px;
+            color: #5a6c7d;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
 
-        .cert-card {
+        .stat-card {
             background: white;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #e8eaed;
             border-radius: 12px;
-            overflow: hidden;
+            padding: 30px 25px;
+            text-align: center;
             transition: all 0.3s;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
-        .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-color: #4a5568;
         }
 
-        .cert-image {
-            height: 180px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #d1e9f6 100%);
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 3px 12px rgba(74, 85, 104, 0.25);
         }
 
-        .cert-content {
-            padding: 25px;
+        .stat-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+            line-height: 1;
         }
 
-        .cert-content h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 12px;
-        }
-
-        .cert-content p {
-            font-size: 14px;
+        .stat-description {
+            font-size: 16px;
             color: #5a6c7d;
-            line-height: 1.7;
+            line-height: 1.5;
         }
 
-        /* Blog Section */
-        .blog {
+        /* News Section */
+        .news {
             padding: 80px 0;
-            background: #e8f4f8;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #edf2f7 100%);
         }
 
-        .blog-grid {
+        .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .blog-card {
+        .news-card {
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
             transition: all 0.3s;
+            border: 1px solid #e8eaed;
         }
 
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        .news-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .blog-image {
+        .news-image {
             height: 200px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #d1e9f6 100%);
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
+            color: white;
         }
 
-        .blog-content {
+        .news-content {
             padding: 25px;
         }
 
-        .blog-content h3 {
+        .news-content h3 {
             font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 12px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
-        .blog-meta {
+        .news-meta {
             display: flex;
             margin-bottom: 15px;
             color: #5a6c7d;
             font-size: 14px;
         }
 
-        .blog-meta span {
+        .news-meta span {
             margin-right: 15px;
         }
 
-        .blog-content p {
-            font-size: 14px;
+        .news-content p {
+            font-size: 14.5px;
             color: #5a6c7d;
             line-height: 1.7;
             margin-bottom: 15px;
@@ -315,65 +358,224 @@
         .read-more {
             color: #1976d2;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             display: inline-block;
             margin-top: 10px;
+            transition: all 0.3s;
         }
 
-        /* Footer */
-        footer {
-            background: #37474f;
-            color: white;
-            padding: 60px 0 30px;
+        .read-more:hover {
+            color: #0d47a1;
         }
 
-        .footer-content {
+        /* Policies Section */
+        .policies {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .policies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .footer-section h3, .footer-section h4 {
-            font-size: 16px;
-            font-weight: 600;
+        .policy-card {
+            background: white;
+            border: 1px solid #e8eaed;
+            border-radius: 12px;
+            padding: 30px 25px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .policy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-color: #4a5568;
+        }
+
+        .policy-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
+            font-size: 24px;
             color: white;
+            box-shadow: 0 3px 12px rgba(74, 85, 104, 0.25);
         }
 
-        .footer-section p, .footer-section a {
-            font-size: 14px;
-            color: #b0bec5;
-            line-height: 1.8;
-            text-decoration: none;
+        .policy-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.3;
         }
 
-        .footer-section a:hover {
-            color: white;
+        .policy-card p {
+            font-size: 14.5px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 15px;
         }
 
-        .footer-section ul {
+        /* Worker Health Section */
+        .worker-health {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #edf2f7 100%);
+        }
+
+        .health-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .health-text h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .health-text p {
+            font-size: 16px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .health-list {
             list-style: none;
+            margin-bottom: 25px;
         }
 
-        .footer-section ul li {
-            margin-bottom: 10px;
+        .health-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+            font-size: 15px;
+            color: #5a6c7d;
         }
 
-        .social-links a {
-            display: inline-block;
-            margin-right: 15px;
+        .health-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4a5568;
+            font-weight: bold;
+            font-size: 18px;
         }
 
-        .footer-bottom {
+        .health-image {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border-radius: 12px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            padding: 80px 0;
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #b0bec5;
-            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.08"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-input {
+            padding: 16px 25px;
+            border-radius: 10px;
+            border: none;
+            font-size: 15px;
+            flex: 1;
+            min-width: 280px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #2d3748;
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
+            background: #f8f9fa;
         }
 
         /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .health-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .health-image {
+                height: 300px;
+            }
+        }
+
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
@@ -387,8 +589,12 @@
                 display: none;
             }
 
+            .page-hero {
+                padding: 80px 0;
+            }
+
             .page-hero h1 {
-                font-size: 32px;
+                font-size: 36px;
             }
 
             .page-hero p {
@@ -396,53 +602,52 @@
             }
 
             .section-title h2 {
-                font-size: 28px;
+                font-size: 32px;
             }
 
-            .page-hero {
+            .stats, .news, .policies, .worker-health {
                 padding: 60px 0;
             }
 
-            .certificates, .blog {
-                padding: 60px 0;
+            .stat-number {
+                font-size: 36px;
             }
         }
 
         @media (max-width: 576px) {
             .container {
-                padding: 0 10px;
+                padding: 0 15px;
             }
 
-            .footer-content {
+            .page-hero h1 {
+                font-size: 30px;
+            }
+
+            .stats-grid, .news-grid, .policies-grid {
                 grid-template-columns: 1fr;
             }
 
-            .cert-grid,
-            .blog-grid {
-                grid-template-columns: 1fr;
+            .cta-input {
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header - EXACTLY SAME AS INDEX.HTML -->
+    <!-- Header - SAME AS INDEX.HTML -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+                <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo"></a>
                 <div class="nav-center">
                     <nav id="mainNav">
                         <ul>
-                            <!-- <li><a href="index.html">Home</a></li> -->
                             <li><a href="Hour.html" class="active">Need of The Hour</a></li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="products.html">Products</a></li>
                             <li><a href="careers.html">Careers</a></li>
                             <li><a href="contact.html">Contact</a></li>
                             <li><a href="media.html">Media</a></li>
-                            <!-- <li><a href="vendor.html">Vendor</a></li> -->
                         </ul>
                     </nav>
                 </div>
@@ -452,12 +657,10 @@
         </div>
     </header>
 
-    <!-- Mobile Menu - EXACTLY SAME AS INDEX.HTML -->
+    <!-- Mobile Menu - SAME AS INDEX.HTML -->
     <div class="mobile-menu-container" id="mobileMenu">
         <div class="mobile-menu-header">
-            <a href="index.html" class="logo">
-    <img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 60px;">
-</a>
+            <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 34px;"></a>
             <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
         </div>
         <nav class="mobile-menu-nav">
@@ -469,7 +672,6 @@
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="media.html">Media</a></li>
-                <!-- <li><a href="vendor.html">Vendor</a></li> -->
                 <li><a href="admin.html">Admin Login</a></li>
             </ul>
         </nav>
@@ -478,140 +680,164 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
-            <h1>Why Zylm Energy</h1>
-            <p>Advanced GPS tracking solutions for personal, commercial, and industrial applications</p>
+            <h1>Need of The Hour: Clean Air</h1>
+            <p>Understanding the critical impact of air pollution on health, environment, and economy, and the solutions we provide.</p>
         </div>
     </section>
 
-    <!-- Certificates Section -->
-    <section class="certificates">
+    <!-- Stats Section -->
+    <section class="stats">
         <div class="container">
             <div class="section-title">
-                <h2>Our Certificates & Accreditations</h2>
-                <p>We maintain the highest standards of quality and compliance in all our products and services.</p>
+                <h2>The Alarming Reality</h2>
+                <p>Global statistics on air pollution and its impact</p>
             </div>
-            <div class="cert-grid">
-                <div class="cert-card">
-                    <div class="cert-image">📄</div>
-                    <div class="cert-content">
-                        <h3>ISO 9001:2015 Certified</h3>
-                        <p>Quality Management System Certification for our manufacturing processes and product development.</p>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">😷</div>
+                    <div class="stat-number">7M</div>
+                    <div class="stat-description">Premature deaths annually due to air pollution (WHO)</div>
                 </div>
-                <div class="cert-card">
-                    <div class="cert-image">📡</div>
-                    <div class="cert-content">
-                        <h3>FCC Part 15 Compliance</h3>
-                        <p>Our GPS tracking devices meet FCC standards for electromagnetic compatibility and radio frequency emissions.</p>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏭</div>
+                    <div class="stat-number">91%</div>
+                    <div class="stat-description">Of the world's population lives where air quality exceeds WHO limits</div>
                 </div>
-                <div class="cert-card">
-                    <div class="cert-image">🇪🇺</div>
-                    <div class="cert-content">
-                        <h3>CE Marking</h3>
-                        <p>Our products comply with EU safety, health, and environmental requirements for market distribution.</p>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-number">$5T</div>
+                    <div class="stat-description">Annual welfare costs from air pollution globally (World Bank)</div>
                 </div>
-                <div class="cert-card">
-                    <div class="cert-image">🌱</div>
-                    <div class="cert-content">
-                        <h3>RoHS Compliant</h3>
-                        <p>All our electronic components meet Restriction of Hazardous Substances directives for environmental safety.</p>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-number">40%</div>
+                    <div class="stat-description">Of outdoor workers exposed to dangerous pollution levels</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section class="blog">
+    <!-- News Section -->
+    <section class="news">
         <div class="container">
             <div class="section-title">
-                <h2>Latest Articles & Insights</h2>
-                <p>Stay updated with the latest trends in GPS technology and tracking solutions.</p>
+                <h2>Recent Air Pollution News</h2>
+                <p>Latest developments in the global fight against air pollution</p>
             </div>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-image">🛰️</div>
-                    <div class="blog-content">
-                        <h3>Advancements in Low-Power GPS Tracking</h3>
-                        <div class="blog-meta">
-                            <span>May 15, 2023</span>
-                            <span>Technology</span>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">📰</div>
+                    <div class="news-content">
+                        <h3>Delhi's Air Quality Crisis Worsens Despite Measures</h3>
+                        <div class="news-meta">
+                            <span>March 15, 2023</span>
+                            <span>Health</span>
                         </div>
-                        <p>Exploring how modern GPS trackers achieve extended battery life while maintaining accuracy and reliability in location tracking.</p>
-                        <a href="#" class="read-more">Read More →</a>
+                        <p>Despite various government initiatives, Delhi's air quality index continues to reach hazardous levels, posing severe health risks to residents.</p>
+                        <!-- <a href="#" class="read-more">Read More →</a> -->
                     </div>
                 </div>
-                <div class="blog-card">
-                    <div class="blog-image">🚚</div>
-                    <div class="blog-content">
-                        <h3>Optimizing Fleet Management with Real-Time Tracking</h3>
-                        <div class="blog-meta">
-                            <span>April 28, 2023</span>
-                            <span>Business</span>
+                <div class="news-card">
+                    <div class="news-image">🌫️</div>
+                    <div class="news-content">
+                        <h3>New Study Links Air Pollution to Increased COVID-19 Mortality</h3>
+                        <div class="news-meta">
+                            <span>February 28, 2023</span>
+                            <span>Research</span>
                         </div>
-                        <p>How businesses are leveraging GPS tracking technology to improve fleet efficiency, reduce costs, and enhance customer service.</p>
-                        <a href="#" class="read-more">Read More →</a>
+                        <p>Harvard research reveals that long-term exposure to PM2.5 pollution is associated with higher COVID-19 death rates.</p>
+                        <!-- <a href="#" class="read-more">Read More →</a> -->
                     </div>
                 </div>
-                <div class="blog-card">
-                    <div class="blog-image">📱</div>
-                    <div class="blog-content">
-                        <h3>The Role of GPS in the Expanding IoT Ecosystem</h3>
-                        <div class="blog-meta">
-                            <span>March 10, 2023</span>
-                            <span>Innovation</span>
+                <div class="news-card">
+                    <div class="news-image">🏭</div>
+                    <div class="news-content">
+                        <h3>Industrial Zones Face Stricter Emission Norms</h3>
+                        <div class="news-meta">
+                            <span>February 10, 2023</span>
+                            <span>Policy</span>
                         </div>
-                        <p>Understanding how GPS technology integrates with IoT devices to create smarter, more connected solutions across various industries.</p>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-image">🔋</div>
-                    <div class="blog-content">
-                        <h3>Battery Life Optimization in Wearable Trackers</h3>
-                        <div class="blog-meta">
-                            <span>February 22, 2023</span>
-                            <span>Engineering</span>
-                        </div>
-                        <p>Technical insights into how we've achieved industry-leading battery performance in our latest wearable GPS tracking devices.</p>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-image">🔒</div>
-                    <div class="blog-content">
-                        <h3>Ensuring Data Security in Location Tracking Systems</h3>
-                        <div class="blog-meta">
-                            <span>January 18, 2023</span>
-                            <span>Security</span>
-                        </div>
-                        <p>Best practices and technologies for protecting sensitive location data in GPS tracking applications and services.</p>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-image">🚀</div>
-                    <div class="blog-content">
-                        <h3>The Future of GPS: What's Next in Location Technology?</h3>
-                        <div class="blog-meta">
-                            <span>December 5, 2022</span>
-                            <span>Innovation</span>
-                        </div>
-                        <p>Exploring emerging technologies that will shape the next generation of GPS tracking and location-based services.</p>
-                        <a href="#" class="read-more">Read More →</a>
+                        <p>Government announces new regulations requiring industrial facilities to install advanced air purification systems by 2025.</p>
+                        <!-- <a href="#" class="read-more">Read More →</a> -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <!-- Footer removed as per requirement - only needed on home page -->
+    <!-- Policies Section -->
+    <section class="policies">
+        <div class="container">
+            <div class="section-title">
+                <h2>Government Initiatives & Policies</h2>
+                <p>Key policies addressing air pollution challenges</p>
+            </div>
+            <div class="policies-grid">
+                <div class="policy-card">
+                    <div class="policy-icon">🇮🇳</div>
+                    <h3>National Clean Air Programme (NCAP)</h3>
+                    <p>India's flagship program aimed at reducing particulate matter (PM) pollution by 20-30% by 2024, focusing on 122 non-attainment cities.</p>
+                </div>
+                <div class="policy-card">
+                    <div class="policy-icon">🌍</div>
+                    <h3>WHO Global Air Quality Guidelines</h3>
+                    <p>Updated guidelines recommending lower PM2.5 and PM10 thresholds to protect human health, urging nations to adopt stricter standards.</p>
+                </div>
+                <div class="policy-card">
+                    <div class="policy-icon">⚡</div>
+                    <h3>Graded Response Action Plan (GRAP)</h3>
+                    <p>Emergency measures implemented in Indian cities during severe pollution episodes, including restrictions on construction, vehicles, and industry.</p>
+                </div>
+                <div class="policy-card">
+                    <div class="policy-icon">🏭</div>
+                    <h3>Industrial Emission Standards</h3>
+                    <p>Stricter norms for industrial emissions, mandating installation of continuous emission monitoring systems and pollution control equipment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Worker Health Section -->
+    <section class="worker-health">
+        <div class="container">
+            <div class="section-title">
+                <h2>Protecting Industrial Worker Health</h2>
+                <p>Addressing the occupational hazards of air pollution</p>
+            </div>
+            <div class="health-content">
+                <div class="health-text">
+                    <h3>Workplace Air Quality: A Critical Health & Safety Issue</h3>
+                    <p>Industrial workers face significantly higher exposure to harmful pollutants, leading to increased risks of respiratory diseases, cardiovascular problems, and reduced productivity.</p>
+                    
+                    <ul class="health-list">
+                        <li>Construction workers exposed to PM2.5 have 30% higher risk of lung disease</li>
+                        <li>Manufacturing employees show 25% more sick days due to pollution-related illnesses</li>
+                        <li>Outdoor workers in polluted areas have decreased cognitive function</li>
+                        <li>Long-term exposure increases risk of chronic conditions like asthma and COPD</li>
+                    </ul>
+                    
+                    <p>Zylm Energy's industrial air purification solutions are specifically designed to protect worker health in challenging environments, reducing absenteeism and improving overall workplace safety.</p>
+                </div>
+                <div class="health-image">
+                    🛡️
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Protect Your Workforce from Air Pollution?</h2>
+            <form class="cta-form" onsubmit="handleCTASubmit(event)">
+                <input type="email" class="cta-input" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Get Expert Consultation</button>
+            </form>
+        </div>
+    </section>
 
     <script>
-        // Mobile Menu Toggle - EXACTLY SAME AS INDEX.HTML
+        // Mobile Menu Toggle - SAME AS INDEX.HTML
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('active');
@@ -623,6 +849,14 @@
                 document.getElementById('mobileMenu').classList.remove('active');
             });
         });
+
+        // CTA Form Handler
+        function handleCTASubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            alert('Thank you for your interest! We will contact you at ' + email + ' to discuss air purification solutions for your needs.');
+            event.target.reset();
+        }
     </script>
 </body>
 </html>
