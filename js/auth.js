@@ -1,216 +1,152 @@
-// Authentication System - Separate File
-class AuthSystem {
+// Authentication module for admin panel
+// Production-ready version
+
+class Auth {
     constructor() {
-        this.tokenKey = 'adminToken';
-        this.userKey = 'adminUser';
-        this.apiBase = window.location.origin + '/api';
-        this.init();
-    }
-
-    init() {
-        console.log('🔐 Auth system initialized');
-        this.setupLoginForm();
-        this.checkExistingAuth();
-    }
-
-    // Check if user is already logged in
-    checkExistingAuth() {
-        const token = this.getToken();
-        const user = this.getUser();
+        this.apiUrl = '/api/login';
+        this.tokenKey = 'zylm_auth_token';
+        this.userKey = 'zylm_auth_user';
         
-        if (token && user) {
-            console.log('✅ User already authenticated, redirecting to admin panel');
-            this.redirectToAdmin();
-        }
-    }
-
-    // Setup login form handler
-    setupLoginForm() {
+        // Check if user is already logged in
+        this.checkAuth();
+        
+        // Set up login form
         const loginForm = document.getElementById('loginForm');
         if (loginForm) {
-            loginForm.addEventListener('submit', (e) => this.handleLogin(e));
-            console.log('✅ Login form handler attached');
+            this.setupLoginForm(loginForm);
+        }
+        
+        // Set up logout button
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.logout());
         }
     }
-
-    // Handle login form submission
-    async handleLogin(e) {
-        e.preventDefault();
+    
+    checkAuth() {
+        const token = localStorage.getItem(this.tokenKey);
+        const user = JSON.parse(localStorage.getItem(this.userKey) || '{}');
         
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        
-        console.log('🔐 Login attempt:', { email, password: '••••••' });
-        
-        this.showLoading(true);
-        this.hideMessages();
-
-        try {
-            const result = await this.authenticate(email, password);
-            
-            if (result.success) {
-                this.showSuccess('Login successful! Redirecting...');
-                this.saveAuthData(result.token, result.user);
-                
-                // Redirect after short delay
-                setTimeout(() => {
-                    this.redirectToAdmin();
-                }, 1500);
-                
-            } else {
-                this.showError(result.error || 'Login failed');
+        if (token && user.email) {
+            // User is authenticated
+            if (window.location.pathname.includes('login.html')) {
+                window.location.href = 'admin.html';
             }
             
-        } catch (error) {
-            console.error('💥 Login error:', error);
-            this.showError('Network error. Please check if server is running.');
-        } finally {
-            this.showLoading(false);
+            // Update UI with user info
+            this.updateUserInfo(user);
+        } else if (!window.location.pathname.includes('login.html') && 
+                  window.location.pathname.includes('admin')) {
+            // Not authenticated and trying to access admin page
+            window.location.href = 'login.html';
         }
     }
-
-    // Authenticate with server
-    async authenticate(email, password) {
-        const response = await fetch(`${this.apiBase}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password })
+    
+    setupLoginForm(form) {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const email = form.querySelector('input[name="email"]').value;
+            const password = form.querySelector('input[name="password"]').value;
+            
+            if (!email || !password) {
+                this.showLoginError('Email and password are required');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Logging in...';
+            
+            try {
+                const response = await fetch(this.apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success && result.token) {
+                    // Save auth data
+                    this.saveAuthData(result.token, result.user);
+                    
+                    // Redirect to admin panel
+                    window.location.href = 'admin.html';
+                } else {
+                    this.showLoginError(result.message || 'Invalid credentials');
+                }
+            } catch (error) {
+                this.showLoginError('Network error. Please try again.');
+            } finally {
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
         });
-
-        const data = await response.json();
-        
-        if (response.ok && data.success) {
-            return {
-                success: true,
-                token: data.token,
-                user: data.user
-            };
-        } else {
-            return {
-                success: false,
-                error: data.error || 'Authentication failed'
-            };
-        }
     }
-
-    // Save authentication data
+    
     saveAuthData(token, user) {
         localStorage.setItem(this.tokenKey, token);
         localStorage.setItem(this.userKey, JSON.stringify(user));
-        console.log('✅ Auth data saved to localStorage');
     }
-
-    // Get stored token
-    getToken() {
-        return localStorage.getItem(this.tokenKey);
+    
+    updateUserInfo(user) {
+        const userNameElements = document.querySelectorAll('.user-name');
+        const userEmailElements = document.querySelectorAll('.user-email');
+        const userRoleElements = document.querySelectorAll('.user-role');
+        
+        userNameElements.forEach(el => {
+            el.textContent = user.name || 'Admin User';
+        });
+        
+        userEmailElements.forEach(el => {
+            el.textContent = user.email || '';
+        });
+        
+        userRoleElements.forEach(el => {
+            el.textContent = user.role || 'admin';
+        });
     }
-
-    // Get stored user data
-    getUser() {
-        const user = localStorage.getItem(this.userKey);
-        return user ? JSON.parse(user) : null;
-    }
-
-    // Check if user is authenticated
-    isAuthenticated() {
-        const token = this.getToken();
-        const user = this.getUser();
-        return !!(token && user);
-    }
-
-    // Logout user
+    
     logout() {
         localStorage.removeItem(this.tokenKey);
         localStorage.removeItem(this.userKey);
-        console.log('✅ User logged out');
-        this.redirectToLogin();
-    }
-
-    // Redirect to admin panel
-    redirectToAdmin() {
-        window.location.href = 'admin.html';
-    }
-
-    // Redirect to login page
-    redirectToLogin() {
+        
         window.location.href = 'login.html';
     }
-
-    // Show loading state
-    showLoading(show) {
-        const btnText = document.getElementById('btnText');
-        const btnSpinner = document.getElementById('btnSpinner');
-        const loginBtn = document.getElementById('loginBtn');
-        
-        if (show) {
-            btnText.style.display = 'none';
-            btnSpinner.style.display = 'block';
-            loginBtn.disabled = true;
+    
+    showLoginError(message) {
+        const errorElement = document.getElementById('loginError');
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
         } else {
-            btnText.style.display = 'block';
-            btnSpinner.style.display = 'none';
-            loginBtn.disabled = false;
+            alert(message);
         }
     }
-
-    // Show error message
-    showError(message) {
-        const errorDiv = document.getElementById('errorMessage');
-        errorDiv.textContent = message;
-        errorDiv.style.display = 'block';
-        
-        // Auto hide after 5 seconds
-        setTimeout(() => {
-            this.hideMessages();
-        }, 5000);
+    
+    // Get authentication token for API calls
+    getToken() {
+        return localStorage.getItem(this.tokenKey);
     }
-
-    // Show success message
-    showSuccess(message) {
-        const successDiv = document.getElementById('successMessage');
-        successDiv.textContent = message;
-        successDiv.style.display = 'block';
+    
+    // Get current user
+    getUser() {
+        return JSON.parse(localStorage.getItem(this.userKey) || '{}');
     }
-
-    // Hide all messages
-    hideMessages() {
-        document.getElementById('errorMessage').style.display = 'none';
-        document.getElementById('successMessage').style.display = 'none';
-    }
-
-    // Verify token with server (optional)
-    async verifyToken() {
-        const token = this.getToken();
-        if (!token) return false;
-
-        try {
-            const response = await fetch(`${this.apiBase}/dashboard/stats`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            
-            return response.ok;
-        } catch (error) {
-            return false;
-        }
+    
+    // Check if user is authenticated
+    isAuthenticated() {
+        return !!this.getToken();
     }
 }
 
-// Initialize auth system when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    window.authSystem = new AuthSystem();
+// Initialize auth when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.auth = new Auth();
 });
-
-// Global logout function
-function logout() {
-    if (window.authSystem) {
-        window.authSystem.logout();
-    } else {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminUser');
-        window.location.href = 'login.html';
-    }
-}

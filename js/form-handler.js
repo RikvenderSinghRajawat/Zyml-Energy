@@ -18,22 +18,10 @@ class FormHandler {
         this.init();
     }
 
-    init() {
-        console.log('📝 Form Handler initialized with OTP verification');
-        console.log('📧 Forms will be sent to:', this.recipientEmail);
-
-        // Initialize DLT service
-        this.initDLTService();
-        
-        this.setupAllForms();
-        this.initDepartmentSelection();
-        this.testConnection();
-        this.addOTPStyles();
-    }
-
-    async testConnection() {
+    async init() {
+        // Initialize form handlers
         try {
-            const response = await fetch('/api/health');
+            const response = await fetch(window.location.origin + '/api/status');
             const result = await response.json();
             console.log('✅ Backend connection:', result.status);
             console.log('📱 OTP Features:', result.features.includes('OTP Verification System') ? 'Enabled' : 'Disabled');
@@ -226,6 +214,53 @@ class FormHandler {
         return isValid;
     }
 
+    addOtpVerificationToPhoneField(form, phoneFieldId) {
+        try {
+            const phoneField = document.getElementById(phoneFieldId);
+            if (!phoneField) {
+                return false;
+            }
+            
+            // Make API call to send OTP
+            const response = await fetch(this.otpApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber }),
+            });
+            
+            const data = await response.json();
+            
+            // Re-enable the send OTP button
+            if (sendOtpBtn) {
+                sendOtpBtn.disabled = false;
+                sendOtpBtn.innerHTML = 'Resend OTP';
+            }
+            
+            if (data.success) {
+                // Start the timer
+                this.startOtpTimer(phoneFieldId);
+                
+                // Show success message
+                this.showMessage('OTP sent successfully', 'success', phoneFieldId);
+                
+                // Enable the verify button
+                const verifyOtpBtn = document.querySelector(`[data-verify-phone="${phoneFieldId}"]`);
+                if (verifyOtpBtn) {
+                    verifyOtpBtn.disabled = false;
+                }
+                
+                return true;
+            } else {
+                this.showMessage(data.message || 'Failed to send OTP', 'error', phoneFieldId);
+                return false;
+            }
+        } catch (error) {
+            return false;
+        }
+    }
+
     initDLTService() {
         try {
             // DLT service is always enabled as it's the primary OTP method
@@ -240,74 +275,142 @@ class FormHandler {
     }
 
     async sendOTP(phoneFieldId) {
-        const phoneField = document.getElementById(phoneFieldId);
-        const phoneNumber = phoneField.value.trim();
-        const sendOtpBtn = phoneField.closest('.form-group').nextElementSibling?.querySelector('.send-otp-btn');
-        const otpInput = document.getElementById(`${phoneFieldId}_otp`);
-        const timerElement = document.getElementById(`${phoneFieldId}_timer`);
-        const countdownElement = document.getElementById(`${phoneFieldId}_countdown`);
-        const statusElement = document.getElementById(`${phoneFieldId}_status`);
-        const recaptchaContainerId = `${phoneFieldId}_recaptcha`;
-
-        if (!phoneNumber) {
-            this.showNotification('Error', 'Please enter your phone number first', 'error');
-            return;
-        }
-        if (!this.validatePhoneNumber(phoneNumber, phoneFieldId)) {
-            this.showNotification('Error', 'Please enter a valid 10-digit Indian phone number', 'error');
-            return;
-        }
-
-        const cleanPhone = phoneNumber.replace(/\D/g, '');
-        if (sendOtpBtn) {
-            sendOtpBtn.disabled = true;
-            sendOtpBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
-        }
-        if (statusElement) {
-            statusElement.innerHTML = '<span style="color: #17a2b8;">Sending OTP...</span>';
-        }
-
         try {
-            // Send OTP via DLT service
+            const phoneField = document.getElementById(phoneFieldId);
+            const phoneNumber = phoneField.value.trim();
+            
+            if (!this.validatePhoneNumber(phoneNumber)) {
+                this.showMessage('Please enter a valid 10-digit phone number', 'error', phoneFieldId);
+                return false;
+            }
+            
+            // Disable the send OTP button and show loading
+            const sendOtpBtn = document.querySelector(`[data-phone-field="${phoneFieldId}"]`);
+            if (sendOtpBtn) {
+                sendOtpBtn.disabled = true;
+                sendOtpBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            }
+            
+            // Make API call to send OTP
             const response = await fetch(this.otpApiUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    phone: cleanPhone, 
-                    timestamp: new Date().toISOString(),
-                    dlt: this.dltEnabled // Flag to use DLT service
-                })
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber }),
             });
-            const result = await response.json();
-            if (!result.success) throw new Error(result.error || 'Failed to send OTP');
-
-            otpInput.disabled = false;
-            otpInput.focus();
-            const verifyBtn = otpInput.closest('.otp-input-group').querySelector('.verify-otp-btn');
-            if (verifyBtn) verifyBtn.disabled = false;
-            timerElement.style.display = 'block';
-            this.startOTPTimer(phoneFieldId, countdownElement, sendOtpBtn, statusElement);
-            if (statusElement) {
-                statusElement.innerHTML = '<span style="color: #28a745;">OTP sent successfully via DLT</span>';
-            }
-            this.showNotification('SMS Sent', 'OTP sent to your mobile via DLT service', 'success');
             
-            // For development/testing purposes only
-            if (result.otp) {
-                console.log(`🔐 TEST OTP for ${cleanPhone}: ${result.otp}`);
+            const data = await response.json();
+            
+            // Re-enable the send OTP button
+            if (sendOtpBtn) {
+                sendOtpBtn.disabled = false;
+                sendOtpBtn.innerHTML = 'Resend OTP';
+            }
+            
+            if (data.success) {
+                // Start the timer
+                this.startOtpTimer(phoneFieldId);
+                
+                // Show success message
+                this.showMessage('OTP sent successfully', 'success', phoneFieldId);
+                
+                // Enable the verify button
+                const verifyOtpBtn = document.querySelector(`[data-verify-phone="${phoneFieldId}"]`);
+                if (verifyOtpBtn) {
+                    verifyOtpBtn.disabled = false;
+                }
+                
+                return true;
+            } else {
+                this.showMessage(data.message || 'Failed to send OTP', 'error', phoneFieldId);
+                return false;
             }
         } catch (error) {
-            console.error('❌ OTP sending error:', error);
-            const msg = error.message || 'Failed to send OTP';
-            if (statusElement) statusElement.innerHTML = `<span style="color: #dc3545;">${msg}</span>`;
-            this.showNotification('Error', msg, 'error');
-        } finally {
-            setTimeout(() => {
-                if (sendOtpBtn && !this.otpTimers.has(phoneFieldId)) {
-                    sendOtpBtn.disabled = false;
-                    sendOtpBtn.innerHTML = 'Send OTP';
+            this.showMessage('An error occurred while sending OTP', 'error', phoneFieldId);
+            return false;
+        }
+    }
+
+    async verifyOTP(phoneFieldId) {
+        try {
+            const phoneField = document.getElementById(phoneFieldId);
+            const phoneNumber = phoneField.value.trim();
+            
+            const otpField = document.querySelector(`input[data-otp-for="${phoneFieldId}"]`);
+            if (!otpField) {
+                this.showMessage('OTP field not found', 'error', phoneFieldId);
+                return false;
+            }
+            
+            const otp = otpField.value.trim();
+            if (!otp || otp.length !== 6) {
+                this.showMessage('Please enter a valid 6-digit OTP', 'error', phoneFieldId);
+                return false;
+            }
+            
+            // Disable the verify button and show loading
+            const verifyOtpBtn = document.querySelector(`[data-verify-phone="${phoneFieldId}"]`);
+            if (verifyOtpBtn) {
+                verifyOtpBtn.disabled = true;
+                verifyOtpBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            }
+            
+            // Make API call to verify OTP
+            const response = await fetch(this.verifyOtpApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber, otp }),
+            });
+            
+            const data = await response.json();
+            
+            // Re-enable the verify button
+            if (verifyOtpBtn) {
+                verifyOtpBtn.disabled = false;
+                verifyOtpBtn.innerHTML = 'Verify OTP';
+            }
+            
+            if (data.success) {
+                // Mark as verified
+                this.otpVerified.set(phoneFieldId, true);
+                
+                // Clear the timer
+                this.clearOtpTimer(phoneFieldId);
+                
+                // Show success message
+                this.showMessage('OTP verified successfully', 'success', phoneFieldId);
+                
+                // Update UI to show verified
+                const otpSection = document.querySelector(`.otp-section[data-for="${phoneFieldId}"]`);
+                if (otpSection) {
+                    otpSection.classList.add('verified');
+                    
+                    // Update the status text
+                    const statusText = otpSection.querySelector('.otp-status');
+                    if (statusText) {
+                        statusText.innerHTML = '<i class="fas fa-check-circle"></i> Verified';
+                        statusText.classList.add('text-success');
+                    }
+                    
+                    // Disable the OTP field and buttons
+                    if (otpField) otpField.disabled = true;
+                    if (verifyOtpBtn) verifyOtpBtn.disabled = true;
+                    
+                    const sendOtpBtn = document.querySelector(`[data-phone-field="${phoneFieldId}"]`);
+                    if (sendOtpBtn) sendOtpBtn.disabled = true;
                 }
-            }, 2000);
+                
+                return true;
+            } else {
+                this.showMessage(data.message || 'Invalid OTP', 'error', phoneFieldId);
+                return false;
+            }
+        } catch (error) {
+            this.showMessage('An error occurred while verifying OTP', 'error', phoneFieldId);
+            return false;
         }
     }
 
