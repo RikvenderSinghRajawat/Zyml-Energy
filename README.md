@@ -199,6 +199,51 @@ chmod 666 database.sqlite
 
 ### Port Already in Use
 
+## 📱 OTP & DLT Configuration
+
+This project enforces OTP verification on all forms that collect a phone/mobile number. OTP is sent via India’s DLT-registered SMS route when configured, with a safe development fallback.
+
+### How It Works
+- Frontend adds an OTP section to forms automatically and requires verification before submission.
+- Backend generates and stores OTPs (`5 minutes` validity) and sends SMS via DLT when enabled.
+- In development, if DLT is not configured, the API returns the OTP in the JSON response and logs it in the console for testing.
+
+### Enable DLT (Production)
+Add these to `.env` and set `DLT_ENABLED=true`:
+
+```env
+DLT_ENABLED=true
+DLT_API_KEY=YOUR_DLT_API_KEY
+DLT_SENDER_ID=YOUR_SENDER_ID  # e.g., 6-char alpha sender like ZYLMEN
+DLT_TEMPLATE_ID=YOUR_APPROVED_TEMPLATE_ID
+DLT_ENTITY_ID=YOUR_ENTITY_ID
+DLT_API_URL=YOUR_PROVIDER_ENDPOINT
+SEND_TEST_OTP_IN_RESPONSE=false
+```
+
+### What to Request from Client (DLT)
+- `DLT Entity ID` – Registered enterprise/entity identifier.
+- `DLT Sender ID` – 6-character alpha sender ID approved on DLT.
+- `DLT Template ID` – Approved template ID for OTP message.
+- `DLT API Key/Token` – Auth credentials for the SMS gateway (operator/platform).
+- `DLT API URL` – HTTPS endpoint for sending transactional SMS via DLT.
+- Confirm that the template text allows variables (OTP and validity period).
+
+Recommended OTP template:
+"Your OTP for Zylm Energy verification is: {#var#}. Valid for 5 minutes."
+
+### Developer Settings (Safe Defaults)
+- Keep `DLT_ENABLED=false` until keys are available.
+- Use `SEND_TEST_OTP_IN_RESPONSE=true` so frontend can read OTP in dev.
+- Switch to production by flipping `DLT_ENABLED=true` and `SEND_TEST_OTP_IN_RESPONSE=false`.
+
+### Testing Checklist
+- Verify OTP UI appears on Contact, Careers, Vendor, Products, Legal, About, Hour pages.
+- Send OTP → status shows “OTP sent successfully via DLT” when enabled.
+- Enter OTP → “OTP verified successfully” before form submission proceeds.
+- Check server logs and `/api/health` for service status.
+
+
 **Solution: Change Port**
 ```env
 # In .env file

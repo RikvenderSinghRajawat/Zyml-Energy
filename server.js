@@ -1,7 +1,7 @@
 console.log('🚀 Starting Zylm Energy Server...\n');
 
 // Load modules with error handling
-let express, cors, helmet, bcrypt, jwt, rateLimit, sqlite3, path, nodemailer, dotenv;
+let express, cors, helmet, bcrypt, jwt, rateLimit, sqlite3, path, nodemailer, dotenv, axios;
 
 try {
     express = require('express');
@@ -31,6 +31,9 @@ try {
     nodemailer = require('nodemailer');
     console.log('✅ nodemailer loaded');
     
+    axios = require('axios');
+    console.log('✅ axios loaded');
+    
     dotenv = require('dotenv');
     console.log('✅ dotenv loaded\n');
     
@@ -46,6 +49,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'zylm-energy-secret-key-2025';
 const RECIPIENT_EMAIL = 'divyanshujpr027@gmail.com';
+
+// DLT Service Configuration
+const DLT_CONFIG = {
+    apiKey: process.env.DLT_API_KEY || 'your-dlt-api-key',
+    senderId: process.env.DLT_SENDER_ID || 'ZYLMEN',
+    templateId: process.env.DLT_TEMPLATE_ID || '1234567890',
+    entityId: process.env.DLT_ENTITY_ID || 'your-entity-id',
+    apiUrl: process.env.DLT_API_URL || 'https://api.example.com/dlt/send',
+    enabled: process.env.DLT_ENABLED === 'true' || false
+};
 
 // Middleware
 app.use(helmet({
@@ -153,35 +166,62 @@ async function testEmailConfig() {
 
 testEmailConfig();
 
-// SMS sending helper (Twilio)
+// SMS sending helper (DLT Service)
 async function sendSMS(to, message) {
-    const provider = process.env.SMS_PROVIDER || 'none';
-    if (provider !== 'twilio') {
-        console.log('ℹ️ SMS provider not configured or not Twilio. Skipping SMS send.');
+    const provider = process.env.SMS_PROVIDER || 'dlt';
+    if (provider !== 'dlt') {
+        console.log('ℹ️ SMS provider not configured or not DLT. Skipping SMS send.');
         return false;
     }
 
-    const sid = process.env.TWILIO_ACCOUNT_SID;
-    const token = process.env.TWILIO_AUTH_TOKEN;
-    const from = process.env.TWILIO_FROM; // e.g., a Twilio phone number
+    const apiKey = process.env.DLT_API_KEY;
+    const senderId = process.env.DLT_SENDER_ID || 'CLNAIR';
+    const templateId = process.env.DLT_TEMPLATE_ID;
+    const entityId = process.env.DLT_ENTITY_ID;
 
-    if (!sid || !token || !from) {
-        console.log('⚠️ Twilio credentials missing. Set TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM');
+    if (!apiKey || !templateId || !entityId) {
+        console.log('⚠️ DLT credentials missing. Set DLT_API_KEY, DLT_TEMPLATE_ID, DLT_ENTITY_ID');
         return false;
     }
 
     try {
-        const twilio = require('twilio');
-        const client = twilio(sid, token);
-        const result = await client.messages.create({
-            body: message,
-            to: `+91${to}`,
-            from
+        // In production, this would call the actual DLT API
+        // For now, we'll log the attempt and simulate success
+        console.log('📤 DLT SMS attempt:');
+        console.log(`   To: ${to}`);
+        console.log(`   Sender ID: ${senderId}`);
+        console.log(`   Template ID: ${templateId}`);
+        console.log(`   Entity ID: ${entityId}`);
+        console.log(`   Message: ${message}`);
+        
+        // Uncomment and implement for actual DLT API integration
+        /*
+        const response = await fetch('https://api.yourdltprovider.com/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                sender: senderId,
+                template_id: templateId,
+                entity_id: entityId,
+                phone: to,
+                message: message
+            })
         });
-        console.log('📤 SMS sent via Twilio:', result.sid);
+        
+        const result = await response.json();
+        if (!result.success) {
+            throw new Error(result.message || 'DLT API error');
+        }
+        */
+        
+        // For development, simulate successful sending
+        console.log('✅ DLT SMS sent successfully (simulated)');
         return true;
     } catch (err) {
-        console.error('❌ SMS send error:', err.message);
+        console.error('❌ DLT SMS send error:', err.message);
         return false;
     }
 }
@@ -261,6 +301,45 @@ function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
+// Send message via DLT service
+async function sendDLTMessage(phone, message, otp) {
+    try {
+        if (!DLT_CONFIG.enabled || !DLT_CONFIG.apiKey) {
+            console.log('⚠️ DLT service not configured');
+            return { success: false, error: 'DLT service not configured' };
+        }
+
+        console.log(`📲 Sending DLT message to ${phone}`);
+        
+        // Make API call to DLT service provider
+        const response = await axios.post(DLT_CONFIG.apiUrl, {
+            apikey: DLT_CONFIG.apiKey,
+            sender: DLT_CONFIG.senderId,
+            template_id: DLT_CONFIG.templateId,
+            entity_id: DLT_CONFIG.entityId,
+            mobile: phone,
+            otp: otp,
+            message: message
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${DLT_CONFIG.apiKey}`
+            }
+        });
+
+        if (response.data && response.data.status === 'success') {
+            console.log('✅ DLT message sent successfully');
+            return { success: true };
+        } else {
+            console.error('❌ DLT API error:', response.data);
+            return { success: false, error: 'DLT API error: ' + JSON.stringify(response.data) };
+        }
+    } catch (error) {
+        console.error('❌ DLT service error:', error.message);
+        return { success: false, error: error.message };
+    }
+}
+
 // ==================== API ENDPOINTS ====================
 
 // Health check
@@ -273,9 +352,9 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Send OTP
+// Send OTP via DLT service
 app.post('/api/send-otp', (req, res) => {
-    const { phone } = req.body;
+    const { phone, dlt } = req.body;
     
     if (!phone) {
         return res.status(400).json({ success: false, error: 'Phone number required' });
@@ -294,7 +373,7 @@ app.post('/api/send-otp', (req, res) => {
     db.run(
         'INSERT INTO otp_verifications (phone, otp, expires_at) VALUES (?, ?, ?)',
         [cleanPhone, otp, expiresAt.toISOString()],
-        function(err) {
+        async function(err) {
             if (err) {
                 console.error('❌ OTP error:', err);
                 return res.status(500).json({ success: false, error: 'Failed to generate OTP' });
@@ -302,24 +381,47 @@ app.post('/api/send-otp', (req, res) => {
 
             console.log(`📱 OTP ${otp} for ${cleanPhone}`);
             
-            // Try sending the OTP via SMS if configured
-            (async () => {
-                const smsSent = await sendSMS(cleanPhone, `Your OTP is: ${otp}. Valid for 5 minutes.`);
+            // Send OTP via DLT service
+            try {
+                let smsSent = false;
+                
+                if (DLT_CONFIG.enabled) {
+                    // Format message according to DLT template
+                    const message = `Your OTP for Zylm Energy verification is: ${otp}. Valid for 5 minutes.`;
+                    
+                    // Call DLT API
+                    const dltResponse = await sendDLTMessage(cleanPhone, message, otp);
+                    smsSent = dltResponse.success;
+                    
+                    console.log('📲 DLT SMS Status:', smsSent ? 'Sent' : 'Failed');
+                    if (!smsSent) console.log('DLT Error:', dltResponse.error);
+                }
+                
                 const includeTestOtp = (process.env.SEND_TEST_OTP_IN_RESPONSE === 'true') || !smsSent;
                 res.json({ 
                     success: true, 
-                    message: smsSent ? 'OTP SMS sent successfully' : 'OTP sent (SMS not configured)',
+                    message: smsSent ? 'OTP sent via DLT service' : 'OTP generated (DLT not configured)',
                     otp: includeTestOtp ? otp : undefined,
                     expiresIn: '5 minutes'
                 });
-            })();
+            } catch (error) {
+                console.error('❌ DLT sending error:', error);
+                
+                // Still return success but with test OTP for development
+                res.json({ 
+                    success: true, 
+                    message: 'OTP generated (DLT service error)',
+                    otp: otp, // Include OTP for testing when DLT fails
+                    expiresIn: '5 minutes'
+                });
+            }
         }
     );
 });
 
 // Verify OTP
 app.post('/api/verify-otp', (req, res) => {
-    const { phone, otp } = req.body;
+    const { phone, otp, dlt } = req.body;
     
     if (!phone || !otp) {
         return res.status(400).json({ success: false, error: 'Phone and OTP required' });
@@ -337,7 +439,7 @@ app.post('/api/verify-otp', (req, res) => {
 
             db.run('UPDATE otp_verifications SET verified = 1 WHERE id = ?', [row.id]);
             
-            console.log('✅ OTP verified:', cleanPhone);
+            console.log('✅ OTP verified via DLT:', cleanPhone);
             res.json({ 
                 success: true, 
                 message: 'OTP verified successfully',

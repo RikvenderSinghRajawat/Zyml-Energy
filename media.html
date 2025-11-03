@@ -1,1 +1,710 @@
-test phase now
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Press Coverage - Zylm Energy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2c3e50;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 46px;
+        }
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #5a6c7d;
+            font-size: 15px;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            color: #2c3e50;
+        }
+        .admin-login-btn {
+            background: #f5f5f5;
+            color: #5a6c7d;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+            font-size: 18px;
+        }
+        .admin-login-btn:hover {
+            background: #e9e9e9;
+            color: #2c3e50;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .mobile-menu-container.active {
+            left: 0;
+        }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+        .mobile-menu-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .mobile-menu-nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 700;
+            display: block;
+            padding: 15px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .mobile-menu-nav a:hover, .mobile-menu-nav a.active {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .hero {
+            background: linear-gradient(rgba(45, 55, 72, 0.85), rgba(45, 55, 72, 0.92)), url('assets/images/Home-banner.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.05"/></svg>');
+            background-size: 50px 50px;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 18px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        .hero-content p {
+            font-size: 18px;
+            color: #e2e8f0;
+            line-height: 1.8;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .media-section {
+            padding: 70px 0 100px;
+            background: white;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .section-title p {
+            font-size: 15px;
+            color: #5a6c7d;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        .media-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            padding: 30px 25px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 85, 104, 0.2);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card i {
+            font-size: 36px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .media-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #e8eaed;
+            cursor: pointer;
+        }
+        .media-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+        }
+        .media-image {
+            width: 100%;
+            overflow: hidden;
+            background: #f8f9fa;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .media-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.5s;
+            border-radius: 8px;
+        }
+        .media-card:hover .media-image img {
+            transform: scale(1.02);
+        }
+        .media-content {
+            padding: 25px;
+            border-top: 3px solid #edf2f7;
+        }
+        .media-source {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .media-source i {
+            font-size: 14px;
+        }
+        .media-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .media-card p {
+            font-size: 14px;
+            color: #5a6c7d;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+        .media-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 18px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 13px;
+            color: #5a6c7d;
+        }
+        .media-date {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+        .media-badge {
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-content {
+            max-width: 95%;
+            max-height: 95%;
+            position: relative;
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .lightbox-close:hover {
+            background: #e9e9e9;
+            transform: rotate(90deg);
+        }
+        .zoom-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #4a5568;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .media-card:hover .zoom-hint {
+            background: #4a5568;
+            color: white;
+        }
+        @media (max-width: 1024px) {
+            .media-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            .admin-login-btn.desktop {
+                display: none;
+            }
+            .nav-center {
+                display: none;
+            }
+            .hero {
+                padding: 80px 0;
+            }
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            .hero-content p {
+                font-size: 17px;
+            }
+            .section-title h2 {
+                font-size: 32px;
+            }
+            .media-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .media-card h3 {
+                font-size: 18px;
+            }
+        }
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            .hero-content h1 {
+                font-size: 30px;
+            }
+            .media-image {
+                padding: 15px;
+            }
+            .media-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo"></a>
+                <div class="nav-center">
+                    <nav id="mainNav">
+                        <ul>
+                            <li><a href="Hour.html">Need of The Hour</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="media.html" class="active">Media</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <a href="admin.html" class="admin-login-btn desktop" title="Admin Login">👤</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-container" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Zylm Energy Logo" style="height: 34px;"></a>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Hour.html">Need of The Hour</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="media.html" class="active">Media</a></li>
+                <li><a href="admin.html">Admin Login</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Media & Press Coverage</h1>
+                <p>Discover how Zylm Energy is making headlines with innovative air purification solutions across India</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="media-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured in Leading Publications</h2>
+                <p>Our groundbreaking air purification technology has garnered extensive media attention nationwide. Click on any article to view full coverage.</p>
+            </div>
+
+            <div class="media-stats">
+                <div class="stat-card">
+                    <i class="fas fa-newspaper"></i>
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Media Publications</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Industry Awards</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Live Installations</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-city"></i>
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Cities Covered</div>
+                </div>
+            </div>
+
+            <div class="media-grid">
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical.png" alt="Amar Ujala News Coverage">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> Amar Ujala</span>
+                        <h3>Smart AirBin Installed to Combat Air Pollution in Faridabad</h3>
+                        <p>Zylm Energy deploys advanced air purification system in one of the most polluted areas, promising cleaner air within 30-meter radius with multi-stage filtration technology.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> 2023</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical1.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical1.png" alt="Dainik Bhaskar Coverage">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> Dainik Bhaskar</span>
+                        <h3>India's First Smog Tower Installed at Ajanta Chowk, Bhiwadi</h3>
+                        <p>Revolutionary 100-meter tall structure aims to purify air in 100-meter radius, reducing pollution by up to 75% AQI points in industrial areas.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> Dec 8, 2021</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical2.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical2.png" alt="Alwar News Coverage">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> Alwar News</span>
+                        <h3>Smog Tower to Clean Air Within 1 Kilometer Radius in Bhiwadi</h3>
+                        <p>State-of-the-art air purification technology promises clean oxygen supply to residents and workers in industrial areas of Rajasthan.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> 2022</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical3.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical3.png" alt="Investment Coverage">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> Business Daily</span>
+                        <h3>Zylm Energy Secures Major Investment for Air Purification Expansion</h3>
+                        <p>Company receives significant funding boost to scale up operations and deploy more air purification systems across major Indian cities.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> Oct 7, 2022</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical4.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical4.png" alt="Statesman Feature">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> The Statesman</span>
+                        <h3>Innovative Technology Meets Air Quality Needs of Aging Society</h3>
+                        <p>How Zylm Energy's novel air purification bins are addressing health concerns in urban and industrial environments with cutting-edge technology.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> Jan 25, 2023</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical5.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical5.png" alt="Bhiwadi Bhaskar Feature">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> Bhiwadi Bhaskar</span>
+                        <h3>State's First Smog Tower Shows Promising Results in Air Quality</h3>
+                        <p>Pilot project demonstrates significant improvement in local air quality, paving way for wider deployment across Rajasthan industrial belt.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> Dec 6, 2021</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical6.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical6.png" alt="Live Installation Coverage">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> Bhiwadi Ki Aawaz</span>
+                        <h3>Live: Rajasthan's First Smog Tower Installed in Bhiwadi</h3>
+                        <p>Real-time coverage of groundbreaking installation promises cleaner air for residents within one-kilometer radius, marking a milestone for the region.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> 2021</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media-card" onclick="openLightbox('assets/Media/Artical7.png')">
+                    <div class="media-image">
+                        <img src="assets/Media/Artical7.png" alt="Statesman Startup Feature">
+                    </div>
+                    <div class="media-content">
+                        <span class="media-source"><i class="fas fa-newspaper"></i> The Statesman</span>
+                        <h3>Delhi Startup Develops Novel Air Bin Technology</h3>
+                        <p>Young company creates innovative air purification solution with support from RSPCB, RIICO, and merchant associations to combat urban pollution.</p>
+                        <div class="media-meta">
+                            <span class="media-date"><i class="far fa-calendar"></i> Jan 2, 2023</span>
+                            <span class="zoom-hint"><i class="fas fa-search-plus"></i> Click to view full article</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+            <img id="lightbox-img" src="" alt="Full Article">
+        </div>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+    <script src="js/form-handler.js"></script>
+</body>
+</html>

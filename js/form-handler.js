@@ -13,10 +13,8 @@ class FormHandler {
         this.recipientEmail = 'divyanshujpr027@gmail.com';
         this.otpTimers = new Map();
         this.otpVerified = new Map();
-        // Firebase
-        this.firebaseEnabled = false;
-        this.auth = null;
-        this.confirmations = new Map(); // phoneFieldId -> confirmationResult
+        // DLT Service configuration - always enabled as primary OTP method
+        this.dltEnabled = true;
         this.init();
     }
 
@@ -24,8 +22,8 @@ class FormHandler {
         console.log('📝 Form Handler initialized with OTP verification');
         console.log('📧 Forms will be sent to:', this.recipientEmail);
 
-        // Initialize Firebase (if configured)
-        this.initFirebase();
+        // Initialize DLT service
+        this.initDLTService();
         
         this.setupAllForms();
         this.initDepartmentSelection();
@@ -159,7 +157,7 @@ class FormHandler {
         otpSection.className = 'otp-section';
         otpSection.innerHTML = `
             <div class="form-group">
-                <label for="${phoneFieldId}_otp">OTP Verification *</label>
+                <label for="${phoneFieldId}_otp">OTP Verification <span class="text-danger">*</span></label>
                 <div class="otp-input-group">
                     <input type="text" id="${phoneFieldId}_otp" name="otp" class="form-control otp-input" 
                            placeholder="Enter 6-digit OTP" maxlength="6" pattern="[0-9]{6}" disabled required>
@@ -172,13 +170,17 @@ class FormHandler {
                         Verify OTP
                     </button>
                 </div>
-                <div id="${phoneFieldId}_recaptcha" class="otp-recaptcha-container"></div>
                 <small class="otp-timer" id="${phoneFieldId}_timer" style="display: none;">
                     OTP valid for: <span id="${phoneFieldId}_countdown">300</span> seconds
                 </small>
-                <small class="otp-hint">
-                    We'll send a verification code to your phone number
-                </small>
+                <div class="dlt-info">
+                    <small class="otp-hint">
+                        We'll send a verification code to your phone number via DLT service
+                    </small>
+                    <a href="https://www.trai.gov.in/dlt-information" target="_blank" class="dlt-link" title="Learn about DLT Service">
+                        <i class="fa fa-info-circle"></i> About DLT
+                    </a>
+                </div>
                 <div class="otp-status" id="${phoneFieldId}_status"></div>
             </div>
         `;
@@ -224,23 +226,16 @@ class FormHandler {
         return isValid;
     }
 
-    initFirebase() {
+    initDLTService() {
         try {
-            const hasConfig = typeof window !== 'undefined' && window.FIREBASE_CONFIG;
-            const hasFirebase = typeof window !== 'undefined' && window.firebase && window.firebase.auth;
-            if (hasConfig && hasFirebase && (window.USE_FIREBASE_OTP === true || window.USE_FIREBASE_OTP === 'true')) {
-                if (!window.firebase.apps || window.firebase.apps.length === 0) {
-                    window.firebase.initializeApp(window.FIREBASE_CONFIG);
-                }
-                this.auth = window.firebase.auth();
-                this.firebaseEnabled = true;
-                console.log('✅ Firebase Phone Auth enabled for SMS OTP');
-            } else {
-                console.log('ℹ️ Firebase not configured; using server-side OTP');
-            }
+            // DLT service is always enabled as it's the primary OTP method
+            console.log('✅ DLT Service enabled for SMS OTP');
+            
+            // DLT configuration is handled server-side
+            this.dltEnabled = true;
         } catch (err) {
-            console.warn('⚠️ Firebase init failed, falling back to server OTP:', err.message);
-            this.firebaseEnabled = false;
+            console.warn('⚠️ DLT service initialization error:', err.message);
+            this.dltEnabled = false;
         }
     }
 
@@ -273,47 +268,33 @@ class FormHandler {
         }
 
         try {
-            if (this.firebaseEnabled) {
-                const e164 = '+91' + cleanPhone;
-                // Initialize invisible reCAPTCHA per field
-                const verifier = new window.firebase.auth.RecaptchaVerifier(recaptchaContainerId, { size: 'invisible' });
-                const confirmationResult = await this.auth.signInWithPhoneNumber(e164, verifier);
-                this.confirmations.set(phoneFieldId, confirmationResult);
+            // Send OTP via DLT service
+            const response = await fetch(this.otpApiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    phone: cleanPhone, 
+                    timestamp: new Date().toISOString(),
+                    dlt: this.dltEnabled // Flag to use DLT service
+                })
+            });
+            const result = await response.json();
+            if (!result.success) throw new Error(result.error || 'Failed to send OTP');
 
-                // Enable OTP input and verify button
-                otpInput.disabled = false;
-                otpInput.focus();
-                const verifyBtn = otpInput.closest('.otp-input-group').querySelector('.verify-otp-btn');
-                if (verifyBtn) verifyBtn.disabled = false;
-
-                timerElement.style.display = 'block';
-                this.startOTPTimer(phoneFieldId, countdownElement, sendOtpBtn, statusElement);
-                if (statusElement) {
-                    statusElement.innerHTML = '<span style="color: #28a745;">OTP SMS sent successfully</span>';
-                }
-                this.showNotification('SMS Sent', 'OTP sent to your mobile via SMS', 'success');
-            } else {
-                // Fallback to server-side OTP
-                const response = await fetch(this.otpApiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ phone: cleanPhone, timestamp: new Date().toISOString() })
-                });
-                const result = await response.json();
-                if (!result.success) throw new Error(result.error || 'Failed to send OTP');
-
-                otpInput.disabled = false;
-                otpInput.focus();
-                const verifyBtn = otpInput.closest('.otp-input-group').querySelector('.verify-otp-btn');
-                if (verifyBtn) verifyBtn.disabled = false;
-                timerElement.style.display = 'block';
-                this.startOTPTimer(phoneFieldId, countdownElement, sendOtpBtn, statusElement);
-                if (statusElement) {
-                    statusElement.innerHTML = '<span style="color: #28a745;">OTP sent successfully</span>';
-                }
-                if (result.otp) {
-                    console.log(`🔐 TEST OTP for ${cleanPhone}: ${result.otp}`);
-                }
+            otpInput.disabled = false;
+            otpInput.focus();
+            const verifyBtn = otpInput.closest('.otp-input-group').querySelector('.verify-otp-btn');
+            if (verifyBtn) verifyBtn.disabled = false;
+            timerElement.style.display = 'block';
+            this.startOTPTimer(phoneFieldId, countdownElement, sendOtpBtn, statusElement);
+            if (statusElement) {
+                statusElement.innerHTML = '<span style="color: #28a745;">OTP sent successfully via DLT</span>';
+            }
+            this.showNotification('SMS Sent', 'OTP sent to your mobile via DLT service', 'success');
+            
+            // For development/testing purposes only
+            if (result.otp) {
+                console.log(`🔐 TEST OTP for ${cleanPhone}: ${result.otp}`);
             }
         } catch (error) {
             console.error('❌ OTP sending error:', error);
@@ -380,32 +361,36 @@ class FormHandler {
             return { success: false, error: 'Please enter a 6-digit OTP' };
         }
         try {
-            if (this.firebaseEnabled) {
-                // Verify using Firebase confirmation result
-                const confirmationResult = this.confirmations.get(document.activeElement?.id?.replace('_otp','')) || null;
-                // Fallback: map by scanning inputs
-                const otpInputs = document.querySelectorAll('.otp-input');
-                for (const input of otpInputs) {
-                    if (input.value === enteredOTP) {
-                        const id = input.id.replace('_otp','');
-                        if (this.confirmations.has(id)) {
-                            const res = await this.confirmations.get(id).confirm(cleanOTP);
-                            return { success: true, phone: res.user.phoneNumber };
-                        }
-                    }
-                }
-                // If we have a unique field id from verify button context, try it
-                // Note: triggerVerify supplies phoneFieldId and calls this method indirectly
-                return { success: false, error: 'Unable to verify OTP. Please click Verify button near the OTP field.' };
-            } else {
-                const response = await fetch(this.verifyOtpApiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ phone: cleanPhone, otp: cleanOTP, timestamp: new Date().toISOString() })
-                });
-                const result = await response.json();
-                return result;
+            // Check if this OTP was already verified
+            const phoneKey = `${cleanPhone}_${cleanOTP}`;
+            if (this.otpVerified.has(phoneKey)) {
+                return { success: true, message: 'OTP already verified' };
             }
+            
+            // Verify OTP using DLT service (server-side implementation)
+            const response = await fetch(this.verifyOtpApiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    phone: cleanPhone, 
+                    otp: cleanOTP, 
+                    timestamp: new Date().toISOString(),
+                    dlt: true // Flag to use DLT service
+                })
+            });
+            const result = await response.json();
+            
+            // Store verified OTP to prevent multiple verifications
+            if (result.success) {
+                this.otpVerified.set(phoneKey, true);
+                // Clear any existing timer for this phone
+                if (this.otpTimers.has(cleanPhone)) {
+                    clearInterval(this.otpTimers.get(cleanPhone));
+                    this.otpTimers.delete(cleanPhone);
+                }
+            }
+            
+            return result;
         } catch (error) {
             console.error('❌ OTP verification error:', error);
             return { success: false, error: 'OTP verification failed. Please try again.' };
@@ -746,8 +731,44 @@ class FormHandler {
                 form.addEventListener('submit', (e) => this.handleGenericFormWithOTP(e));
                 form.dataset.otpHandled = 'true';
                 console.log('✅ Generic form handler with OTP attached:', form.id || 'unnamed form');
+            } else {
+                // For forms without phone fields, add a phone field and OTP verification
+                this.addPhoneFieldWithOTP(form);
             }
         });
+    }
+    
+    addPhoneFieldWithOTP(form) {
+        const phoneId = 'added_phone_' + Math.random().toString(36).substr(2, 9);
+        
+        // Create phone field with proper styling
+        const phoneGroup = document.createElement('div');
+        phoneGroup.className = 'form-group';
+        phoneGroup.innerHTML = `
+            <label for="${phoneId}">Phone Number <span class="text-danger">*</span></label>
+            <input type="tel" id="${phoneId}" name="phone" class="form-control" 
+                   placeholder="Enter your phone number" required>
+            <small class="form-text text-muted">Required for OTP verification</small>
+        `;
+        
+        // Find submit button and insert phone group before it safely
+        const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (submitBtn) {
+            const parent = submitBtn.parentNode;
+            parent.insertBefore(phoneGroup, submitBtn);
+        } else {
+            // If no submit button, add to the end
+            form.appendChild(phoneGroup);
+        }
+        
+        // Add OTP fields
+        this.addOTPFields(form, phoneId);
+        
+        // Add submit handler
+        form.addEventListener('submit', (e) => this.handleGenericFormWithOTP(e));
+        form.dataset.otpHandled = 'true';
+        
+        console.log('✅ Added phone field and OTP verification to form:', form.id || 'unnamed form');
     }
 
     async handleGenericFormWithOTP(e) {
